@@ -73,5 +73,5 @@ Route::get('create_product_properties/{product}', [ProductController::class,'cre
 //Slider Route
 Route::resource('sliders', SliderController::class);
 
-//Banner Route
+//Banner Route 
 Route::resource('banners', BannerController::class);
