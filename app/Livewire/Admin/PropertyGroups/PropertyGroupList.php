@@ -27,7 +27,7 @@ class PropertyGroupList extends Component
     {
         $property_groups = PropertyGroup::query()
             ->where('name','like','%'.$this->search.'%')
-            ->paginate(10);
+            ->paginate(20);
         return view('livewire.admin.property-groups.property-group-list',compact('property_groups'));
     }
 }

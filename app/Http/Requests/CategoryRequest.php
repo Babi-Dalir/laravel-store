@@ -24,7 +24,6 @@ class CategoryRequest extends FormRequest
         return [
             'name'=>'required',
             'e_name'=>'required|unique:categories,e_name,'.$this->category,
-            'image'=>'required'
         ];
     }
 }

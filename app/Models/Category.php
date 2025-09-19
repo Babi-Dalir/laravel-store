@@ -70,6 +70,17 @@ class Category extends Model
         }
         return $array;
     }
+    public static function getProductCategoryCount($id)
+    {
+        $sum = 0;
+        $categories = self::query()->with('childCategory')->where('parent_id',$id)->get();
+        foreach ($categories as $category1){
+            foreach ($category1->childCategory as $category2){
+               $sum += $category2->products()->count();
+            }
+        }
+        return $sum;
+    }
     protected static function boot()
     {
         parent::boot();

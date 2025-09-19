@@ -22,7 +22,7 @@ class Product extends Model
         'image',
         'guaranty_id',
         'description',
-        'is_spacial',
+        'spacial_start',
         'spacial_expiration',
         'status',
         'category_id',
@@ -57,6 +57,24 @@ class Product extends Model
     public function propertyGroups()
     {
         return $this->belongsToMany(PropertyGroup::class, 'product_property_group');
+    }
+    public function productPrices()
+    {
+        return $this->hasMany(ProductPrice::class);
+    }
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
+    public function guaranty()
+    {
+        return $this->belongsTo(Guaranty::class);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
     public static function createProduct($request)
     {

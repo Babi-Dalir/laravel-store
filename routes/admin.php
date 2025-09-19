@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\GuarantyController;
 use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\ProductController;
@@ -51,13 +52,13 @@ Route::resource('guaranties', GuarantyController::class);
 //ProductPrice Route
 Route::get('product_prices/{id}', [ProductPriceController::class,'index'])->name('product.prices');
 
-Route::get('create_product_prices/{id}', [ProductPriceController::class,'create'])->name('create.product.prices');
+Route::get('create_product_prices/{product_id}', [ProductPriceController::class,'create'])->name('create.product.prices');
 
-Route::post('store_product_prices/{id}', [ProductPriceController::class,'store'])->name('store.product.prices');
+Route::post('store_product_prices/{product_id}', [ProductPriceController::class,'store'])->name('store.product.prices');
 
-Route::get('edit_product_prices/{id}', [ProductPriceController::class,'edit'])->name('edit.product.prices');
+Route::get('edit_product_prices/{id}/{product_id}', [ProductPriceController::class,'edit'])->name('edit.product.prices');
 
-Route::put('update_product_prices/{id}', [ProductPriceController::class,'update'])->name('update.product.prices');
+Route::put('update_product_prices/{id}/{product_id}', [ProductPriceController::class,'update'])->name('update.product.prices');
 
 // Gallery Route
 Route::get('add_product_galleries/{id}', [ProductController::class,'addGallery'])->name('add.product.gallery');
@@ -73,5 +74,8 @@ Route::get('create_product_properties/{product}', [ProductController::class,'cre
 //Slider Route
 Route::resource('sliders', SliderController::class);
 
-//Banner Route 
+//Banner Route
 Route::resource('banners', BannerController::class);
+
+//Banner Route
+Route::get('users_comments', [CommentController::class,'userComments'])->name('users.comments');

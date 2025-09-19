@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Banner;
 use App\Models\Category;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,8 +24,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $categories = Category::query()->with('childCategory.childCategory')->where('parent_id', 0)->get();
+        $banners = Cache::remember('banners',60*60*24*10,function (){
+            return Banner::query()->get();
+        });
         View::share([
-            'categories'=>$categories
+            'categories'=>$categories,
+            'banners'=>$banners
         ]);
     }
 }

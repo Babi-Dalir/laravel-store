@@ -21,8 +21,8 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('color_id')->constrained('colors');
             $table->foreignId('guaranty_id')->constrained('guaranties');
-            $table->boolean('is_spacial')->default(false);
-            $table->timestamp('special_expiration')->nullable();
+            $table->timestamp('spacial_start')->nullable();
+            $table->timestamp('spacial_expiration')->nullable();
             $table->string('status')->default(\App\Enums\ProductStatus::Waiting->value);
             $table->timestamps();
         });

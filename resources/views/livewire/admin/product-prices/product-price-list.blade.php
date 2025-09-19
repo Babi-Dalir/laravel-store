@@ -21,6 +21,8 @@
             <th class="text-center align-middle text-primary">تعداد</th>
             <th class="text-center align-middle text-primary">نهایت فروش</th>
             <th class="text-center align-middle text-primary">رنگ ها</th>
+            <th class="text-center align-middle text-primary">فروش ویژه</th>
+            <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
         </tr>
@@ -36,6 +38,19 @@
                 <td class="text-center align-middle">{{$product_price->count}}</td>
                 <td class="text-center align-middle">{{$product_price->max_sell}}</td>
                 <td class="text-center align-middle">{{$product_price->color->name}}</td>
+                <td class="text-center align-middle">
+                    @if($product_price->spacial_start==null && $product_price->spacial_expiration==null)
+                        <span class="cursor-pointer badge badge-light">فروش عادی</span>
+                    @else
+                        <span class="cursor-pointer badge badge-danger">فروش شگفت انگیز</span>
+                    @endif
+
+                </td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-info" href="{{route('edit.product.prices',[$product_price->id,$product_id])}}">
+                        ویرایش
+                    </a>
+                </td>
                 <td class="text-center align-middle">
                     <a class="btn btn-outline-danger" wire:click="$dispatch('deleteProductPrice',{'product_price_id':{{$product_price->id}}})">
                         حذف

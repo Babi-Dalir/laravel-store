@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->unsignedBigInteger('guaranty_id')->nullable();
             $table->text('description')->nullable();
-            $table->boolean('is_spacial')->default(false);
-            $table->timestamp('special_expiration')->nullable();
+            $table->timestamp('spacial_start')->nullable();
+            $table->timestamp('spacial_expiration')->nullable();
             $table->string('status')->default(\App\Enums\ProductStatus::Waiting->value);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete()->cascadeOnUpdate();

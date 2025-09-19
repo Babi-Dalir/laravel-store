@@ -17,8 +17,8 @@ class ProductPrice extends Model
         'product_id',
         'color_id',
         'guaranty_id',
-        'is_spacial',
-        'special_expiration',
+        'spacial_start',
+        'spacial_expiration',
         'status',
     ];
 
@@ -26,74 +26,108 @@ class ProductPrice extends Model
     {
         return $this->belongsTo(Color::class);
     }
+
     public function guaranty()
     {
         return $this->belongsTo(Guaranty::class);
     }
-    public static function createProductPrice($request,$product_id)
+
+    public function product()
     {
-        $less_price = ProductPrice::query()->orderBy('price',"ASC")
-            ->where('product_id',$product_id)->first();
+        return $this->belongsTo(Product::class);
+    }
+
+    public static function createProductPrice($request, $product_id)
+    {
+        $less_price = ProductPrice::query()->orderBy('price', "ASC")
+            ->where('product_id', $product_id)->first();
 
         $price = ($request->input('main_price')) - (($request->input('main_price') * $request->input('discount')) / 100);
 
-        $product_price = ProductPrice::query()->create([
-            'main_price'=>$request->input('main_price'),
-            'discount'=>$request->input('discount'),
-            'price'=> $price,
-            'count'=>$request->input('count'),
-            'max_sell'=>$request->input('max_sell'),
-            'product_id'=>$product_id,
-            'color_id'=>$request->input('color_id'),
-            'guaranty_id'=>$request->input('guaranty_id'),
-            'is_spacial'=>$request->input('is_spacial') == "on" ? true : false,
-            'special_expiration'=> $request->input('is_spacial') == "on" ? DateManager::shamsi_to_miladi($request->input('special_expiration')) : null,
+        ProductPrice::query()->create([
+            'main_price' => $request->input('main_price'),
+            'discount' => $request->input('discount'),
+            'price' => $price,
+            'count' => $request->input('count'),
+            'max_sell' => $request->input('max_sell'),
+            'product_id' => $product_id,
+            'color_id' => $request->input('color_id'),
+            'guaranty_id' => $request->input('guaranty_id'),
+            'spacial_start' => $request->input('spacial_start') != null ? DateManager::shamsi_to_miladi($request->input('spacial_start')) : null,
+            'spacial_expiration' => $request->input('spacial_expiration') != null ? DateManager::shamsi_to_miladi($request->input('spacial_expiration')) : null,
         ]);
-        if ($less_price){
-            if ($price < $less_price->price){
-                $product = Product::query()->find($product_id);
-                $product->update([
-                    'price'=>$price,
-                    'discount'=>$request->input('discount'),
-                    'count'=>$request->input('count'),
-                    'max_sell'=>$request->input('max_sell'),
-                    'guaranty_id'=>$request->input('guaranty_id'),
-                    'is_spacial'=>$request->input('is_spacial') == "on" ? true : false,
-                    'special_expiration'=> $request->input('is_spacial') == "on" ? DateManager::shamsi_to_miladi($request->input('special_expiration')) : null,
-                ]);
-                $colors = [];
-                $product_prices = ProductPrice::query()
-                    ->where('product_id',$product_id)
-                    ->where('guaranty_id',$request->input('guaranty_id'))->get();
-                foreach ($product_prices as $product_price){
-                    array_push($colors,$product_price->color_id);
-                }
-                $product->colors()->sync($colors);
-            }
-        }else {
+        if ($less_price) {
             $product = Product::query()->find($product_id);
-            $product->update([
-                'price' => $price,
-                'discount' => $request->input('discount'),
-                'count' => $request->input('count'),
-                'max_sell' => $request->input('max_sell'),
-                'guaranty_id' => $request->input('guaranty_id'),
-                'is_spacial' => $request->input('is_spacial') == "on" ? true : false,
-                'special_expiration' => $request->input('is_spacial') == "on" ? DateManager::shamsi_to_miladi($request->input('special_expiration')) : null,
-            ]);
-            $colors = [];
-            $product_prices = ProductPrice::query()
-                ->where('product_id', $product_id)
-                ->where('guaranty_id', $request->input('guaranty_id'))->get();
-            foreach ($product_prices as $product_price) {
-                array_push($colors, $product_price->color_id);
+            if ($price < $less_price->price) {
+                self::getUpdateProduct($product, $price, $request);
+                self::getColors($product_id, $request, $product);
+            } else {
+                if ($product->guaranty_id == $request->input('guaranty_id')) {
+                    self::getColors($product_id, $request, $product);
+                }
             }
-            $product->colors()->sync($colors);
+        } else {
+            $product = Product::query()->find($product_id);
+            self::getUpdateProduct($product, $price, $request);
+            self::getColors($product_id, $request, $product);
         }
     }
 
-    public static function updateProductPrice($request,$id)
+    public static function updateProductPrice($request, $id, $product_id)
     {
+        $less_price = ProductPrice::query()->orderBy('price', "ASC")
+            ->where('product_id', $product_id)->first();
 
+        $price = ($request->input('main_price')) - (($request->input('main_price') * $request->input('discount')) / 100);
+
+        $product_price = ProductPrice::query()->find($id);
+        $product_price->update([
+            'main_price' => $request->input('main_price'),
+            'discount' => $request->input('discount'),
+            'price' => $price,
+            'count' => $request->input('count'),
+            'max_sell' => $request->input('max_sell'),
+            'product_id' => $product_id,
+            'color_id' => $request->input('color_id'),
+            'guaranty_id' => $request->input('guaranty_id'),
+            'spacial_start' => $request->input('spacial_start') != null ? DateManager::shamsi_to_miladi($request->input('spacial_start')) : null,
+            'spacial_expiration' => $request->input('spacial_expiration') != null ? DateManager::shamsi_to_miladi($request->input('spacial_expiration')) : null,
+        ]);
+
+        $product = Product::query()->find($product_id);
+        if ($price <= $less_price->price) {
+            self::getUpdateProduct($product, $price, $request);
+            self::getColors($product_id, $request, $product);
+        } else {
+            if ($product->guaranty_id == $request->input('guaranty_id')) {
+                self::getColors($product_id, $request, $product);
+            }
+        }
+    }
+
+    public static function getColors($product_id, $request, $product)
+    {
+        $product_prices = ProductPrice::query()
+            ->where('product_id', $product_id)
+            ->where('guaranty_id', $request->input('guaranty_id'))->get();
+        foreach ($product_prices as $product_price) {
+            if ($product->colors()->where('color_id', $product_price->color_id)->exists()) {
+                $product->colors()->sync($product_price->color_id);
+            } else {
+                $product->colors()->attach($product_price->color_id);
+            }
+        }
+    }
+    public static function getUpdateProduct($product, float|int $price, $request): void
+    {
+        $product->update([
+            'price' => $price,
+            'discount' => $request->input('discount'),
+            'count' => $request->input('count'),
+            'max_sell' => $request->input('max_sell'),
+            'guaranty_id' => $request->input('guaranty_id'),
+            'spacial_start' => $request->input('spacial_start') != null ? DateManager::shamsi_to_miladi($request->input('spacial_start')) : null,
+            'spacial_expiration' => $request->input('spacial_expiration') != null ? DateManager::shamsi_to_miladi($request->input('spacial_expiration')) : null,
+        ]);
     }
 }

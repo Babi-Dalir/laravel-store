@@ -14,7 +14,7 @@
     <!-- Plugins -->
     <link rel="stylesheet" href="{{url('frontend/css/vendor/bootstrap-slider.min.css')}}">
     <link rel="stylesheet" href="{{url('frontend/css/vendor/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{url('frontendcss/vendor/jquery.horizontalmenu.css')}}">
+    <link rel="stylesheet" href="{{url('frontend/css/vendor/jquery.horizontalmenu.css')}}">
     <link rel="stylesheet" href="{{url('frontend/css/vendor/jquery-stack-menu.min.css')}}">
     <link rel="stylesheet" href="{{url('frontend/css/vendor/fancybox.min.css')}}">
     <link rel="stylesheet" href="{{url('frontend/css/vendor/nice-select.css')}}">

@@ -29,7 +29,7 @@ class ProductPriceController extends Controller
      */
     public function create($id)
     {
-        $title = "ایجاد تنوع قیمت محصول";
+       $title = "ایجاد تنوع قیمت محصول";
        $colors = Color::query()->pluck('name','id');
        $product = Product::query()->find($id);
        $guaranties = Guaranty::query()->pluck('name','id');
@@ -57,22 +57,22 @@ class ProductPriceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id,$product_id)
     {
         $title ="ویرایش تنوع قیمت محصول";
-        $categories = Category::getCategories();
-        $brands = Brand::query()->pluck('name','id');
-        $tags = Tag::query()->pluck('name','id');
-        $product = Product::findOrfail($id);
-        return view('admin.product_prices.edit',compact('title','categories','brands','tags','product'));
+        $guaranties = Guaranty::query()->pluck('name','id');
+        $product = Product::query()->findOrfail($product_id);
+        $product_price = ProductPrice::query()->findOrfail($id);
+        $colors = Color::query()->pluck('name','id');
+        return view('admin.product_prices.edit',compact('title','guaranties','product_price','product','colors'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id,$product_id)
     {
-        Product::updateProduct($request,$id);
+        ProductPrice::updateProductPrice($request,$id,$product_id);
         return redirect()->route('products.index')->with('message', ' تنوع قیمت محصول  با موفقیت ویرایش شد');
     }
 

@@ -107,6 +107,12 @@
                     <li><a href="{{route('products.index')}}">لیست محصولات</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#">نظرات</a>
+                <ul>
+                    <li><a href="{{route('users.comments')}}">لیست نظرات محصول</a></li>
+                </ul>
+            </li>
         </ul>
 {{--        @endhasanyrole--}}
     </div>

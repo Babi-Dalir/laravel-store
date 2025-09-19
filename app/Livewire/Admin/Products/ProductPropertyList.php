@@ -56,7 +56,9 @@ class ProductPropertyList extends Component
 
     public function render()
     {
-        $property_groups = PropertyGroup::query()->where('category_id', $this->product->category_id)->get();
+        $property_groups = PropertyGroup::query()
+            ->where('category_id', $this->product->category->parentCategory->id)
+            ->get();
         $product_property_groups = collect($this->product->propertyGroups);
         return view('livewire.admin.products.product-property-list', compact('property_groups', 'product_property_groups'));
     }

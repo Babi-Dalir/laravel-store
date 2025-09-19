@@ -58,18 +58,19 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck" name="is_special">
-                                    <label class="custom-control-label" for="customCheck"> فروش شگفت انگیز </label>
-                                </div>
+                            <label class="col-sm-2 col-form-label"> تاریخ شروع شگفت انگیز</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="spacial_start" class="text-left form-control" dir="rtl"
+                                       name="spacial_start">
                             </div>
-                            <div class="col-sm-3">
-                                <label class="col-form-label"> تاریخ انقضای شگفت انگیز</label>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" id="special_expiration" class="text-left form-control" dir="rtl"
-                                       name="special_expiration">
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> تاریخ انقضای شگفت انگیز</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" id="spacial_expiration" class="text-left form-control" dir="rtl"
+                                       name="spacial_expiration">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -85,7 +86,6 @@
     </main>
 @endsection
 @section('scripts')
-    <script src="{{url('panel/plugins/ckeditor/ckeditorConf.js')}}"></script>
     <script>
         var customOptions = {
             placeholder: "روز / ماه / سال"
@@ -100,7 +100,8 @@
             , sync: true
             , gotoToday: true
         }
-        kamaDatepicker('special_expiration', customOptions);
+        kamaDatepicker('spacial_start', customOptions);
+        kamaDatepicker('spacial_expiration', customOptions);
         $('.form-select').select2()
     </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\ImageManager;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Slider extends Model
 {
@@ -13,6 +14,7 @@ class Slider extends Model
     ];
     public static function createSlider($request)
     {
+        Cache::forget('sliders');
         Slider::query()->create([
             'link'=>$request->input('link'),
             'image'=>ImageManager::saveImage('sliders',$request->image)
@@ -20,6 +22,7 @@ class Slider extends Model
     }
     public static function updateSlider($request,$id)
     {
+        Cache::forget('sliders');
         $slider = Slider::query()->find($id);
         $slider->update([
             'link'=>$request->input('link'),
