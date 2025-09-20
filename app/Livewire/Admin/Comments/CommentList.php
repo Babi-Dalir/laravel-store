@@ -2,6 +2,10 @@
 
 namespace App\Livewire\Admin\Comments;
 
+<<<<<<< HEAD
+=======
+use App\Enums\CommentStatus;
+>>>>>>> e9d87ba (tree commit)
 use App\Models\Brand;
 use App\Models\Comment;
 use Livewire\Attributes\On;
@@ -18,6 +22,27 @@ class CommentList extends Component
     {
         $this->resetPage();
     }
+<<<<<<< HEAD
+=======
+
+    public function submitComment($comment_id)
+    {
+        $comment = Comment::query()->find($comment_id);
+        if ($comment->status == CommentStatus::Draft->value){
+            $comment->update([
+                'status'=>CommentStatus::Approved->value
+            ]);
+        }elseif ($comment->status == CommentStatus::Approved->value){
+            $comment->update([
+                'status'=>CommentStatus::Rejected->value
+            ]);
+        }else{
+            $comment->update([
+                'status'=>CommentStatus::Approved->value
+            ]);
+        }
+    }
+>>>>>>> e9d87ba (tree commit)
     public function render()
     {
         $comments = Comment::query()

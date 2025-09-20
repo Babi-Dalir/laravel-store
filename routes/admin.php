@@ -77,5 +77,9 @@ Route::resource('sliders', SliderController::class);
 //Banner Route
 Route::resource('banners', BannerController::class);
 
+<<<<<<< HEAD
 //Banner Route
+=======
+//Comment Route
+>>>>>>> e9d87ba (tree commit)
 Route::get('users_comments', [CommentController::class,'userComments'])->name('users.comments');

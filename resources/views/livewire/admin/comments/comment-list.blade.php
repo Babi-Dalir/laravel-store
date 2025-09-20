@@ -12,6 +12,10 @@
             <th class="text-center align-middle text-primary">نام کاربر</th>
             <th class="text-center align-middle text-primary">متن نظر</th>
             <th class="text-center align-middle text-primary">تایید یا عدم تایید</th>
+<<<<<<< HEAD
+=======
+            <th class="text-center align-middle text-primary"> وضعیت</th>
+>>>>>>> e9d87ba (tree commit)
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
         </tr>
         </thead>
@@ -22,9 +26,31 @@
                 <td class="text-center align-middle">{{$comment->user->name}}</td>
                 <td class="text-center align-middle">{{$comment->body}}</td>
                 <td class="text-center align-middle">
+<<<<<<< HEAD
                     <a class="btn btn-outline-danger" wire:click="$dispatch('deleteBrand',{'id':{{$comment->id}}})">
                         تایید یا عدم تایید
                     </a>
+=======
+                    @if($comment->status == \App\Enums\CommentStatus::Draft->value || $comment->status == \App\Enums\CommentStatus::Rejected->value)
+                        <a class="btn btn-outline-success" wire:click="submitComment({{$comment->id}})">
+                            تایید
+                        </a>
+                    @else
+                        <a class="btn btn-outline-danger" wire:click="submitComment({{$comment->id}})">
+                              عدم تایید
+                        </a>
+                    @endif
+                </td>
+                <td class="text-center align-middle">
+                    @if($comment->status === \App\Enums\CommentStatus::Approved->value)
+                        <span class="cursor-pointer badge badge-success">تایید شده</span>
+                    @elseif($comment->status === \App\Enums\CommentStatus::Draft->value)
+                        <span class="cursor-pointer badge badge-warning">در انتظار تایید</span>
+                    @elseif($comment->status === \App\Enums\CommentStatus::Rejected->value)
+                        <span class="cursor-pointer badge badge-danger">تایید نشده</span>
+                    @endif
+
+>>>>>>> e9d87ba (tree commit)
                 </td>
                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($comment->created_at)->format('%d%B، %Y')}}</td>
             </tr>

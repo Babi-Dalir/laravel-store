@@ -16,7 +16,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+<<<<<<< HEAD
         return view('auth.login');
+=======
+        return view('frontend.auth.login');
+>>>>>>> e9d87ba (tree commit)
     }
 
     /**

@@ -9,6 +9,10 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+<<<<<<< HEAD
+=======
+use App\Http\Controllers\Auth\VerifyMobileController;
+>>>>>>> e9d87ba (tree commit)
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -33,6 +37,13 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+<<<<<<< HEAD
+=======
+
+    //Mobile Route
+    Route::get('verify_mobile', [VerifyMobileController::class, 'verifyMobile'])
+        ->name('verify.mobile');
+>>>>>>> e9d87ba (tree commit)
 });
 
 Route::middleware('auth')->group(function () {
@@ -54,6 +65,10 @@ Route::middleware('auth')->group(function () {
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
+<<<<<<< HEAD
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+=======
+    Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
+>>>>>>> e9d87ba (tree commit)
         ->name('logout');
 });
