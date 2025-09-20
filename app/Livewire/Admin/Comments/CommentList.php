@@ -2,10 +2,8 @@
 
 namespace App\Livewire\Admin\Comments;
 
-<<<<<<< HEAD
-=======
+
 use App\Enums\CommentStatus;
->>>>>>> e9d87ba (tree commit)
 use App\Models\Brand;
 use App\Models\Comment;
 use Livewire\Attributes\On;
@@ -22,8 +20,6 @@ class CommentList extends Component
     {
         $this->resetPage();
     }
-<<<<<<< HEAD
-=======
 
     public function submitComment($comment_id)
     {
@@ -42,7 +38,6 @@ class CommentList extends Component
             ]);
         }
     }
->>>>>>> e9d87ba (tree commit)
     public function render()
     {
         $comments = Comment::query()

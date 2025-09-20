@@ -19,11 +19,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-<<<<<<< HEAD
-        return view('auth.register');
-=======
         return view('frontend.auth.register');
->>>>>>> e9d87ba (tree commit)
     }
 
     /**

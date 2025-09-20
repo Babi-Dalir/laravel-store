@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-<?php
-=======
 @extends('frontend.auth.layouts.master')
 @section('content')
     <main class="main-content dt-sl mt-4 mb-3">
@@ -58,4 +55,3 @@
         </div>
     </main>
 @endsection
->>>>>>> e9d87ba (tree commit)

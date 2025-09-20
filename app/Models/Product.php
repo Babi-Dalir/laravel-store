@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-<<<<<<< HEAD
-=======
+
 use App\Enums\CommentStatus;
->>>>>>> e9d87ba (tree commit)
 use App\Helpers\ImageManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -80,13 +78,11 @@ class Product extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-<<<<<<< HEAD
-=======
+
     public function approvedComments()
     {
         return $this->morphMany(Comment::class, 'commentable')->where('status',CommentStatus::Approved->value);
     }
->>>>>>> e9d87ba (tree commit)
     public static function createProduct($request)
     {
         $product = Product::query()->create([
