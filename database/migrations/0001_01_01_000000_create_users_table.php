@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('user_name')->nullable();
             $table->string('mobile')->nullable()->unique();
+            $table->timestamp('mobile_verified_at')->nullable();
             $table->string('email')->unique()->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->unique()->nullable();
             $table->string('image')->nullable();
             $table->boolean('is_admin')->default(false);
@@ -25,7 +27,6 @@ return new class extends Migration
             $table->string('instagram')->nullable();
             $table->string('eita')->nullable();
             $table->string('status')->default(\App\Enums\UserStatus::Active->value);
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

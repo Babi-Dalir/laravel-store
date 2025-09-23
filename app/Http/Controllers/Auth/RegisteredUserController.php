@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\VerificationCode;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -31,20 +33,22 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'mobile' => ['required', 'string', 'lowercase', 'max:11', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        Session::put('name',$request->name);
+        Session::put('mobile',$request->mobile);
+        Session::put('password',$request->password);
 
-        event(new Registered($user));
+        $check_send_sms = VerificationCode::checkTimeCode($request->mobile);
+        if ($check_send_sms){
+            $code = rand(11111, 99999);
+            VerificationCode::createVerificationCode($request->mobile,$code);
 
-        Auth::login($user);
+            //send sms
+        }
 
-        return redirect(route('panel', absolute: false));
+        return redirect()->route('verify.mobile');
     }
 }

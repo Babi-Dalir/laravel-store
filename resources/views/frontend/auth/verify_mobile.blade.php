@@ -17,18 +17,19 @@
                                 ویرایش شماره
                             </a>
                         </div>
-                        <form action="#">
+                        <form action="{{route('verify.code')}}" method="POST">
+                            @csrf
                             <div class="form-row-title">
                                 <h3>کد تایید را وارد کنید</h3>
                             </div>
                             <div class="form-row">
                                 <div class="numbers-verify">
                                     <div class="lines-number-input">
-                                        <input type="text" class="line-number" maxlength="1" autofocus="">
-                                        <input type="text" class="line-number" maxlength="1">
-                                        <input type="text" class="line-number" maxlength="1">
-                                        <input type="text" class="line-number" maxlength="1">
-                                        <input type="text" class="line-number" maxlength="1">
+                                        <input name="code[]" type="text" class="line-number" maxlength="1" autofocus="">
+                                        <input name="code[]" type="text" class="line-number" maxlength="1">
+                                        <input name="code[]" type="text" class="line-number" maxlength="1">
+                                        <input name="code[]" type="text" class="line-number" maxlength="1">
+                                        <input name="code[]" type="text" class="line-number" maxlength="1">
                                     </div>
                                 </div>
                             </div>

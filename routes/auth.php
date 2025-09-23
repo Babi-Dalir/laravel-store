@@ -38,6 +38,8 @@ Route::middleware('guest')->group(function () {
     //Mobile Route
     Route::get('verify_mobile', [VerifyMobileController::class, 'verifyMobile'])
         ->name('verify.mobile');
+    Route::post('verify_code', [VerifyMobileController::class, 'verifyCode'])
+        ->name('verify.code');
 });
 
 Route::middleware('auth')->group(function () {

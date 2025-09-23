@@ -14,21 +14,39 @@
 {{--                        <div class="message-light">--}}
 {{--                            اگر قبلا با ایمیل ثبت‌نام کرده‌اید، نیاز به ثبت‌نام مجدد با شماره همراه ندارید--}}
 {{--                        </div>--}}
-                        <form action="#">
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
+                            @include('frontend.auth.layouts.error')
+                            <div class="form-row-title">
+                                <h3>نام و نام خانوادگی</h3>
+                            </div>
+                            <div class="form-row with-icon">
+                                <input type="text" class="input-ui pr-2" name="name"
+                                       placeholder="نام و نام خانوادگی خود را وارد نمایید">
+                                <i class="mdi mdi-account-circle-outline"></i>
+                            </div>
                             <div class="form-row-title">
                                 <h3>  شماره موبایل</h3>
                             </div>
                             <div class="form-row with-icon">
-                                <input type="text" class="input-ui pr-2"
-                                       placeholder="ایمیل یا شماره موبایل خود را وارد نمایید">
+                                <input type="text" class="input-ui pr-2" name="mobile"
+                                       placeholder=" شماره موبایل خود را وارد نمایید">
                                 <i class="mdi mdi-account-circle-outline"></i>
                             </div>
                             <div class="form-row-title">
                                 <h3>رمز عبور</h3>
                             </div>
                             <div class="form-row with-icon">
-                                <input type="password" class="input-ui pr-2"
+                                <input type="password" class="input-ui pr-2" name="password"
                                        placeholder="رمز عبور خود را وارد نمایید">
+                                <i class="mdi mdi-lock-open-variant-outline"></i>
+                            </div>
+                            <div class="form-row-title">
+                                <h3>تکرار رمز عبور</h3>
+                            </div>
+                            <div class="form-row with-icon">
+                                <input type="password" class="input-ui pr-2" name="password_confirmation"
+                                       placeholder="تکرار رمز عبور خود را وارد نمایید">
                                 <i class="mdi mdi-lock-open-variant-outline"></i>
                             </div>
                             <div class="form-row mt-2">
@@ -41,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="form-row mt-3">
-                                <button class="btn-primary-cm btn-with-icon mx-auto w-100">
+                                <button type="submit" class="btn-primary-cm btn-with-icon mx-auto w-100">
                                     <i class="mdi mdi-account-circle-outline"></i>
                                     ثبت نام در سایت
                                 </button>
