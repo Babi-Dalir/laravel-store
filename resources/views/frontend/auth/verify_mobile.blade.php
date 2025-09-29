@@ -11,8 +11,16 @@
                         <div class="section-title title-wide mb-1 no-after-title-wide">
                             <h2 class="font-weight-bold">تایید شماره</h2>
                         </div>
+                        <div class="row">
+                            @if(\Illuminate\Support\Facades\Session::has('message'))
+                                <div class="alert alert-info">
+                                    <div>{{session('message')}}</div>
+                                </div>
+                            @endif
+
+                        </div>
                         <div class="message-light">
-                            برای شماره همراه 09999999999 کد تایید ارسال گردید
+                            برای شماره همراه {{session('mobile')}} کد تایید ارسال گردید
                             <a href="#" class="btn-link-border">
                                 ویرایش شماره
                             </a>

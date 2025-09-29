@@ -25,9 +25,9 @@ class VerifyMobileController extends Controller
         $check = VerificationCode::checkVerificationCode($mobile, $code);
         if ($check) {
             $user = User::create([
-                'name' => $request->name,
-                'mobile' => $request->mobile,
-                'password' => Hash::make($request->password),
+                'name' => Session::get('name'),
+                'mobile' => Session::get('mobile'),
+                'password' => Hash::make(Session::get('password')),
             ]);
             event(new Registered($user));
             Auth::login($user);

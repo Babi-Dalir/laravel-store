@@ -22,29 +22,47 @@ class VerificationCode extends Model
             ->where('created_at','<',Carbon::now()->subMinute(2))
             ->first();
         if ($check){
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     public static function createVerificationCode($entry,$code)
     {
-        self::query()->create([
-            'mobile'=>$entry,
-            'code'=>$code
-        ]);
+       if (filter_var($entry, FILTER_VALIDATE_EMAIL)){
+           self::query()->create([
+               'email'=>$entry,
+               'code'=>$code
+           ]);
+       }elseif (preg_match('/^([0-9\s\-\+\(\)]*)$/',$entry)){
+           self::query()->create([
+               'mobile'=>$entry,
+               'code'=>$code
+           ]);
+       }
     }
 
     public static function checkVerificationCode($entry,$code)
     {
-        $check = self::query()
-            ->where('mobile',$entry)
-            ->orWhere('email',$entry)
-            ->where('code',$code)
-            ->first();
-        if ($check){
-            return true;
+        if (filter_var($entry, FILTER_VALIDATE_EMAIL)){
+            $check = self::query()
+                ->where('email',$entry)
+                ->where('code',$code)
+                ->first();
+            if ($check){
+                return true;
+            }
+            return false;
+        }elseif (preg_match('/^([0-9\s\-\+\(\)]*)$/',$entry)){
+            $check = self::query()
+                ->where('mobile',$entry)
+                ->where('code',$code)
+                ->first();
+            if ($check){
+                return true;
+            }
+            return false;
         }
-        return false;
+
     }
 }
