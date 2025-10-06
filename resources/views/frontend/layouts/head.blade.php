@@ -22,5 +22,5 @@
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{url('frontend/css/main.css')}}">
     <link rel="stylesheet" href="{{url('frontend/css/colors/default.css')}}" id="colorswitch">
-
+    @livewireStyles
 </head>

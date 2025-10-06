@@ -1,3 +1,4 @@
+@livewireScripts
 <script src="{{url('frontend/js/vendor/jquery-3.4.1.min.js')}}"></script>
 <script src="{{url('frontend/js/vendor/popper.min.js')}}"></script>
 <script src="{{url('frontend/js/vendor/bootstrap.min.js')}}"></script>

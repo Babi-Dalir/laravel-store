@@ -107,17 +107,12 @@ class ProductPrice extends Model
 
     public static function getColors($product_id, $request, $product)
     {
-        $product_prices = ProductPrice::query()
-            ->where('product_id', $product_id)
-            ->where('guaranty_id', $request->input('guaranty_id'))->get();
-        foreach ($product_prices as $product_price) {
-            if ($product->colors()->where('color_id', $product_price->color_id)->exists()) {
-                $product->colors()->sync($product_price->color_id);
-            } else {
-                $product->colors()->attach($product_price->color_id);
-            }
+        $check = $product->colors()->where('color_id', $request->color_id)->exists();
+        if (!$check) {
+            $product->colors()->attach($request->input('color_id'));
         }
     }
+
     public static function getUpdateProduct($product, float|int $price, $request): void
     {
         $product->update([
