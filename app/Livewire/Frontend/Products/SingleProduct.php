@@ -8,14 +8,22 @@ use Livewire\Component;
 class SingleProduct extends Component
 {
     public $product;
+    public $product_price;
 
-    public function changeColorProduct()
+    public function mount()
     {
-        dd("hi");
+        $this->product_price = ProductPrice::query()->where('product_id',$this->product->id)->orderBy('price','ASC')->first();
+    }
+    public function changeColorProduct($color_id)
+    {
+        $this->product_price = ProductPrice::query()
+            ->where('product_id',$this->product->id)
+            ->where('color_id',$color_id)
+            ->orderBy('price','ASC')
+            ->first();
     }
     public function render()
     {
-        $product_price = ProductPrice::query()->where('product_id',$this->product->id)->orderBy('price','ASC')->first();
-        return view('livewire.frontend.products.single-product',compact('product_price'));
+        return view('livewire.frontend.products.single-product');
     }
 }

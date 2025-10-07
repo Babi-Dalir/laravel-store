@@ -22,7 +22,7 @@
                     </div>
                 </div>
             @endif
-            <div class="product-gallery">
+            <div class="product-gallery" wire:ignore>
                 <div class="product-carousel owl-carousel" data-slider-id="1">
                     @foreach($product->galleries as $gallery)
                         <div class="item">
@@ -63,7 +63,7 @@
                             </div>
                             <ul class="product-variants float-right ml-3">
                                 @foreach($product->colors as $color)
-                                    <li class="ui-variant" wire:click="changeColorProduct()">
+                                    <li class="ui-variant" wire:click="changeColorProduct({{$color->id}})">
                                         <label class="ui-variant ui-variant--color">
                                                         <span class="ui-variant-shape"
                                                               style="background-color: {{$color->code}}"></span>
@@ -100,19 +100,19 @@
                             <h2>کد محصول:225566</h2>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="product-guaranteed">
+                    <div class="col-lg-6" wire:ignore.self>
+                        <div class="product-guaranteed" wire:ignore>
                             <i class="fas fa-badge-check"></i>
                             <p>بیش از ۴۳۰ نفر از خریداران این محصول را پیشنهاد داده‌اند</p>
                         </div>
-                        <div class="product-summary">
-                            <nav id="stack-menu">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <div class="product-seller-row-main">
-                                                <img src="./assets/img/seller-logo.png" alt="">
-                                                <div class="product-seller-first-line">
+                        <div class="product-summary" wire:ignore.self>
+                            <nav id="stack-menu" wire:ignore.self>
+                                <ul wire:ignore.self>
+                                    <li wire:ignore>
+                                        <a href="#" wire:ignore>
+                                            <div class="product-seller-row-main" wire:ignore>
+                                                <img src="./assets/img/seller-logo.png" alt="" wire:ignore>
+                                                <div class="product-seller-first-line" wire:ignore>
                                                     فروشنده:
                                                     <span class="product-seller-name">بابی شاپ</span>
                                                 </div>
@@ -242,13 +242,13 @@
                                             </div>
                                         </ul>
                                     </li>
-                                    <li>
+                                    <li wire:ignore.self>
                                         <a>
                                             <i class="far fa-shield-check"></i>
                                             {{$product_price->guaranty->name}}
                                         </a>
                                     </li>
-                                    <li>
+                                    <li wire:ignore>
                                         <a href="#">
                                             <i class="far fa-box-check product-delivery-warehouse"></i>
                                             موجود در انبار بابی شاپ
@@ -272,29 +272,31 @@
                                         </ul>
                                     </li>
                                 </ul>
-                                <div class="product-seller-row product-seller-row--price">
-                                    <div class="product-seller-price-info">
-                                        <div class="product-seller-price-prev">
+                                <div class="product-seller-row product-seller-row--price" wire:ignore.self>
+                                    <div class="product-seller-price-info" wire:ignore.self>
+                                        <div class="product-seller-price-prev" wire:ignore.self>
                                             {{number_format(($product_price->main_price))}}
                                         </div>
-                                        <div class="product-seller-price-off">
-                                            {{$product_price->discount}}٪
-                                        </div>
+                                        @if($product_price->discount >0)
+                                            <div class="product-seller-price-off" wire:ignore.self>
+                                                {{$product_price->discount}}٪
+                                            </div>
+                                        @endif
                                     </div>
-                                    <div class="product-seller-price-real">
+                                    <div class="product-seller-price-real" wire:ignore.self>
                                         <div class="product-seller-price-raw">{{number_format($product_price->price)}}</div>
                                         تومان
                                     </div>
                                     <div
-                                        class="product-additional-item product-additional-item--no-icon">
+                                        class="product-additional-item product-additional-item--no-icon" wire:ignore.self>
                                         <span>{{number_format($product_price->main_price - $product_price->price)}}</span>&nbsp; تومان تخفیف سازمانی کسر گردیده است.
                                     </div>
                                 </div>
                                 <div class="product-seller-row product-seller-row--add-to-cart">
-                                    <a href="#" class="btn-add-to-cart btn-add-to-cart--full-width">
+                                    <a href="#" class="btn-add-to-cart btn-add-to-cart--full-width" wire:ignore>
                                         <span class="btn-add-to-cart-txt">افزودن به سبد خرید</span>
                                     </a>
-                                    <div class="product-seller-digiclub">
+                                    <div class="product-seller-digiclub" wire:ignore>
                                         <img src="./assets/img/digiclub.png" alt="">
                                         <div>
                                             دریافت
@@ -303,7 +305,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="other-seller">
+                                <div class="other-seller" wire:ignore.self>
                                     <a href="#product-seller-all">
                                         <div class="product-seller-row-main">
                                                             <span class="font-weight-bold">
