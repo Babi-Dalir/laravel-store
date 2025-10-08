@@ -292,7 +292,7 @@
                                         <span>{{number_format($product_price->main_price - $product_price->price)}}</span>&nbsp; تومان تخفیف سازمانی کسر گردیده است.
                                     </div>
                                 </div>
-                                <div class="product-seller-row product-seller-row--add-to-cart">
+                                <div class="product-seller-row product-seller-row--add-to-cart" wire:click="addToCart({{$product_price->color_id}},{{$product_price->guaranty_id}})">
                                     <a href="#" class="btn-add-to-cart btn-add-to-cart--full-width" wire:ignore>
                                         <span class="btn-add-to-cart-txt">افزودن به سبد خرید</span>
                                     </a>

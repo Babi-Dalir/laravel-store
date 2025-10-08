@@ -3,6 +3,7 @@
 namespace App\Livewire\Frontend\Products;
 
 use App\Models\ProductPrice;
+use App\Models\UserCart;
 use Livewire\Component;
 
 class SingleProduct extends Component
@@ -13,6 +14,22 @@ class SingleProduct extends Component
     public function mount()
     {
         $this->product_price = ProductPrice::query()->where('product_id',$this->product->id)->orderBy('price','ASC')->first();
+    }
+
+    public function addToCart($color_id,$guaranty_id)
+    {
+        if (auth()->user()){
+            UserCart::query()->create([
+                'user_id'=>auth()->user()->id,
+                'product_id'=>$this->product->id,
+                'color_id'=>$color_id,
+                'guaranty_id'=>$guaranty_id,
+                'count'=>1,
+            ]);
+            return redirect()->route('user.cart');
+        }else{
+            return redirect()->route('login');
+        }
     }
     public function changeColorProduct($color_id)
     {

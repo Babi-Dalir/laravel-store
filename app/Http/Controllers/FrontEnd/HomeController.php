@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use App\Enums\CartType;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductPrice;
 use App\Models\Slider;
+use App\Models\UserCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -38,5 +40,11 @@ class HomeController extends Controller
             ->with(['category','brand','colors','tags','properties','propertyGroups','productPrices'])
             ->where('slug',$slug)->first();
         return view('frontend.single_product',compact('product'));
+    }
+
+    public function userCart()
+    {
+        $carts = UserCart::query()->where('type',CartType::Main->value)->get();
+        return view('frontend.user_cart',compact('carts'));
     }
 }
