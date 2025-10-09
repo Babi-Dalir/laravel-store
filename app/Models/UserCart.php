@@ -31,4 +31,16 @@ class UserCart extends Model
     {
         return $this->belongsTo(Guaranty::class);
     }
+
+    public function productPrice($product_id,$color_id,$guaranty_id)
+    {
+        $product_price = ProductPrice::query()
+            ->where('product_id',$product_id)
+            ->where('color_id',$color_id)
+            ->where('guaranty_id',$guaranty_id)
+            ->first();
+        if ($product_price){
+            return $product_price->price;
+        }
+    }
 }

@@ -19,13 +19,26 @@ class SingleProduct extends Component
     public function addToCart($color_id,$guaranty_id)
     {
         if (auth()->user()){
-            UserCart::query()->create([
-                'user_id'=>auth()->user()->id,
-                'product_id'=>$this->product->id,
-                'color_id'=>$color_id,
-                'guaranty_id'=>$guaranty_id,
-                'count'=>1,
-            ]);
+            $user_cart = UserCart::query()
+                ->where('user_id',auth()->user()->id)
+                ->where('product_id',$this->product->id)
+                ->where('color_id',$color_id)
+                ->where('guaranty_id',$guaranty_id)
+                ->first();
+            if ($user_cart){
+                $user_cart->update([
+                    'count'=>$user_cart->count +1
+                ]);
+            }else{
+                UserCart::query()->create([
+                    'user_id'=>auth()->user()->id,
+                    'product_id'=>$this->product->id,
+                    'color_id'=>$color_id,
+                    'guaranty_id'=>$guaranty_id,
+                    'count'=>1,
+                ]);
+            }
+
             return redirect()->route('user.cart');
         }else{
             return redirect()->route('login');
