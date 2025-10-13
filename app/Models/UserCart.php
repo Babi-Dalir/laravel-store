@@ -12,6 +12,7 @@ class UserCart extends Model
         'color_id',
         'guaranty_id',
         'count',
+        'type',
 
     ];
 

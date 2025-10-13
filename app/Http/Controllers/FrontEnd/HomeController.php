@@ -44,7 +44,7 @@ class HomeController extends Controller
 
     public function userCart()
     {
-        $carts = UserCart::query()->where('type',CartType::Main->value)->get();
-        return view('frontend.user_cart',compact('carts'));
+        $carts_count = UserCart::query()->where('type',CartType::Main->value)->count();
+        return view('frontend.user_cart',compact('carts_count'));
     }
 }

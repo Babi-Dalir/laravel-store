@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 @section('content')
-    @if(count($carts) == 0)
+    @if($carts_count == 0)
         <main class="main-content dt-sl mb-3">
             <div class="container main-container">
                 <div class="row">
@@ -473,7 +473,7 @@
     @else
         <main class="main-content dt-sl mb-3">
             <div class="container main-container">
-                <livewire:frontend.carts.carts-detail :carts="$carts"/>
+                <livewire:frontend.carts.carts-detail/>
             </div>
         </main>
     @endif

@@ -7,7 +7,7 @@
                    aria-selected="true">سبد خرید<span class="count-cart">{{count($carts)}}</span></a>
                 <a class="nav-item nav-link d-inline-flex w-auto" id="nav-profile-tab" data-toggle="tab"
                    href="#nav-profile" role="tab" aria-controls="nav-profile"
-                   aria-selected="false">لیست خرید بعدی<span class="count-cart">1</span></a>
+                   aria-selected="false">لیست خرید بعدی<span class="count-cart">{{count($reserve_carts)}}</span></a>
             </div>
         </nav>
     </div>
@@ -21,6 +21,7 @@
                             <div class="checkout-header checkout-header--express">
                                 <span class="checkout-header-title">ارسال عادی</span>
                                 <span class="checkout-header-extra-info">({{count($carts)}} کالا)</span>
+                                <span wire:loading class="text text-info mr-3">درحال بروزرسانی</span>
                             </div>
                             <div class="checkout-section-content-dd-k">
                                 <div class="cart-items-dd-k">
@@ -68,9 +69,13 @@
                                                                     <span wire:click="decreaseCart({{$cart->product_id}},{{$cart->color_id}},{{$cart->guaranty_id}})" class="minus dis"></span>
                                                                 </div>
                                                             </div>
-                                                            <button class="item-remove-btn mr-3">
-                                                                <i class="far fa-trash-alt"></i>
+                                                            <button wire:click="deleteCart({{$cart->id}})" class="item-remove-btn mr-3">
+                                                                <i class="far fa-trash-alt btn-danger"></i>
                                                                 حذف
+                                                            </button>
+                                                            <button class="item-remove-btn mr-3" wire:click="moveToReserveCart({{$cart->id}})">
+                                                                <i class="far fa-retweet-alt btn-info"></i>
+                                                                انتقال به لیست خرید بعدی
                                                             </button>
                                                         </div>
                                                         <div class="item-price">
@@ -90,18 +95,11 @@
                         <div class="dt-sn dt-sn--box border mb-2">
                             <ul class="checkout-summary-summary">
                                 <li>
-                                    <span>مبلغ کل (۲ کالا)</span><span>۱۶,۸۹۷,۰۰۰ تومان</span>
+                                    <span>مبلغ کل ({{count($carts)}} کالا)</span><span>{{number_format($total_price)}} تومان</span>
                                 </li>
                                 <li class="checkout-summary-discount">
-                                    <span>سود شما از خرید</span><span><span>(۱٪)</span>۲۰۰,۰۰۰
+                                    <span>سود شما از خرید</span><span>{{number_format($discount_price)}}
                                                         تومان</span>
-                                </li>
-                                <li>
-                                                    <span>هزینه ارسال<span class="help-sn" data-toggle="tooltip"
-                                                                           data-html="true" data-placement="bottom"
-                                                                           title="<div class='help-container is-right'><div class='help-arrow'></div><p class='help-text'>هزینه ارسال مرسولات می‌تواند وابسته به شهر و آدرس گیرنده متفاوت باشد. در صورتی که هر یک از مرسولات حداقل ارزشی برابر با ۱۵۰هزار تومان داشته باشد، آن مرسوله بصورت رایگان ارسال می‌شود.<br>'حداقل ارزش هر مرسوله برای ارسال رایگان، می تواند متغیر باشد.'</p></div>">
-                                                            <span class="mdi mdi-information-outline"></span>
-                                                        </span></span><span>وابسته به آدرس</span>
                                 </li>
                                 <li class="checkout-club-container">
                                                     <span>کلاب<span class="help-sn" data-toggle="tooltip"
@@ -117,7 +115,7 @@
                             <div class="checkout-summary-content">
                                 <div class="checkout-summary-price-title">مبلغ قابل پرداخت:</div>
                                 <div class="checkout-summary-price-value">
-                                    <span class="checkout-summary-price-value-amount">۱۶,۶۹۷,۰۰۰</span>
+                                    <span class="checkout-summary-price-value-amount">{{number_format($total_price)}}</span>
                                     تومان
                                 </div>
                                 <a href="#" class="mb-2 d-block">
@@ -164,74 +162,75 @@
                         <div class="table-responsive checkout-content dt-sl">
                             <div class="checkout-header checkout-header--express">
                                 <span class="checkout-header-title">ارسال عادی</span>
-                                <span class="checkout-header-extra-info">(2 کالا)</span>
-                                <a class="checkout-add-all-to-cart">
+                                <span class="checkout-header-extra-info">({{count($reserve_carts)}} کالا)</span>
+                                <a wire:click="moveToAllMainCart" class="checkout-add-all-to-cart">
                                     افزودن همه به سبد خرید
                                 </a>
                             </div>
                             <div class="checkout-section-content-dd-k">
                                 <div class="cart-items-dd-k">
-                                    <div class="cart-item py-4 px-3">
-                                        <div class="item-thumbnail">
-                                            <a href="#">
-                                                <img src="./assets/img/cart/cart01.jpg" alt="item">
-                                            </a>
-                                        </div>
-                                        <div class="item-info flex-grow-1">
-                                            <div class="item-title">
-                                                <h2>
-                                                    <a href="#">
-                                                        گوشی موبایل شیائومی مدل Mi 10 Lite 5G M2002J9G
-                                                        دو
-                                                        سیم‌ کارت
-                                                        ظرفیت
-                                                        128 گیگابایت</a>
-                                                </h2>
+                                    @foreach($reserve_carts as $cart)
+                                        <div class="cart-item py-4 px-3">
+                                            <div class="item-thumbnail">
+                                                <a href="#">
+                                                    <img src="{{url('images/products/big/'.$cart->product->image)}}" alt="item">
+                                                </a>
                                             </div>
-                                            <div class="item-detail">
-                                                <ul>
-                                                    <li>
+                                            <div class="item-info flex-grow-1">
+                                                <div class="item-title">
+                                                    <h2>
+                                                        <a href="#">{{$cart->product->name}}</a>
+                                                    </h2>
+                                                </div>
+                                                <div class="item-detail">
+                                                    <ul>
+                                                        <li>
                                                                         <span class="color"
-                                                                              style="background-color: #9E9E9E;"></span>
-                                                        <span>خاکستری</span>
-                                                    </li>
-                                                    <li>
-                                                        <i class="far fa-shield-check text-muted"></i>
-                                                        <span>گارانتی ۱۸ ماهه</span>
-                                                    </li>
-                                                    <li>
-                                                        <i class="far fa-store-alt text-muted"></i>
-                                                        <span>نام فروشنده</span>
-                                                    </li>
-                                                    <li>
-                                                        <i
-                                                            class="far fa-clipboard-check text-primary"></i>
-                                                        <span>موجود در انبار</span>
-                                                    </li>
-                                                </ul>
-                                                <div class="item-quantity--item-price">
-                                                    <div class="item-quantity">
-                                                        <div class="num-block">
-                                                            <div class="num-in">
-                                                                <span class="plus"></span>
-                                                                <input type="text" class="in-num"
-                                                                       value="1" readonly>
-                                                                <span class="minus dis"></span>
+                                                                              style="background-color: {{$cart->color->code}};"></span>
+                                                            <span>{{$cart->color->name}}</span>
+                                                        </li>
+                                                        <li>
+                                                            <i class="far fa-shield-check text-muted"></i>
+                                                            <span>{{$cart->guaranty->name}}</span>
+                                                        </li>
+                                                        <li>
+                                                            <i class="far fa-store-alt text-muted"></i>
+                                                            <span>نام فروشنده</span>
+                                                        </li>
+                                                        <li>
+                                                            <i
+                                                                class="far fa-clipboard-check text-primary"></i>
+                                                            <span>موجود در انبار</span>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="item-quantity--item-price">
+                                                        <div class="item-quantity">
+                                                            <div class="num-block">
+                                                                <div class="num-in">
+                                                                    <span wire:click="increaseCart({{$cart->product_id}},{{$cart->color_id}},{{$cart->guaranty_id}})" class="plus"></span>
+                                                                    <input type="text" class="in-num"
+                                                                           value="{{$cart->count}}" readonly>
+                                                                    <span wire:click="decreaseCart({{$cart->product_id}},{{$cart->color_id}},{{$cart->guaranty_id}})" class="minus dis"></span>
+                                                                </div>
                                                             </div>
+                                                            <button class="item-remove-btn mr-3">
+                                                                <i class="far fa-trash-alt btn-danger"></i>
+                                                                حذف
+                                                            </button>
+                                                            <button class="item-remove-btn mr-3" wire:click="moveToMainCart({{$cart->id}})">
+                                                                <i class="far fa-retweet-alt btn-info"></i>
+                                                                انتقال به لیست خرید اصلی
+                                                            </button>
                                                         </div>
-                                                        <button class="item-remove-btn mr-3">
-                                                            <i class="far fa-trash-alt"></i>
-                                                            حذف
-                                                        </button>
-                                                    </div>
-                                                    <div class="item-price">
-                                                        ۱۰,۷۰۹,۰۰۰<span
-                                                            class="text-sm mr-1">تومان</span>
+                                                        <div class="item-price">
+                                                            {{number_format($cart->productPrice($cart->product_id,$cart->color_id,$cart->guaranty_id))}}<span
+                                                                class="text-sm mr-1">تومان</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
