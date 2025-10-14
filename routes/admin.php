@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\GuarantyController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\PropertyGroupController;
+use App\Http\Controllers\Admin\ProvinceController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TagController;
@@ -80,3 +82,9 @@ Route::resource('banners', BannerController::class);
 //Comment Route
 
 Route::get('users_comments', [CommentController::class,'userComments'])->name('users.comments');
+
+//Province Route
+Route::resource('provinces', ProvinceController::class);
+
+//City Route
+Route::resource('cities', CityController::class);

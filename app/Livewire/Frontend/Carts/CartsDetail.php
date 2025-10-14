@@ -93,6 +93,6 @@ class CartsDetail extends Component
             $total_price += ($product_price->price) * $cart->count;
             $discount_price += ($product_price->main_price - $product_price->price) * $cart->count;
         }
-        return view('livewire.frontend.carts.carts-detail',compact('carts','product_price','reserve_carts','total_price','discount_price'));
+        return view('livewire.frontend.carts.carts-detail',compact('carts','reserve_carts','total_price','discount_price'));
     }
 }

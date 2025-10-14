@@ -13,4 +13,4 @@ Route::get('/single_products/{slug}',[HomeController::class,'singleProduct'])->n
 
 Route::get('/user_cart',[HomeController::class,'userCart'])->name('user.cart');
 
-
+Route::get('/shopping',[HomeController::class,'shopping'])->name('user.shopping');

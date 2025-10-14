@@ -34,6 +34,6 @@ class HeaderCarts extends Component
                 ->first();
             $total_price += ($product_price->price) * $cart->count;
         }
-        return view('livewire.frontend.carts.header-carts',compact('product_price','carts','total_price'));
+        return view('livewire.frontend.carts.header-carts',compact('carts','total_price'));
     }
 }

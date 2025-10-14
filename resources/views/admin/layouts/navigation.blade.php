@@ -41,6 +41,20 @@
                     <li><a href="{{route('roles.index')}}">لیست نقش ها</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#">استان ها</a>
+                <ul>
+                    <li><a href="{{route('provinces.create')}}">ایجاد استان</a></li>
+                    <li><a href="{{route('provinces.index')}}">لیست استان ها</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">شهر ها</a>
+                <ul>
+                    <li><a href="{{route('cities.create')}}">ایجاد شهر</a></li>
+                    <li><a href="{{route('cities.index')}}">لیست شهر ها</a></li>
+                </ul>
+            </li>
         </ul>
 {{--        @hasanyrole('نویسنده')--}}
         <ul id="store">

@@ -5,9 +5,7 @@
 
 <body>
 <div class="wrapper">
-    <!-- Start header -->
-    @include('frontend.layouts.header')
-    <!-- End header -->
+
     <!-- Start main-content -->
     @yield('content')
     <!-- End main-content -->
