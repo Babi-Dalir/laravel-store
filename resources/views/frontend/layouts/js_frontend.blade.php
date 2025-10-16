@@ -18,3 +18,4 @@
 <script src="{{url('frontend/js/vendor/theia-sticky-sidebar.min.js')}}"></script>
 <!-- Main JS File -->
 <script src="{{url('frontend/js/main.js')}}"></script>
+@stack('scripts')

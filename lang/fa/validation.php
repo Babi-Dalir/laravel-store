@@ -206,6 +206,7 @@ return [
         'expiration_date'=>'تاریخ انقضای کد تخفیف',
         'selected_user'=>'کاربر',
         'e_name'=>'نام انگلیسی',
+        'postal_code'=>'کد پستی',
 
     ],
 ];
