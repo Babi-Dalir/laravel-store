@@ -8,28 +8,33 @@
                 <div class="checkout-contact dt-sn dt-sn--box border px-0 pt-0 pb-0">
                     <div class="checkout-contact-content">
                         <ul class="checkout-contact-items">
-                            <li class="checkout-contact-item">
-                                گیرنده:
-                                <span class="full-name">جلال بهرامی راد</span>
-                                <a class="checkout-contact-btn-edit">اصلاح این آدرس</a>
-                            </li>
-                            <li class="checkout-contact-item">
-                                <div class="checkout-contact-item checkout-contact-item-mobile">
-                                    شماره تماس:
-                                    <span class="mobile-phone">09xxxxxxxxx</span>
-                                </div>
-                                <div class="checkout-contact-item-message">
-                                    کد پستی:
-                                    <span class="post-code">۹۹۹۹۹۹۹۹۹۹</span>
-                                </div>
-                                <br>
-                                استان
-                                <span class="state">خراسان شمالی</span>
-                                ، ‌شهر
-                                <span class="city">بجنورد</span>
-                                ،
-                                <span class="address-part">خراسان شمالی-بجنورد</span>
-                            </li>
+                            @foreach($addresses  as $address)
+                                @if($loop->first)
+                                    <li class="checkout-contact-item">
+                                        گیرنده:
+                                        <span class="full-name">{{$address->name}}</span>
+                                        <a class="checkout-contact-btn-edit">اصلاح این آدرس</a>
+                                    </li>
+                                    <li class="checkout-contact-item">
+                                        <div class="checkout-contact-item checkout-contact-item-mobile">
+                                            شماره تماس:
+                                            <span class="mobile-phone">{{$address->mobile}}</span>
+                                        </div>
+                                        <div class="checkout-contact-item-message">
+                                            کد پستی:
+                                            <span class="post-code">{{$address->postal_code}}</span>
+                                        </div>
+                                        <br>
+                                        استان
+                                        <span class="state">{{$address->province->province}}</span>
+                                        ، ‌شهر
+                                        <span class="city">{{$address->city->city}}</span>
+                                        ،
+                                        <span class="address-part">{{$address->address}}</span>
+                                    </li>
+                                @endif
+                            @endforeach
+
                         </ul>
                         <a class="checkout-contact-location" id="btn-checkout-contact-location">تغییر
                             آدرس
@@ -50,78 +55,50 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="checkout-address-row">
-                                <div class="checkout-address-col">
-                                    <div class="checkout-address-box is-selected">
-                                        <h5 class="checkout-address-title">جلال بهرامی راد</h5>
-                                        <p class="checkout-address-text">
-                                                            <span>خراسان شمالی، بجنورد،خراسان شمالی-بجنورد-طالقانی
-                                                                غربی</span>
-                                        </p>
-                                        <ul class="checkout-address-list">
-                                            <li>
-                                                <ul class="checkout-address-contact-info">
-                                                    <li class="">کدپستی: <span>۹۹۹۹۹۹۹۹۹۹</span></li>
-                                                    <li>شماره همراه: <span>09xxxxxxxxx</span>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <ul>
-                                                    <li>
-                                                        <button class="checkout-address-btn-edit"
-                                                                data-toggle="modal"
-                                                                data-target="#modal-location-edit">ویرایش</button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="checkout-address-btn-remove"
-                                                                data-toggle="modal"
-                                                                data-target="#remove-location">حذف</button>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <button class="checkout-address-btn-submit">سفارش به این آدرس
-                                            ارسال می‌شود.</button>
+                            @foreach($addresses as $address)
+                                <div class="checkout-address-row">
+                                    <div class="checkout-address-col">
+                                        <div class="checkout-address-box  @if($address->is_default) is-selected @endif">
+                                            <h5 class="checkout-address-title">{{$address->name}}</h5>
+                                            <p class="checkout-address-text">
+                                                            <span>{{$address->province->province}}، {{$address->city->city}}،
+                                                                {{$address->address}}</span>
+                                            </p>
+                                            <ul class="checkout-address-list">
+                                                <li>
+                                                    <ul class="checkout-address-contact-info">
+                                                        <li class="">کدپستی: <span>{{$address->postalcode}}</span></li>
+                                                        <li>شماره همراه: <span>{{$address->mobile}}</span>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li>
+                                                            <button class="checkout-address-btn-edit"
+                                                                    data-toggle="modal"
+                                                                    data-target="#modal-location-edit">ویرایش</button>
+                                                        </li>
+                                                        <li>
+                                                            <button class="checkout-address-btn-remove"
+                                                                    data-toggle="modal"
+                                                                    data-target="#remove-location">حذف</button>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            @if($address->is_default)
+                                                <button class="checkout-address-btn-submit">سفارش به این آدرس
+                                                    ارسال می‌شود.</button>
+                                            @else
+                                                <button class="checkout-address-btn-submit">ارسال سفارش به این آدرس.</button>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="checkout-address-row">
-                                <div class="checkout-address-col">
-                                    <div class="checkout-address-box">
-                                        <h5 class="checkout-address-title">جلال بهرامی راد</h5>
-                                        <p class="checkout-address-text">
-                                            <span>خراسان شمالی، بجنورد،خراسان شمالی-بجنورد</span>
-                                        </p>
-                                        <ul class="checkout-address-list">
-                                            <li>
-                                                <ul class="checkout-address-contact-info">
-                                                    <li>کدپستی: <span>۹۹۹۹۹۹۹۹۹۹</span>
-                                                    </li>
-                                                    <li>شماره همراه: <span>09xxxxxxxxx</span>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                <ul>
-                                                    <li>
-                                                        <button class="checkout-address-btn-edit"
-                                                                data-toggle="modal"
-                                                                data-target="#modal-location-edit">ویرایش</button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="checkout-address-btn-remove"
-                                                                data-toggle="modal"
-                                                                data-target="#remove-location">حذف</button>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <button class="checkout-address-btn-submit">ارسال سفارش به این
-                                            آدرس</button>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
+
                         </div>
                         <button class="checkout-address-cancel" id="cancel-change-address-btn"></button>
                     </div>

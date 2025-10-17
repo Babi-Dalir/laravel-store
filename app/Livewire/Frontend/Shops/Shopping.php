@@ -3,6 +3,7 @@
 namespace App\Livewire\Frontend\Shops;
 
 use App\Enums\CartType;
+use App\Models\Address;
 use App\Models\ProductPrice;
 use App\Models\UserCart;
 use Livewire\Component;
@@ -11,6 +12,10 @@ class Shopping extends Component
 {
     public function render()
     {
+        $addresses = Address::query()
+            ->where('user_id',auth()->user()->id)
+            ->orderByDesc('is_default')
+            ->get();
         $carts = UserCart::query()->where('type',CartType::Main->value)->get();
         $total_price = 0;
         $discount_price = 0;
@@ -23,6 +28,6 @@ class Shopping extends Component
             $total_price += ($product_price->price) * $cart->count;
             $discount_price += ($product_price->main_price - $product_price->price) * $cart->count;
         }
-        return view('livewire.frontend.shops.shopping',compact('carts','total_price','discount_price'));
+        return view('livewire.frontend.shops.shopping',compact('carts','total_price','discount_price','addresses'));
     }
 }

@@ -20,11 +20,11 @@ class AddAddressModal extends Component
 
     protected $rules = [
         'name'=>'required',
-        'mobile'=>'required',
+        'mobile'=>'required|digits:11',
         'province'=>'required',
         'city'=>'required',
         'address'=>'required',
-        'postal_code'=>'required',
+        'postal_code'=>'required|digits:10',
     ];
 
     public function mount()
@@ -40,16 +40,13 @@ class AddAddressModal extends Component
     public function submit()
     {
         $this->validate();
-        $exists = Address::query()->where('user_id',auth()->user()->id)->exists();
-        if ($exists){
-            Address::query()->create([
-                'name'=>$this->name,
-                'mobile'=>$this->mobile,
-                'user_id'=>auth()->user()->id,
-                'province_id'=>$this->province,
-                'city_id'=>$this->city,
-                'address'=>$this->address,
-                'postal_code'=>$this->postal_code,
+        $address = Address::query()
+            ->where('user_id',auth()->user()->id)
+            ->where('is_default',true)
+            ->first();
+        if ($address){
+            Address::query()->update([
+              'is_default'=>false
             ]);
         }else{
             Address::query()->create([
@@ -63,6 +60,14 @@ class AddAddressModal extends Component
                 'is_default'=>true,
             ]);
         }
+        $this->reset([
+            'name',
+            'mobile',
+            'province',
+            'city',
+            'address',
+            'postal_code',
+        ]);
         $this->dispatch('closeAddressModal');
 
     }
