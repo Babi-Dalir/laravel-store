@@ -19,12 +19,12 @@ class AddAddressModal extends Component
     public $cities;
 
     protected $rules = [
-        'name'=>'required',
-        'mobile'=>'required|digits:11',
-        'province'=>'required',
-        'city'=>'required',
-        'address'=>'required',
-        'postal_code'=>'required|digits:10',
+        'name' => 'required',
+        'mobile' => 'required|digits:11',
+        'province' => 'required',
+        'city' => 'required',
+        'address' => 'required',
+        'postal_code' => 'required|digits:10',
     ];
 
     public function mount()
@@ -37,29 +37,30 @@ class AddAddressModal extends Component
     {
         $this->cities = City::query()->where('province_id', $province_id)->pluck('city', 'id');
     }
+
     public function submit()
     {
         $this->validate();
         $address = Address::query()
-            ->where('user_id',auth()->user()->id)
-            ->where('is_default',true)
+            ->where('user_id', auth()->user()->id)
+            ->where('is_default', true)
             ->first();
-        if ($address){
-            Address::query()->update([
-              'is_default'=>false
-            ]);
-        }else{
-            Address::query()->create([
-                'name'=>$this->name,
-                'mobile'=>$this->mobile,
-                'user_id'=>auth()->user()->id,
-                'province_id'=>$this->province,
-                'city_id'=>$this->city,
-                'address'=>$this->address,
-                'postal_code'=>$this->postal_code,
-                'is_default'=>true,
+        if ($address) {
+            $address->update([
+                'is_default' => false
             ]);
         }
+        Address::query()->create([
+            'name' => $this->name,
+            'mobile' => $this->mobile,
+            'user_id' => auth()->user()->id,
+            'province_id' => $this->province,
+            'city_id' => $this->city,
+            'address' => $this->address,
+            'postal_code' => $this->postal_code,
+            'is_default' => true,
+        ]);
+
         $this->reset([
             'name',
             'mobile',
@@ -69,8 +70,10 @@ class AddAddressModal extends Component
             'postal_code',
         ]);
         $this->dispatch('closeAddressModal');
+        $this->dispatch('refreshAddressList');
 
     }
+
     public function render()
     {
         return view('livewire.frontend.shops.add-address-modal');

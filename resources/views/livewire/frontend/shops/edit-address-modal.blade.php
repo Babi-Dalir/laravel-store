@@ -59,13 +59,18 @@
                                         <div class="form-row">
                                             <div class="form-group" style="width: 100% !important;">
                                                 <select class="form-control"  style="width: 100% !important;" wire:model="province" wire:change="changeProvince($event.target.value)">
-                                                    <option value="">
-                                                        انتخاب استان
-                                                    </option>
+
                                                     @foreach($provinces as $key=>$value)
-                                                        <option value="{{$key}}">
-                                                            {{$value}}
-                                                        </option>
+                                                        @if($key == $province)
+                                                            <option selected value="{{$key}}">
+                                                                {{$value}}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{$key}}">
+                                                                {{$value}}
+                                                            </option>
+                                                        @endif
+
                                                     @endforeach
 
                                                 </select>
@@ -84,13 +89,17 @@
                                         <div class="form-row">
                                             <div class="form-group" style="width: 100% !important;">
                                                 <select class="form-control"  style="width: 100% !important;" wire:model="city">
-                                                    <option value="">
-                                                        انتخاب شهر
-                                                    </option>
+
                                                     @foreach($cities as $key=>$value)
-                                                        <option value="{{$key}}">
-                                                            {{$value}}
-                                                        </option>
+                                                        @if($key == $city)
+                                                            <option selected value="{{$key}}">
+                                                                {{$value}}
+                                                            </option>
+                                                        @else
+                                                            <option value="{{$key}}">
+                                                                {{$value}}
+                                                            </option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                                 @error('city')
@@ -148,3 +157,10 @@
         </div>
     </div>
 </div>
+@push('scripts')
+    <script>
+        window.addEventListener('closeEditAddressModal',event=>{
+            $("#modal-location-edit").modal('toggle')
+        })
+    </script>
+@endpush

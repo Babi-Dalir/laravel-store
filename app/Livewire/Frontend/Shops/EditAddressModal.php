@@ -17,17 +17,18 @@ class EditAddressModal extends Component
     public $postal_code;
     public $provinces;
     public $cities;
+    public $address_id;
 
-    protected $listeners=[
+    protected $listeners = [
         'editAddress'
     ];
     protected $rules = [
-        'name'=>'required',
-        'mobile'=>'required|digits:11',
-        'province'=>'required',
-        'city'=>'required',
-        'address'=>'required',
-        'postal_code'=>'required|digits:10',
+        'name' => 'required',
+        'mobile' => 'required|digits:11',
+        'province' => 'required',
+        'city' => 'required',
+        'address' => 'required',
+        'postal_code' => 'required|digits:10',
     ];
 
     public function mount()
@@ -40,29 +41,30 @@ class EditAddressModal extends Component
     {
         $this->cities = City::query()->where('province_id', $province_id)->pluck('city', 'id');
     }
+
     public function submit()
     {
         $this->validate();
-        $address = Address::query()
-            ->where('user_id',auth()->user()->id)
-            ->where('is_default',true)
+        $edit_address = Address::query()
+            ->where('user_id', auth()->user()->id)
+            ->where('is_default', true)
             ->first();
-        if ($address){
-            Address::query()->update([
-                'is_default'=>false
-            ]);
-        }else{
-            Address::query()->create([
-                'name'=>$this->name,
-                'mobile'=>$this->mobile,
-                'user_id'=>auth()->user()->id,
-                'province_id'=>$this->province,
-                'city_id'=>$this->city,
-                'address'=>$this->address,
-                'postal_code'=>$this->postal_code,
-                'is_default'=>true,
+        if ($edit_address) {
+            $edit_address->update([
+                'is_default' => false
             ]);
         }
+        $address = Address::query()->find($this->address_id);
+        $address->update([
+            'name' => $this->name,
+            'mobile' => $this->mobile,
+            'province_id' => $this->province,
+            'city_id' => $this->city,
+            'address' => $this->address,
+            'postal_code' => $this->postal_code,
+            'is_default' => true,
+        ]);
+
         $this->reset([
             'name',
             'mobile',
@@ -71,20 +73,25 @@ class EditAddressModal extends Component
             'address',
             'postal_code',
         ]);
-        $this->dispatch('closeAddressModal');
+        $this->dispatch('closeEditAddressModal');
+        $this->dispatch('refreshAddressList');
+
 
     }
 
     public function editAddress($address_id)
     {
         $address = Address::query()->find($address_id);
+        $this->address_id = $address_id;
         $this->name = $address->name;
         $this->mobile = $address->mobile;
-        $this->province = $address->province->province;
-        $this->city = $address->city->city;
+        $this->province = $address->province_id;
+        $this->city = $address->city_id;
         $this->address = $address->address;
         $this->postal_code = $address->postal_code;
+        $this->cities = City::query()->where('province_id', $address->province_id)->pluck('city', 'id');
     }
+
     public function render()
     {
         return view('livewire.frontend.shops.edit-address-modal');

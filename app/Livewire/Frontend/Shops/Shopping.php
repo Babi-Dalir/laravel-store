@@ -10,6 +10,9 @@ use Livewire\Component;
 
 class Shopping extends Component
 {
+    protected $listeners=[
+        'refreshAddressList'=>'$refresh'
+    ];
     public function render()
     {
         $addresses = Address::query()
