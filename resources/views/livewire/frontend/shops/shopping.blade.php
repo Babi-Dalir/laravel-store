@@ -8,32 +8,29 @@
                 <div class="checkout-contact dt-sn dt-sn--box border px-0 pt-0 pb-0">
                     <div class="checkout-contact-content">
                         <ul class="checkout-contact-items">
-                            @foreach($addresses  as $address)
-                                @if($loop->first)
-                                    <li class="checkout-contact-item">
-                                        گیرنده:
-                                        <span class="full-name">{{$address->name}}</span>
-                                        <a class="checkout-contact-btn-edit">اصلاح این آدرس</a>
-                                    </li>
-                                    <li class="checkout-contact-item">
-                                        <div class="checkout-contact-item checkout-contact-item-mobile">
-                                            شماره تماس:
-                                            <span class="mobile-phone">{{$address->mobile}}</span>
-                                        </div>
-                                        <div class="checkout-contact-item-message">
-                                            کد پستی:
-                                            <span class="post-code">{{$address->postal_code}}</span>
-                                        </div>
-                                        <br>
-                                        استان
-                                        <span class="state">{{$address->province->province}}</span>
-                                        ، ‌شهر
-                                        <span class="city">{{$address->city->city}}</span>
-                                        ،
-                                        <span class="address-part">{{$address->address}}</span>
-                                    </li>
-                                @endif
-                            @endforeach
+
+                            <li class="checkout-contact-item">
+                                گیرنده:
+                                <span class="full-name">{{$selected_address->name}}</span>
+                                <a class="checkout-contact-btn-edit">اصلاح این آدرس</a>
+                            </li>
+                            <li class="checkout-contact-item">
+                                <div class="checkout-contact-item checkout-contact-item-mobile">
+                                    شماره تماس:
+                                    <span class="mobile-phone">{{$selected_address->mobile}}</span>
+                                </div>
+                                <div class="checkout-contact-item-message">
+                                    کد پستی:
+                                    <span class="post-code">{{$selected_address->postal_code}}</span>
+                                </div>
+                                <br>
+                                استان
+                                <span class="state">{{$selected_address->province->province}}</span>
+                                ، ‌شهر
+                                <span class="city">{{$selected_address->city->city}}</span>
+                                ،
+                                <span class="address-part">{{$selected_address->address}}</span>
+                            </li>
 
                         </ul>
                         <a class="checkout-contact-location" id="btn-checkout-contact-location">تغییر
@@ -46,7 +43,8 @@
                     <div class="checkout-address dt-sn px-0 pt-0 pb-0" id="user-address-list-container">
                         <div class="checkout-address-content">
                             <div class="checkout-address-headline">آدرس مورد نظر خود را جهت تحویل
-                                انتخاب فرمایید:</div>
+                                انتخاب فرمایید:
+                            </div>
                             <div class="checkout-address-row">
                                 <div class="checkout-address-col">
                                     <button class="checkout-address-location" data-toggle="modal"
@@ -75,23 +73,31 @@
                                                 <li>
                                                     <ul>
                                                         <li>
-                                                            <button wire:click="$dispatch('editAddress',{address_id : {{$address->id}} })" class="checkout-address-btn-edit"
-                                                                    data-toggle="modal"
-                                                                    data-target="#modal-location-edit">ویرایش</button>
+                                                            <button
+                                                                wire:click="$dispatch('editAddress',{address_id : {{$address->id}} })"
+                                                                class="checkout-address-btn-edit"
+                                                                data-toggle="modal"
+                                                                data-target="#modal-location-edit">ویرایش
+                                                            </button>
                                                         </li>
                                                         <li>
-                                                            <button wire:click="$dispatch('openModalDeleteAddress',{address_id : {{$address->id}} })"  class="checkout-address-btn-remove"
-                                                                    data-toggle="modal"
-                                                                    data-target="#remove-location">حذف</button>
+                                                            <button
+                                                                wire:click="$dispatch('openModalDeleteAddress',{address_id : {{$address->id}} })"
+                                                                class="checkout-address-btn-remove"
+                                                                data-toggle="modal"
+                                                                data-target="#remove-location">حذف
+                                                            </button>
                                                         </li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                             @if($address->is_default)
                                                 <button class="checkout-address-btn-submit">سفارش به این آدرس
-                                                    ارسال می‌شود.</button>
+                                                    ارسال می‌شود.
+                                                </button>
                                             @else
-                                                <button class="checkout-address-btn-submit">ارسال سفارش به این آدرس.</button>
+                                                <button class="checkout-address-btn-submit">ارسال سفارش به این آدرس.
+                                                </button>
                                             @endif
                                         </div>
                                     </div>
@@ -127,13 +133,6 @@
                             عادی
                         </label>
                     </div>
-                    <div class="custom-control custom-radio  pl-0 pr-3">
-                        <input type="radio" class="custom-control-input" name="radio1" id="radio2"
-                               value="option2">
-                        <label for="radio2" class="custom-control-label">
-                            سریع‌ (مرسوله‌ها در سریع‌ترین زمان ممکن ارسال می‌شوند)
-                        </label>
-                    </div>
                 </div>
                 <div class="section-title text-sm-title title-wide no-after-title-wide mb-0 px-res-1">
                     <h2>مرسوله ۱ از ۱</h2>
@@ -146,7 +145,8 @@
                                 @foreach($carts as $cart)
                                     <div class="item">
                                         <div class="product-card mb-3">
-                                            <a class="product-thumb" href="{{route('single.product',$cart->product->slug)}}">
+                                            <a class="product-thumb"
+                                               href="{{route('single.product',$cart->product->slug)}}">
                                                 <img src="{{url('images/products/small/'.$cart->product->image)}}"
                                                      alt="Product Thumbnail">
                                             </a>
@@ -167,30 +167,20 @@
                         <div class="col-12">
                             <div class="checkout-tab-times dt-sl">
                                 <ul class="nav nav-tabs dt-sl" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab"
-                                           href="#home" role="tab" aria-controls="home"
-                                           aria-selected="true">
-                                            سه شنبه
-                                            <span>26 شهریور</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab"
-                                           href="#profile" role="tab" aria-controls="profile"
-                                           aria-selected="false">
-                                            چهارشنبه
-                                            <span>27 شهریور</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link disabled" id="contact-tab" data-toggle="tab"
-                                           href="#contact" role="tab" aria-controls="contact"
-                                           aria-selected="false">
-                                            پنج شنبه
-                                            <span>28 شهریور</span>
-                                        </a>
-                                    </li>
+                                    @for($i=0; $i<7; $i++)
+                                        @if(\Carbon\Carbon::now()->addDays($i + $send_time)->dayOfWeek != \Carbon\Carbon::FRIDAY)
+                                            <li class="nav-item">
+                                                <a class="nav-link @if($i == 0)active @endif" id="home-tab"
+                                                   data-toggle="tab"
+                                                   href="#home" role="tab" aria-controls="home"
+                                                   aria-selected="true">
+                                                    {{\Hekmatinasser\Verta\Verta::instance(\Carbon\Carbon::now()->addDays($i + $send_time))->formatWord('l')}}
+                                                    <span>{{\Hekmatinasser\Verta\Verta::instance(\Carbon\Carbon::now()->addDays($i + $send_time))->format('%d،%B')}}</span>
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endfor
+
                                 </ul>
                                 <div class="tab-content dt-sl" id="myTabContent">
                                     <div class="tab-pane px-2 pt-2 fade show active" id="home"
@@ -211,88 +201,6 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="tab-pane px-2 pt-2 fade" id="profile" role="tabpanel"
-                                         aria-labelledby="profile-tab">
-                                        <div class="custom-control custom-radio pl-0 pr-3">
-                                            <input type="radio" class="custom-control-input"
-                                                   name="radio3" id="radio6" value="option1">
-                                            <label for="radio6" class="custom-control-label">
-                                                ساعت 11 تا 13
-                                            </label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio pl-0 pr-3">
-                                            <input type="radio" class="custom-control-input"
-                                                   name="radio3" id="radio7" value="option2" checked="">
-                                            <label for="radio7" class="custom-control-label">
-                                                ساعت 13 تا 15
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane px-2 pt-2 fade" id="contact" role="tabpanel"
-                                         aria-labelledby="contact-tab">...</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="checkout-time-table checkout-time-table-time">
-                            <div class="col-12">
-                                <div class="radio-box custom-control custom-radio pl-0 pr-3">
-                                    <input type="radio" class="custom-control-input" name="post-pishtaz"
-                                           id="1" value="1" checked>
-                                    <label for="1" class="custom-control-label">
-                                        <img src="./assets/img/svg/d86ea8ec.svg"
-                                             class="checkout-additional-options-checkbox-image" />
-                                        <div class="content-box">
-                                            <div
-                                                class="checkout-time-table-title-bar checkout-time-table-title-bar-city">
-                                                بازه تحویل سفارش: زمان تقریبی تحویل از
-                                                <span>۱۳ خرداد</span>
-                                                تا
-                                                <span>۲۰ خرداد</span>
-                                            </div>
-                                            <ul class="checkout-time-table-subtitle-bar">
-                                                <li>
-                                                    شیوه ارسال : پست پیشتاز با ظرفیت اختصاصی برای دیجی
-                                                    کالا
-                                                </li>
-                                                <li>
-                                                    هزینه ارسال:
-                                                    <span class="">رایگان</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="radio-box custom-control custom-radio pl-0 pr-3">
-                                    <input type="radio" class="custom-control-input" name="post-pishtaz"
-                                           id="2" value="2">
-                                    <label for="2" class="custom-control-label">
-                                        <img src="./assets/img/svg/d86ea8ec.svg"
-                                             class="checkout-additional-options-checkbox-image" />
-                                        <div class="content-box">
-                                            <div
-                                                class="checkout-time-table-title-bar checkout-time-table-title-bar-city">
-                                                بازه تحویل سفارش: زمان تقریبی تحویل از
-                                                <span>۱۳ خرداد</span>
-                                                تا
-                                                <span>۲۰ خرداد</span>
-                                            </div>
-                                            <ul class="checkout-time-table-subtitle-bar">
-                                                <li>
-                                                    شیوه ارسال : پست پیشتاز با ظرفیت اختصاصی برای دیجی
-                                                    کالا
-                                                </li>
-                                                <li>
-                                                    هزینه ارسال:
-                                                    <span class="">رایگان</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -333,7 +241,11 @@
                                                            data-placement="bottom"
                                                            title="<div class='help-container is-right'><div class='help-arrow'></div><p class='help-text'>هزینه ارسال مرسولات می‌تواند وابسته به شهر و آدرس گیرنده متفاوت باشد. در صورتی که هر یک از مرسولات حداقل ارزشی برابر با ۱۵۰هزار تومان داشته باشد، آن مرسوله بصورت رایگان ارسال می‌شود.<br>'حداقل ارزش هر مرسوله برای ارسال رایگان، می تواند متغیر باشد.'</p></div>">
                                             <span class="mdi mdi-information-outline"></span>
-                                        </span></span><span>وابسته به آدرس</span>
+                                        </span></span><span>@if($total_price >450000)
+                            ریگان
+                        @else
+                            {{number_format($send_price)}}
+                        @endif</span>
                 </li>
                 <li class="checkout-club-container">
                                     <span>کلاب<span class="help-sn" data-toggle="tooltip" data-html="true"

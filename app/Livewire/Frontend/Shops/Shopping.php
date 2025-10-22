@@ -19,6 +19,14 @@ class Shopping extends Component
             ->where('user_id',auth()->user()->id)
             ->orderByDesc('is_default')
             ->get();
+        $selected_address = Address::query()
+            ->where('user_id',auth()->user()->id)
+            ->where('is_default',true)
+            ->first();
+
+        $send_price = $selected_address->city->send_price;
+        $send_time = $selected_address->city->send_time;
+
         $carts = UserCart::query()->where('type',CartType::Main->value)->get();
         $total_price = 0;
         $discount_price = 0;
@@ -31,6 +39,6 @@ class Shopping extends Component
             $total_price += ($product_price->price) * $cart->count;
             $discount_price += ($product_price->main_price - $product_price->price) * $cart->count;
         }
-        return view('livewire.frontend.shops.shopping',compact('carts','total_price','discount_price','addresses'));
+        return view('livewire.frontend.shops.shopping',compact('carts','total_price','discount_price','addresses','selected_address','send_price','send_time'));
     }
 }
