@@ -127,12 +127,15 @@
                 </div>
                 <div class="checkout-shipment border-bottom pb-3 mb-4">
                     <div class="custom-control custom-radio pl-0 pr-3">
-                        <input type="radio" class="custom-control-input" name="radio1" id="radio1"
+                        <input type="radio" class="custom-control-input" name="send_type" wire:model="send_type" id="radio1"
                                value="option1" checked>
                         <label for="radio1" class="custom-control-label">
                             عادی
                         </label>
                     </div>
+                    @error('send_type')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="section-title text-sm-title title-wide no-after-title-wide mb-0 px-res-1">
                     <h2>مرسوله ۱ از ۱</h2>
@@ -169,8 +172,8 @@
                                 <ul class="nav nav-tabs dt-sl" id="myTab" role="tablist">
                                     @for($i=0; $i<7; $i++)
                                         @if(\Carbon\Carbon::now()->addDays($i + $send_time)->dayOfWeek != \Carbon\Carbon::FRIDAY)
-                                            <li class="nav-item">
-                                                <a class="nav-link @if($i == 0)active @endif" id="home-tab"
+                                            <li class="nav-item" wire:click.prevent="receiveDay({{$i}})">
+                                                <a class="nav-link @if($i == $selected_day_index)active @endif" id="home-tab"
                                                    data-toggle="tab"
                                                    href="#home" role="tab" aria-controls="home"
                                                    aria-selected="true">
@@ -186,20 +189,23 @@
                                     <div class="tab-pane px-2 pt-2 fade show active" id="home"
                                          role="tabpanel" aria-labelledby="home-tab">
                                         <div class="custom-control custom-radio pl-0 pr-3">
-                                            <input type="radio" class="custom-control-input"
-                                                   name="radio2" id="radio4" value="option1">
+                                            <input type="radio" class="custom-control-input" wire:model="receive_time"
+                                                   name="receive_time" id="radio4" value="ساعت 9 تا 13">
                                             <label for="radio4" class="custom-control-label">
-                                                ساعت 11 تا 13
+                                                ساعت 9 تا 13
                                             </label>
                                         </div>
 
                                         <div class="custom-control custom-radio pl-0 pr-3">
-                                            <input type="radio" class="custom-control-input"
-                                                   name="radio2" id="radio5" value="option2" checked="">
+                                            <input type="radio" class="custom-control-input" wire:model="receive_time"
+                                                   name="receive_time" id="radio5" value="ساعت 14 تا 18" checked="">
                                             <label for="radio5" class="custom-control-label">
-                                                ساعت 13 تا 15
+                                                ساعت 14 تا 18
                                             </label>
                                         </div>
+                                        @error('receive_time')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -212,8 +218,8 @@
                 <div class="checkout-invoice">
                     <div class="checkout-invoice-headline">
                         <div class="custom-control custom-checkbox pl-0 pr-3">
-                            <input type="checkbox" class="custom-control-input" checked>
-                            <label class="custom-control-label">درخواست ارسال فاکتور خرید</label>
+                            <input type="checkbox" class="form-check-input" @if($factor) checked @endif  wire:model="factor">
+                            <label class="form-check-label" style="margin-right: 15px; !important;">درخواست ارسال فاکتور خرید</label>
                         </div>
                     </div>
                 </div>
@@ -264,7 +270,7 @@
                     <span class="checkout-summary-price-value-amount">{{number_format($total_price)}}</span>
                     تومان
                 </div>
-                <a href="#" class="mb-2 d-block">
+                <a href="#" class="mb-2 d-block" wire:click.prevent="submitCountinueOrder">
                     <button class="btn-primary-cm btn-with-icon w-100 text-center pr-0 pl-0">
                         <i class="mdi mdi-arrow-left"></i>
                         تایید و ادامه ثبت سفارش

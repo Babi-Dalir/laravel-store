@@ -64,7 +64,7 @@
                                                             <div class="num-block">
                                                                 <div class="num-in">
                                                                     <span wire:click="increaseCart({{$cart->product_id}},{{$cart->color_id}},{{$cart->guaranty_id}})" class="plus"></span>
-                                                                    <input type="text" class="in-num"
+                                                                    <input type="text"
                                                                            value="{{$cart->count}}" readonly>
                                                                     <span wire:click="decreaseCart({{$cart->product_id}},{{$cart->color_id}},{{$cart->guaranty_id}})" class="minus dis"></span>
                                                                 </div>

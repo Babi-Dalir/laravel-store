@@ -207,6 +207,7 @@ return [
         'selected_user'=>'کاربر',
         'e_name'=>'نام انگلیسی',
         'postal_code'=>'کد پستی',
+        'send_type'=>'نوع ارسال',
 
     ],
 ];
