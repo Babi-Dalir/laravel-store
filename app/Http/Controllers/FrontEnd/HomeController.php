@@ -51,4 +51,9 @@ class HomeController extends Controller
     {
         return view('frontend.shopping');
     }
+
+    public function shoppingPayment()
+    {
+        return view('frontend.shopping_payment');
+    }
 }

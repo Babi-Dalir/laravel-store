@@ -40,7 +40,7 @@ class Shopping extends Component
     public function submitCountinueOrder()
     {
         $this->validate();
-        dd($this->receive_day,$this->receive_time);
+        return redirect()->route('user.shopping.payment');
     }
     public function render()
     {
