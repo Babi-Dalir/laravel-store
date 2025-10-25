@@ -8,48 +8,25 @@
                 <div class="checkout-pack">
                     <div class="row">
                         <div class="checkout-time-table checkout-time-table-time">
-                            <div class="col-12">
-                                <div class="radio-box custom-control custom-radio pl-0 pr-3">
-                                    <input type="radio" class="custom-control-input" name="post-pishtaz"
-                                           id="1" value="1" checked>
-                                    <label for="1" class="custom-control-label">
-                                        <i
-                                            class="mdi mdi-credit-card-outline checkout-additional-options-checkbox-image"></i>
-                                        <div class="content-box">
-                                            <div
-                                                class="checkout-time-table-title-bar checkout-time-table-title-bar-city">
-                                                پرداخت اینترنتی هوشمند دیجی‌کالا
-                                                <span class="help-sn" data-toggle="tooltip"
-                                                      data-html="true" data-placement="bottom"
-                                                      title="<div class='help-container is-left'><div class='help-arrow'></div><p class='help-text'>با پرداخت اینترنتی، سفارش شما با اولویت بیشتری نسبت به پرداخت در محل پردازش و ارسال می شود. در صورت پرداخت ناموفق هزینه کسر شده حداکثر طی ۷۲ ساعت به حساب شما بازگردانده می‌شود.</p></div>">
-                                                                    <span class="mdi mdi-information-outline"></span>
-                                                                </span>
+                        @foreach($payment_types as $payment_type)
+                                <div class="col-12">
+                                    <div class="radio-box custom-control custom-radio pl-0 pr-3">
+                                        <input type="radio" class="custom-control-input" name="payment_type" wire:model="payment_type"
+                                               id="{{$payment_type->id}}" value="{{$payment_type->id}}">
+                                        <label for="{{$payment_type->id}}" class="custom-control-label">
+                                            <i
+                                                class="mdi mdi-credit-card-multiple-outline checkout-additional-options-checkbox-image"></i>
+                                            <div class="content-box">
+                                                <div
+                                                    class="checkout-time-table-title-bar checkout-time-table-title-bar-city">
+                                                    {{$payment_type->title}}
+                                                </div>
                                             </div>
-                                            <ul class="checkout-time-table-subtitle-bar">
-                                                <li>
-                                                    آنلاین با تمامی کارت‌های بانکی
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </label>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="radio-box custom-control custom-radio pl-0 pr-3">
-                                    <input type="radio" class="custom-control-input" name="post-pishtaz"
-                                           id="2" value="2">
-                                    <label for="2" class="custom-control-label">
-                                        <i
-                                            class="mdi mdi-credit-card-multiple-outline checkout-additional-options-checkbox-image"></i>
-                                        <div class="content-box">
-                                            <div
-                                                class="checkout-time-table-title-bar checkout-time-table-title-bar-city">
-                                                پرداخت اعتباری دیجی‌پی
-                                            </div>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
+                        @endforeach
+
                         </div>
                     </div>
                 </div>

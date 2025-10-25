@@ -3,14 +3,17 @@
 namespace App\Livewire\Frontend\Orders;
 
 use App\Enums\CartType;
+use App\Models\PaymentType;
 use App\Models\ProductPrice;
 use App\Models\UserCart;
 use Livewire\Component;
 
 class Payment extends Component
 {
+    public $payment_type;
     public function render()
     {
+        $payment_types = PaymentType::query()->get();
         $carts = UserCart::query()->where('type',CartType::Main->value)->get();
         $total_price = 0;
         $discount_price = 0;
@@ -23,6 +26,6 @@ class Payment extends Component
             $total_price += ($product_price->price) * $cart->count;
             $discount_price += ($product_price->main_price - $product_price->price) * $cart->count;
         }
-        return view('livewire.frontend.orders.payment',compact('carts','total_price','discount_price'));
+        return view('livewire.frontend.orders.payment',compact('carts','total_price','discount_price','payment_types'));
     }
 }

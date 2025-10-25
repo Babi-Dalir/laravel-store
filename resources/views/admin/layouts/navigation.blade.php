@@ -127,6 +127,13 @@
                     <li><a href="{{route('users.comments')}}">لیست نظرات محصول</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#">تخفیفات</a>
+                <ul>
+                    <li><a href="{{route('discounts.create')}}">ایجاد تخفیف</a></li>
+                    <li><a href="{{route('discounts.index')}}">لیست تخفیفات</a></li>
+                </ul>
+            </li>
         </ul>
 {{--        @endhasanyrole--}}
     </div>

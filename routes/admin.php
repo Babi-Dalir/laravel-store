@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\GuarantyController;
 use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\ProductController;
@@ -88,3 +89,6 @@ Route::resource('provinces', ProvinceController::class);
 
 //City Route
 Route::resource('cities', CityController::class);
+
+//Discount Route
+Route::resource('discounts', DiscountController::class);

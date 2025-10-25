@@ -208,6 +208,7 @@ return [
         'e_name'=>'نام انگلیسی',
         'postal_code'=>'کد پستی',
         'send_type'=>'نوع ارسال',
+        'discount'=>'تخفیف',
 
     ],
 ];
