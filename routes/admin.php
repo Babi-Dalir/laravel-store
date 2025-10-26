@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\GiftCartController;
 use App\Http\Controllers\Admin\GuarantyController;
 use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\ProductController;
@@ -92,3 +93,6 @@ Route::resource('cities', CityController::class);
 
 //Discount Route
 Route::resource('discounts', DiscountController::class);
+
+//GiftCart Route
+Route::resource('gift_carts', GiftCartController::class);

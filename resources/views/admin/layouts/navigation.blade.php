@@ -134,6 +134,13 @@
                     <li><a href="{{route('discounts.index')}}">لیست تخفیفات</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#">کارتهای هدیه</a>
+                <ul>
+                    <li><a href="{{route('gift_carts.create')}}">ایجاد کارت هدیه</a></li>
+                    <li><a href="{{route('gift_carts.index')}}">لیست کارتهای هدیه</a></li>
+                </ul>
+            </li>
         </ul>
 {{--        @endhasanyrole--}}
     </div>
