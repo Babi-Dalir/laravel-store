@@ -1,5 +1,4 @@
 <main class="main-content">
-    @include('admin.layouts.error')
     <div class="row flex justify-content-center">
         <div class="col-sm-10">
             <form wire:submit.prevent="submit">
@@ -67,11 +66,15 @@
             <div class="container">
                 <h6 class="card-title"> ایجاد کارت هدیه </h6>
                 <form wire:submit.prevent="addGiftCart" enctype="multipart/form-data">
-                    @csrf
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">نام و نام خانوادگی</label>
                         <div class="col-sm-10">
                             <label class="col-sm-2 col-form-label">@if($selected_user){{$selected_user['name']}} @endif</label>
+                        </div>
+                        <div class="text text-danger">
+                            @error('selected_user')
+                                {{ $message }}
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -79,11 +82,21 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control text-left" dir="rtl" wire:model="gift_title">
                         </div>
+                        <div class="text text-danger">
+                            @error('gift_title')
+                            {{ $message }}
+                            @enderror
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">میزان تخفیف</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control text-left" dir="rtl" wire:model="gift_price">
+                        </div>
+                        <div class="text text-danger">
+                            @error('gift_price')
+                            {{ $message }}
+                            @enderror
                         </div>
                     </div>
 
@@ -93,6 +106,11 @@
                         <div class="col-sm-10">
                             <input type="text" id="expiration_date" class="text-left form-control" dir="rtl"
                                    wire:model="expiration_date">
+                        </div>
+                        <div class="text text-danger">
+                            @error('expiration_date')
+                            {{ $message }}
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">

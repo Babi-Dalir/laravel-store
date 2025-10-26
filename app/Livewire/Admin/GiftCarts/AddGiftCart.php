@@ -27,29 +27,36 @@ class AddGiftCart extends Component
     public function submit()
     {
         $this->users = User::query()
-            ->where('name','like','%'.$this->search.'%')
-            ->orWhere('mobile','like','%'.$this->search.'%')
-            ->orWhere('email','like','%'.$this->search.'%')
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orWhere('mobile', 'like', '%' . $this->search . '%')
+            ->orWhere('email', 'like', '%' . $this->search . '%')
             ->get();
     }
 
     public function addGiftCart()
     {
+        $this->validate([
+            'selected_user'=>'required',
+            'gift_title'=>'required',
+            'gift_price'=>'required',
+            'expiration_date'=>'required',
+        ]);
         GiftCart::query()->create([
-            'user_id'=>$this->selected_user['id'],
-            'code' => CreateUniqueCode::generateRandomString(6,GiftCart::class),
+            'user_id' => $this->selected_user['id'],
+            'code' => CreateUniqueCode::generateRandomString(6, GiftCart::class),
             'gift_title' => $this->gift_title,
             'gift_price' => $this->gift_price,
-            'expiration_date' =>DateManager::shamsi_to_miladi($this->expiration_date)
+            'expiration_date' => DateManager::shamsi_to_miladi($this->expiration_date)
 
         ]);
-        session()->flash('message','کارت هدیه باموفقیت ثبت شد');
+        session()->flash('message', 'کارت هدیه باموفقیت ثبت شد');
     }
 
     public function selectUser($user)
     {
         $this->selected_user = $user;
     }
+
     public function render()
     {
         return view('livewire.admin.gift-carts.add-gift-cart');
