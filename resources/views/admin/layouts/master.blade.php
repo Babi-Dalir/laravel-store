@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{url('panel/vendors/bundle.css')}}" type="text/css">
     <link rel="stylesheet" href="{{url('panel/vendors/slick/slick.css')}}">
     <link rel="stylesheet" href="{{url('panel/vendors/slick/slick-theme.css')}}">
+    <link rel="stylesheet" href="{{url('panel/plugins/persian_date_picker/persian-datepicker.min.css')}}">
     <link rel="stylesheet" href="{{url('panel/vendors/vmap/jqvmap.min.css')}}">
     <link rel="stylesheet" href="{{url('panel/vendors/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{url('panel/plugins/colorpicker/css/bootstrap-colorpicker.min.css')}}">
@@ -41,6 +42,8 @@
 <script src="{{url('panel/plugins/datepicker/kamadatepicker.holidays.js')}}"></script>
 <script src="{{url('panel/plugins/datepicker/kamadatepicker.min.js')}}"></script>
 <script src="{{url('panel/plugins/dropzone/js/dropzone.js')}}"></script>
+<script src="{{url('panel/plugins/persian_date_picker/persian-date.min.js')}}"></script>
+<script src="{{url('panel/plugins/persian_date_picker/persian-datepicker.min.js')}}"></script>
 {{--<script>--}}
 {{--    $('select').select2({--}}
 {{--        dir:"rtl",--}}

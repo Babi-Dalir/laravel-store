@@ -124,3 +124,19 @@
         </div>
     </div>
 </main>
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#expiration_date").persianDatepicker({
+                observer: true,
+                initialValueType: 'persian',
+                format: 'YYYY/MM/DD',
+                initialValue: true,
+                autoClose: true,
+                onSelect: function(unix){
+                    @this.set('expiration_date', new persianDate(unix).format('YYYY/MM/DD'), true);
+                }
+            });
+        });
+    </script>
+@endsection

@@ -49,6 +49,15 @@ class AddGiftCart extends Component
             'expiration_date' => DateManager::shamsi_to_miladi($this->expiration_date)
 
         ]);
+        $this->reset([
+            'gift_title',
+            'gift_price',
+            'expiration_date',
+            'users',
+            'search',
+            'selected_user'
+        ]);
+        $this->users = collect();
         session()->flash('message', 'کارت هدیه باموفقیت ثبت شد');
     }
 
