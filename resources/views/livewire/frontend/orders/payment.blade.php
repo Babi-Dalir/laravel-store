@@ -11,7 +11,8 @@
                         @foreach($payment_types as $payment_type)
                                 <div class="col-12">
                                     <div class="radio-box custom-control custom-radio pl-0 pr-3">
-                                        <input type="radio" class="custom-control-input" name="payment_type" wire:model="payment_type"
+                                        <input type="radio" class="custom-control-input" name="payment_type"
+                                               wire:model="payment_type"
                                                id="{{$payment_type->id}}" value="{{$payment_type->id}}">
                                         <label for="{{$payment_type->id}}" class="custom-control-label">
                                             <i
@@ -25,7 +26,7 @@
                                         </label>
                                     </div>
                                 </div>
-                        @endforeach
+                            @endforeach
 
                         </div>
                     </div>
@@ -81,7 +82,8 @@
                                             <div class="product-box-container">
                                                 <div class="product-box product-box-compact">
                                                     <a class="product-box-img">
-                                                        <img src="{{url('images/products/small/'.$cart->product->image)}}">
+                                                        <img
+                                                            src="{{url('images/products/small/'.$cart->product->image)}}">
                                                     </a>
                                                     <div class="product-box-title">
                                                         {{$cart->product->name}}
@@ -111,12 +113,24 @@
                         </div>
                         <p>با ثبت کد کارت هدیه، مبلغ کارت هدیه از “مبلغ قابل پرداخت” کسر می‌شود.</p>
                         <div class="form-ui">
-                            <form action="">
+                            <form wire:submit.prevent="giftCartCode">
                                 <div class="row text-center">
                                     <div class="col-xl-8 col-lg-12 px-0">
                                         <div class="form-row">
-                                            <input type="text" class="input-ui pr-2"
+                                            <input type="text" class="input-ui pr-2" wire:model="gift_cart_code"
                                                    placeholder="مثلا 1234ABCD5678EFGH0123">
+                                        </div>
+                                        <div>
+                                            @if(session()->has('success_gift_cart'))
+                                                <div class="alert alert-success">
+                                                    <div>{{session('success_gift_cart')}}</div>
+                                                </div>
+                                            @endif
+                                            @if(session()->has('warning_gift_cart'))
+                                                <div class="alert alert-danger">
+                                                    <div>{{session('warning_gift_cart')}}</div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-12 px-0">
@@ -140,12 +154,24 @@
                         </div>
                         <p>با ثبت کد تخفیف، مبلغ کد تخفیف از “مبلغ قابل پرداخت” کسر می‌شود.</p>
                         <div class="form-ui">
-                            <form action="">
+                            <form wire:submit.prevent="discountCode">
                                 <div class="row text-center">
                                     <div class="col-xl-8 col-lg-12 px-0">
                                         <div class="form-row">
-                                            <input type="text" class="input-ui pr-2"
+                                            <input type="text" class="input-ui pr-2" wire:model="discount_code"
                                                    placeholder="مثلا 837A2CS">
+                                        </div>
+                                        <div>
+                                            @if(session()->has('success_discount'))
+                                                <div class="alert alert-success">
+                                                    <div>{{session('success_discount')}}</div>
+                                                </div>
+                                            @endif
+                                            @if(session()->has('warning_discount'))
+                                                <div class="alert alert-danger">
+                                                    <div>{{session('warning_discount')}}</div>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-xl-4 col-lg-12 px-0">
@@ -173,7 +199,7 @@
                 </li>
                 <li class="checkout-summary-discount">
                     <span>تخفیف شما از خرید</span><span>
-                                        تومان</span>
+                                        {{number_format($discount_price)}} تومان</span>
                 </li>
 
             </ul>
