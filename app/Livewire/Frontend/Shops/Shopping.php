@@ -56,7 +56,10 @@ class Shopping extends Component
         $this->send_price = $this->selected_address->city->send_price;
         $this->send_time = $this->selected_address->city->send_time;
 
-        $carts = UserCart::query()->where('type',CartType::Main->value)->get();
+        $carts = UserCart::query()
+            ->where('user_id',auth()->user()->id)
+            ->where('type',CartType::Main->value)
+            ->get();
         $total_price = 0;
         $discount_price = 0;
         foreach ($carts as $cart){

@@ -25,7 +25,10 @@ class Payment extends Component
         $this->payment_type = 1;
 
         $this->payment_types = PaymentType::query()->get();
-        $this->carts = UserCart::query()->where('type',CartType::Main->value)->get();
+        $this->carts = UserCart::query()
+            ->where('user_id',auth()->user()->id)
+            ->where('type',CartType::Main->value)
+            ->get();
         $this->total_price = 0;
         $this->discount_price = 0;
         foreach ($this->carts as $cart){
