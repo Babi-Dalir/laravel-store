@@ -7,6 +7,7 @@ use App\Models\Address;
 use App\Models\ProductPrice;
 use App\Models\UserCart;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Shopping extends Component
@@ -40,6 +41,12 @@ class Shopping extends Component
     public function submitCountinueOrder()
     {
         $this->validate();
+        $shop_data = [];
+        $shop_data['send_type'] = $this->send_type;
+        $shop_data['receive_time'] = $this->receive_time;
+        $shop_data['factor'] = $this->factor;
+        $shop_data['receive_day'] = $this->receive_day;
+        Session::put('shop_data',$shop_data);
         return redirect()->route('user.shopping.payment');
     }
     public function render()

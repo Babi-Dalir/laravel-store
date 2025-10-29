@@ -8,6 +8,7 @@ use App\Models\GiftCart;
 use App\Models\PaymentType;
 use App\Models\ProductPrice;
 use App\Models\UserCart;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Payment extends Component
@@ -76,7 +77,11 @@ class Payment extends Component
     }
     public function render()
     {
-
+        $shop_data = Session::get('shop_data');
+        $shop_data['payment_type'] = $this->payment_type;
+        $shop_data['discount_code'] = $this->discount_code;
+        $shop_data['gift_cart_code'] = $this->gift_cart_code;
+        Session::put('shop_data',$shop_data);
         return view('livewire.frontend.orders.payment');
     }
 }
