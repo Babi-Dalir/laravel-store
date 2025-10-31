@@ -11,9 +11,11 @@ use App\Models\Discount;
 use App\Models\GiftCart;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
 use App\Models\ProductPrice;
 use App\Models\UserCart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Shetabit\Multipay\Invoice;
 use Shetabit\Payment\Facade\Payment;
@@ -115,8 +117,46 @@ class PaymentController extends Controller
         }
         )->pay()->render();
     }
-    public function callback()
+    public function callback(Request $request)
     {
+        $authority = $request->Authority;
+        $order = Order::query()->where('transaction_id',$authority)->first();
+        $order_details = OrderDetail::query()->where('order_id',$order->id)->get();
+        if ($request->Status =="OK"){
+            DB::beginTransaction();
+            try {
+                $order->update([
+                    'status'=>OrderStatus::Payed->value
+                ]);
+                foreach ($order_details as $order_detail){
+                    $order_detail->update([
+                        'status'=>OrderDetailStatus::Received->value
+                    ]);
+
+                    $product_price = ProductPrice::query()
+                        ->where('product_id',$order_detail->product_id)
+                        ->where('color_id',$order_detail->color_id)
+                        ->where('guaranty_id',$order_detail->guaranty_id)
+                        ->first();
+                    $product_price->update([
+                        'count'=>$product_price->count - $order_detail->count
+                    ]);
+
+                    $product = Product::query()->find($order_detail->product_id);
+                    $product->update([
+                        'sold'=>$product->sold + $order_detail->count
+                    ]);
+                }
+                DB::commit();
+
+                return view('frontend.shopping_result');
+            }catch (\Exception $exception){
+                DB::rollBack();
+            }
+        }else{
+            return view('frontend.shopping_result');
+
+        }
 
     }
 }
