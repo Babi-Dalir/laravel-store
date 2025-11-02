@@ -138,23 +138,33 @@ class PaymentController extends Controller
                         ->where('color_id',$order_detail->color_id)
                         ->where('guaranty_id',$order_detail->guaranty_id)
                         ->first();
-                    $product_price->update([
-                        'count'=>$product_price->count - $order_detail->count
-                    ]);
+                    $product_price->decrement('count',$order_detail->count);
 
                     $product = Product::query()->find($order_detail->product_id);
-                    $product->update([
-                        'sold'=>$product->sold + $order_detail->count
-                    ]);
+                    $product->increment('sold',$order_detail->count);
                 }
+                $carts = UserCart::query()
+                    ->where('user_id',$order->user_id)
+                    ->where('type',CartType::Main->value)->get();
+                foreach ($carts as $cart){
+                    $cart->delete();
+                }
+                $result = "success";
                 DB::commit();
 
-                return view('frontend.shopping_result');
+                return view('frontend.shopping_result',compact('order'));
+
             }catch (\Exception $exception){
+
                 DB::rollBack();
+                $result = "failed";
+
+                return view('frontend.shopping_result',compact('order'));
             }
         }else{
-            return view('frontend.shopping_result');
+            $result = "failed";
+
+            return view('frontend.shopping_result',compact('order'));
 
         }
 
