@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="checkout-alert-content">
                                     <p class="checkout-alert-content-success">
-                                        سفارش نهایتا تا یک روز آماده ارسال خواهد شد.
+                                        سفارش نهایتا تا {{\Hekmatinasser\Verta\Verta::instance($order->receive_day)->formatDifference()}} روز آماده ارسال خواهد شد.
                                     </p>
                                 </div>
                             </div>

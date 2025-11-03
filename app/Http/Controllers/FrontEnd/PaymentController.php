@@ -97,7 +97,7 @@ class PaymentController extends Controller
                 ->where('color_id',$cart->color_id)
                 ->where('guaranty_id',$cart->guaranty_id)
                 ->first();
-            OrderDetail::query()->create([
+            $order_details = OrderDetail::query()->create([
                 'order_id'=>$order->id,
                 'product_id'=>$cart->product_id,
                 'color_id'=>$cart->color_id,
@@ -109,13 +109,54 @@ class PaymentController extends Controller
                 'status'=>OrderDetailStatus::Waiting->value,
             ]);
         }
-        return Payment::purchase(
-            (new Invoice)->amount($total_price),function ($driver,$transactionId) use ($order){
+        if ($shop_data['payment_type'] == 'offline'){
+            DB::beginTransaction();
+            try {
+                $order->update([
+                    'status'=>OrderStatus::Payed->value
+                ]);
+                foreach ($order_details as $order_detail){
+                    $order_detail->update([
+                        'status'=>OrderDetailStatus::Received->value
+                    ]);
+
+                    $product_price = ProductPrice::query()
+                        ->where('product_id',$order_detail->product_id)
+                        ->where('color_id',$order_detail->color_id)
+                        ->where('guaranty_id',$order_detail->guaranty_id)
+                        ->first();
+                    $product_price->decrement('count',$order_detail->count);
+
+                    $product = Product::query()->find($order_detail->product_id);
+                    $product->increment('sold',$order_detail->count);
+                }
+                $carts = UserCart::query()
+                    ->where('user_id',$order->user_id)
+                    ->where('type',CartType::Main->value)->get();
+                foreach ($carts as $cart){
+                    $cart->delete();
+                }
+                $result = "success";
+                DB::commit();
+
+                return view('frontend.shopping_result',compact('order','result'));
+
+            }catch (\Exception $exception){
+
+                DB::rollBack();
+                $result = "failed";
+
+                return view('frontend.shopping_result',compact('order','result'));
+            }
+        }else{
+            return Payment::via($shop_data['payment_type'])->purchase(
+                (new Invoice)->amount($total_price),function ($driver,$transactionId) use ($order){
                 $order->update([
                     'transaction_id'=>$transactionId
                 ]);
+            }
+            )->pay()->render();
         }
-        )->pay()->render();
     }
     public function callback(Request $request)
     {
@@ -152,19 +193,19 @@ class PaymentController extends Controller
                 $result = "success";
                 DB::commit();
 
-                return view('frontend.shopping_result',compact('order'));
+                return view('frontend.shopping_result',compact('order','result'));
 
             }catch (\Exception $exception){
 
                 DB::rollBack();
                 $result = "failed";
 
-                return view('frontend.shopping_result',compact('order'));
+                return view('frontend.shopping_result',compact('order','result'));
             }
         }else{
             $result = "failed";
 
-            return view('frontend.shopping_result',compact('order'));
+            return view('frontend.shopping_result',compact('order','result'));
 
         }
 

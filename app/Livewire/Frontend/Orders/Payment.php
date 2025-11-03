@@ -23,7 +23,7 @@ class Payment extends Component
 
     public function mount()
     {
-        $this->payment_type = 1;
+        $this->payment_type = 'zarinpal';
 
         $this->payment_types = PaymentType::query()->get();
         $this->carts = UserCart::query()
