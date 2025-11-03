@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderDetailStatus;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderDetail extends Model
@@ -35,5 +36,20 @@ class OrderDetail extends Model
     public function guaranty()
     {
         return $this->belongsTo(Guaranty::class);
+    }
+
+    public static function createOrderDetail($order,$cart,$product_price)
+    {
+        return OrderDetail::query()->create([
+            'order_id'=>$order->id,
+            'product_id'=>$cart->product_id,
+            'color_id'=>$cart->color_id,
+            'guaranty_id'=>$cart->guaranty_id,
+            'main_price'=>$product_price->main_price,
+            'price'=>$product_price->price,
+            'discount'=>$product_price->discount,
+            'count'=>$cart->count,
+            'status'=>OrderDetailStatus::Waiting->value,
+        ]);
     }
 }
