@@ -78,7 +78,7 @@ class Order extends Model
         ]);
         foreach ($order_details as $order_detail) {
             $order_detail->update([
-                'status' => OrderDetailStatus::Received->value
+                'status' => OrderDetailStatus::Processing->value
             ]);
 
             $product_price = ProductPrice::query()

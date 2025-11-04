@@ -59,7 +59,7 @@ class PaymentController extends Controller
                 ->where('color_id', $cart->color_id)
                 ->where('guaranty_id', $cart->guaranty_id)
                 ->first();
-            $order_details = OrderDetail::createOrderDetail($order, $cart, $product_price);
+            $order_details[] = OrderDetail::createOrderDetail($order, $cart, $product_price);
         }
         if ($shop_data['payment_type'] == 'offline') {
             DB::beginTransaction();

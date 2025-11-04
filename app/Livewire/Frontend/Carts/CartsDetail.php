@@ -18,7 +18,12 @@ class CartsDetail extends Component
             ->where('color_id',$color_id)
             ->where('guaranty_id',$guaranty_id)
             ->first();
-        if ($user_cart && $user_cart->count < $user_cart->product->max_sell){
+        $product_price = ProductPrice::query()
+            ->where('product_id',$product_id)
+            ->where('color_id',$color_id)
+            ->where('guaranty_id',$guaranty_id)
+            ->first();
+        if ($user_cart && $user_cart->count < $user_cart->product->max_sell && $product_price->count > $user_cart->count){
             $user_cart->update([
                 'count'=>$user_cart->count +1
             ]);
@@ -80,7 +85,9 @@ class CartsDetail extends Component
     }
     public function render()
     {
-        $carts = UserCart::query()->where('type',CartType::Main->value)->get();
+        $carts = UserCart::query()
+            ->where('user_id',auth()->id())
+            ->where('type',CartType::Main->value)->get();
         $reserve_carts = UserCart::query()->where('type',CartType::Reserve->value)->get();
         $total_price = 0;
         $discount_price = 0;

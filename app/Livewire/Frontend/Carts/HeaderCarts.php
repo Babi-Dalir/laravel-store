@@ -23,7 +23,9 @@ class HeaderCarts extends Component
     }
     public function render()
     {
-        $carts = UserCart::query()->where('type',CartType::Main->value)->get();
+        $carts = UserCart::query()
+            ->where('user_id',auth()->id())
+            ->where('type',CartType::Main->value)->get();
 
         $total_price = 0;
         foreach ($carts as $cart){

@@ -63,15 +63,17 @@
                             </div>
                             <ul class="product-variants float-right ml-3">
                                 @foreach($product->colors as $color)
-                                    <li class="ui-variant" wire:click="changeColorProduct({{$color->id}})">
-                                        <label class="ui-variant ui-variant--color">
+                                    @if($product->productPrices()->where('color_id',$color->id)->where('count','>',0)->first())
+                                        <li class="ui-variant" wire:click="changeColorProduct({{$color->id}})">
+                                            <label class="ui-variant ui-variant--color">
                                                         <span class="ui-variant-shape"
                                                               style="background-color: {{$color->code}}"></span>
-                                            <input type="radio" value="1" name="color"
-                                                   class="variant-selector" @if($product->productPrices()->where('price',$product->price)->first()->color_id == $color->id) checked @endif>
-                                            <span class="ui-variant--check">{{$color->name}}</span>
-                                        </label>
-                                    </li>
+                                                <input type="radio" value="1" name="color"
+                                                       class="variant-selector" @if($product->productPrices()->where('price',$product->price)->first()->color_id == $color->id) checked @endif>
+                                                <span class="ui-variant--check">{{$color->name}}</span>
+                                            </label>
+                                        </li>
+                                    @endif
                                 @endforeach
 
                             </ul>
