@@ -24,31 +24,19 @@ class PaymentController extends Controller
 {
     public function payment()
     {
-        $shop_data = Session::get('shop_data');
-        $user = auth()->user();
-        $address = Address::query()
-            ->where('user_id', $user->id)
-            ->where('is_default', true)
-            ->first();
-
-        $carts = UserCart::query()
-            ->where('user_id', $user->id)
-            ->where('type', CartType::Main->value)->get();
-
         $total_price = 0;
         $discount_code_price = 0;
         $gif_cart_code_price = 0;
         $order_details = [];
 
-        foreach ($carts as $cart) {
-            $product_price = ProductPrice::query()
-                ->where('product_id', $cart->product_id)
-                ->where('color_id', $cart->color_id)
-                ->where('guaranty_id', $cart->guaranty_id)
-                ->first();
-            $total_price += ($product_price->price) * $cart->count;
+        $shop_data = Session::get('shop_data');
+        $user = auth()->user();
 
-        }
+        $address = Address::getUserAddress($user);
+
+        $carts = UserCart::getUserCart($user);
+
+        $total_price = ProductPrice::calculateTotalPriceInCart($carts,$total_price);
         //discount
         if ($shop_data['discount_code']) {
             $result = Discount::calculateDiscount($shop_data, $total_price, $discount_code_price);
@@ -76,7 +64,7 @@ class PaymentController extends Controller
         if ($shop_data['payment_type'] == 'offline') {
             DB::beginTransaction();
             try {
-                Order::successPayment($order, $order_details);
+                Order::successPayment($order, $order_details,$shop_data['discount_code'],$shop_data['gift_cart_code']);
                 $result = "success";
                 DB::commit();
 
@@ -108,7 +96,7 @@ class PaymentController extends Controller
         if ($request->Status == "OK") {
             DB::beginTransaction();
             try {
-                Order::successPayment($order, $order_details);
+                Order::successPayment($order, $order_details,$order->discount_code,$order->gif_cart_code);
                 $result = "success";
                 DB::commit();
 

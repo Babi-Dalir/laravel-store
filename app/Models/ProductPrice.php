@@ -125,4 +125,18 @@ class ProductPrice extends Model
             'spacial_expiration' => $request->input('spacial_expiration') != null ? DateManager::shamsi_to_miladi($request->input('spacial_expiration')) : null,
         ]);
     }
+
+    public static function calculateTotalPriceInCart($carts,$total_price)
+    {
+        foreach ($carts as $cart) {
+            $product_price = ProductPrice::query()
+                ->where('product_id', $cart->product_id)
+                ->where('color_id', $cart->color_id)
+                ->where('guaranty_id', $cart->guaranty_id)
+                ->first();
+            $total_price += ($product_price->price) * $cart->count;
+
+        }
+        return $total_price;
+    }
 }

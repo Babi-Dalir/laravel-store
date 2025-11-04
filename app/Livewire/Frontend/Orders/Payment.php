@@ -8,6 +8,7 @@ use App\Models\GiftCart;
 use App\Models\PaymentType;
 use App\Models\ProductPrice;
 use App\Models\UserCart;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -48,6 +49,7 @@ class Payment extends Component
         $discount = Discount::query()
             ->where('code',$this->discount_code)
             ->where('discount','>',0)
+            ->where('expiration_date', '>=',Carbon::now()->toDateTimeString())
             ->first();
         if ($discount){
             $this->total_price -= $discount->discount;
@@ -65,6 +67,7 @@ class Payment extends Component
             ->where('code',$this->gift_cart_code)
             ->where('user_id',auth()->user()->id)
             ->where('gift_price','>',0)
+            ->where('expiration_date', '>=',Carbon::now()->toDateTimeString())
             ->first();
         if ($gift_cart){
             $this->total_price -= $gift_cart->gift_price;
