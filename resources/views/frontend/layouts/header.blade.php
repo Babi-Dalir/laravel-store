@@ -107,7 +107,7 @@
                         <ul>
                             @foreach($categories as $category1)
                                 <li>
-                                    <a href="#">{{$category1->name}}</a>
+                                    <a href="{{route('main.category.product.list',$category1->slug)}}">{{$category1->name}}</a>
                                     <ul class="row">
                                         @foreach($category1->childCategory as $category2)
                                             <li class="sublist--title"><a href="#">{{$category2->name}}</a></li>

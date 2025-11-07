@@ -34,14 +34,6 @@ class HomeController extends Controller
             ,'most_sold','spacial_products','brands','newest_products'));
     }
 
-    public function singleProduct($slug)
-    {
-        $product = Product::query()
-            ->with(['category','brand','colors','tags','properties','propertyGroups','productPrices'])
-            ->where('slug',$slug)->first();
-        return view('frontend.single_product',compact('product'));
-    }
-
     public function userCart()
     {
         $carts_count = UserCart::query()
