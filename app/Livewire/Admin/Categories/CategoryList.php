@@ -15,6 +15,22 @@ class CategoryList extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search;
+    public $categories;
+    public $search_categories;
+
+    public function mount()
+    {
+        $this->categories = Category::query()
+            ->where('parent_id',0)
+            ->get();
+    }
+
+    public function updatingSearch($value)
+    {
+        $this->search_categories = Category::query()
+            ->where('name','like','%'.$value.'%')
+            ->get();
+    }
     #[On('destroy_category')]
     public function destroyCategory($id)
     {
@@ -27,10 +43,6 @@ class CategoryList extends Component
     }
     public function render()
     {
-        $categories = Category::query()
-            ->where('name','like','%'.$this->search.'%')
-            ->orWhere('e_name','like','%'.$this->search.'%')
-            ->paginate(20);
-        return view('livewire.admin.categories.category-list',compact('categories'));
+        return view('livewire.admin.categories.category-list');
     }
 }
