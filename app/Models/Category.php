@@ -99,4 +99,18 @@ class Category extends Model
             }
         });
     }
+
+    public static function getProductListByMainCategory($slug)
+    {
+        $categoryList = [];
+        $category = Category::query()->where('slug',$slug)->first();
+        foreach ($category->childCategory()->get() as $category1){
+            if (sizeof($category1->childCategory) > 0){
+                foreach ($category1->childCategory()->get() as $category2){
+                    array_push($categoryList,$category2->id);
+                }
+            }
+        }
+        return  Product::query()->whereIn('category_id',$categoryList)->get();
+    }
 }
