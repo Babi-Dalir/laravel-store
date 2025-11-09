@@ -11,16 +11,17 @@ class CategoryProduct extends Component
     public $main_slug;
     public $sub_slug;
     public $child_slug;
+    public $more_viewed;
     public function mount()
     {
-        if ($this->main_slug != null && $this->sub_slug == null && $this->child_slug == null){
-        $this->products = Category::getProductListByMainCategory($this->main_slug);
-    }elseif ($this->main_slug == null && $this->sub_slug != null && $this->child_slug == null){
-            $this->products = Category::getProductListBySubCategory($this->sub_slug);
-        }elseif ($this->main_slug == null && $this->sub_slug != null && $this->child_slug != null){
-            $this->products = Category::getProductListByChildCategory($this->child_slug);
-        }
+        $this->products = Category::getProductByCategory($this->main_slug,$this->sub_slug,$this->child_slug,'id','DESC');
+        $this->more_viewed=[];
+    }
 
+    public function moreViewedProducts()
+    {
+        $this->products = [];
+        $this->more_viewed = Category::getProductByCategory($this->main_slug,$this->sub_slug,$this->child_slug,'viewed','DESC');
     }
     public function render()
     {
