@@ -104,13 +104,34 @@ class Category extends Model
     {
         $categoryList = [];
         $category = Category::query()->where('slug',$slug)->first();
-        foreach ($category->childCategory()->get() as $category1){
-            if (sizeof($category1->childCategory) > 0){
-                foreach ($category1->childCategory()->get() as $category2){
-                    array_push($categoryList,$category2->id);
+        if (sizeof($category->childCategory) > 0){
+            foreach ($category->childCategory as $category1){
+                if (sizeof($category1->childCategory) > 0){
+                    foreach ($category1->childCategory()->get() as $category2){
+                        array_push($categoryList,$category2->id);
+                    }
                 }
             }
         }
+
         return  Product::query()->whereIn('category_id',$categoryList)->get();
+    }
+    public static function getProductListBySubCategory($slug)
+    {
+        $categoryList = [];
+        $category = Category::query()->where('slug',$slug)->first();
+        if (sizeof($category->childCategory) > 0){
+            foreach ($category->childCategory as $category1){
+                array_push($categoryList,$category1->id);
+            }
+        }
+
+        return  Product::query()->whereIn('category_id',$categoryList)->get();
+    }
+    public static function getProductListByChildCategory($slug)
+    {
+
+        $category = Category::query()->where('slug',$slug)->first();
+        return  Product::query()->where('category_id',$category->id)->get();
     }
 }

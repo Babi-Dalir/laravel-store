@@ -15,8 +15,8 @@ Route::get('/single_products/{slug}',[ProductController::class,'singleProduct'])
 
 Route::get('/payment/callback',[PaymentController::class,'callback'])->name('payment.callback');
 
-Route::get('/main_category_product_list/{slug}',[ProductController::class,'mainCategoryProductList'])->name('main.category.product.list');
-Route::get('/payment/callback',[PaymentController::class,'callback'])->name('payment.callback');
+Route::get('/main_category_product_list/{main_slug}',[ProductController::class,'mainCategoryProductList'])->name('main.category.product.list');
+Route::get('/search_category_product_list/{sub_slug}/{child_slug?}',[ProductController::class,'searchCategoryProductList'])->name('search.category.product.list');
 
 
 Route::middleware('auth')->group(function (){

@@ -110,9 +110,9 @@
                                     <a href="{{route('main.category.product.list',$category1->slug)}}">{{$category1->name}}</a>
                                     <ul class="row">
                                         @foreach($category1->childCategory as $category2)
-                                            <li class="sublist--title"><a href="#">{{$category2->name}}</a></li>
+                                            <li class="sublist--title"><a href="{{route('search.category.product.list',$category2->slug)}}">{{$category2->name}}</a></li>
                                             @foreach($category2->childCategory as $category3)
-                                                <li class="sublist--item"><a href="#">{{$category3->name}}</a></li>
+                                                <li class="sublist--item"><a href="{{route('search.category.product.list',[$category2->slug,$category3->slug])}}">{{$category3->name}}</a></li>
                                             @endforeach
                                         @endforeach
                                     </ul>

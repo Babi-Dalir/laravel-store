@@ -17,9 +17,16 @@ class ProductController extends Controller
         return view('frontend.single_product',compact('product'));
     }
 
-    public function mainCategoryProductList($slug)
+    public function mainCategoryProductList($main_slug)
     {
+        $sub_slug=null;
+        $child_slug=null;
+        return view('frontend.category_product_list', compact('main_slug','sub_slug','child_slug'));
+    }
 
-        return view('frontend.category_product_list', compact('slug'));
+    public function searchCategoryProductList($sub_slug,$child_slug=null)
+    {
+        $main_slug=null;
+        return view('frontend.category_product_list', compact('main_slug','sub_slug','child_slug'));
     }
 }
