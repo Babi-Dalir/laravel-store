@@ -125,7 +125,7 @@ class Category extends Model
         }
 
         return  Product::query()->whereIn('category_id',$categoryList)
-            ->orderBy($column,$orderBy)->get();
+            ->orderBy($column,$orderBy)->paginate(2);
     }
     public static function getProductListBySubCategory($slug,$column,$orderBy)
     {
@@ -138,13 +138,13 @@ class Category extends Model
         }
 
         return  Product::query()->whereIn('category_id',$categoryList)
-            ->orderBy($column,$orderBy)->get();
+            ->orderBy($column,$orderBy)->paginate(2);
     }
     public static function getProductListByChildCategory($slug,$column,$orderBy)
     {
 
         $category = Category::query()->where('slug',$slug)->first();
         return  Product::query()->where('category_id',$category->id)
-            ->orderBy($column,$orderBy)->get();
+            ->orderBy($column,$orderBy)->paginate(2);
     }
 }

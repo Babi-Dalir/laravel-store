@@ -68,17 +68,8 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="pagination">
-                            <a href="#" class="prev"><i
-                                    class="mdi mdi-chevron-double-right"></i></a>
-                            <a href="#">1</a>
-                            <a href="#" class="active-page">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">...</a>
-                            <a href="#">7</a>
-                            <a href="#" class="next"><i class="mdi mdi-chevron-double-left"></i></a>
-                        </div>
+                        @if(count($products) >0) {{$products->links('vendor.pagination.products-pagination')}} @endif
+
                     </div>
                 </div>
             </div>
@@ -134,17 +125,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="pagination">
-                            <a href="#" class="prev"><i
-                                    class="mdi mdi-chevron-double-right"></i></a>
-                            <a href="#">1</a>
-                            <a href="#" class="active-page">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">...</a>
-                            <a href="#">7</a>
-                            <a href="#" class="next"><i class="mdi mdi-chevron-double-left"></i></a>
-                        </div>
+                        @if(count($more_viewed) >0) {{$more_viewed->links('vendor.pagination.products-pagination')}} @endif
                     </div>
                 </div>
             </div>
@@ -200,17 +181,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="pagination">
-                            <a href="#" class="prev"><i
-                                    class="mdi mdi-chevron-double-right"></i></a>
-                            <a href="#">1</a>
-                            <a href="#" class="active-page">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">...</a>
-                            <a href="#">7</a>
-                            <a href="#" class="next"><i class="mdi mdi-chevron-double-left"></i></a>
-                        </div>
+                        @if(count($newest) >0) {{$newest->links('vendor.pagination.products-pagination')}} @endif
                     </div>
                 </div>
             </div>
@@ -266,17 +237,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="pagination">
-                            <a href="#" class="prev"><i
-                                    class="mdi mdi-chevron-double-right"></i></a>
-                            <a href="#">1</a>
-                            <a href="#" class="active-page">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">...</a>
-                            <a href="#">7</a>
-                            <a href="#" class="next"><i class="mdi mdi-chevron-double-left"></i></a>
-                        </div>
+                        @if(count($more_sold) >0) {{$more_sold->links('vendor.pagination.products-pagination')}} @endif
                     </div>
                 </div>
             </div>
@@ -332,17 +293,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="pagination">
-                            <a href="#" class="prev"><i
-                                    class="mdi mdi-chevron-double-right"></i></a>
-                            <a href="#">1</a>
-                            <a href="#" class="active-page">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">...</a>
-                            <a href="#">7</a>
-                            <a href="#" class="next"><i class="mdi mdi-chevron-double-left"></i></a>
-                        </div>
+                        @if(count($cheapest) >0) {{$cheapest->links('vendor.pagination.products-pagination')}} @endif
                     </div>
                 </div>
             </div>
@@ -398,17 +349,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="pagination">
-                            <a href="#" class="prev"><i
-                                    class="mdi mdi-chevron-double-right"></i></a>
-                            <a href="#">1</a>
-                            <a href="#" class="active-page">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">...</a>
-                            <a href="#">7</a>
-                            <a href="#" class="next"><i class="mdi mdi-chevron-double-left"></i></a>
-                        </div>
+                        @if(count($most_expensive) >0) {{$most_expensive->links('vendor.pagination.products-pagination')}} @endif
                     </div>
                 </div>
             </div>

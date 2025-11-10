@@ -4,18 +4,23 @@ namespace App\Livewire\Frontend\Products;
 
 use App\Models\Category;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class CategoryProduct extends Component
 {
-    public $products;
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
     public $main_slug;
     public $sub_slug;
     public $child_slug;
-    public $more_viewed;
-    public $newest;
-    public $more_sold;
-    public $cheapest;
-    public $most_expensive;
+    private $products;
+    private $more_viewed;
+    private $newest;
+    private $more_sold;
+    private $cheapest;
+    private $most_expensive;
     public function mount()
     {
         $this->products = Category::getProductByCategory($this->main_slug,$this->sub_slug,$this->child_slug,'id','DESC');
@@ -86,6 +91,12 @@ class CategoryProduct extends Component
     }
     public function render()
     {
-        return view('livewire.frontend.products.category-product');
+        $products = $this->products;
+        $more_viewed = $this->more_viewed;
+        $newest = $this->newest;
+        $more_sold = $this->more_sold;
+        $cheapest = $this->cheapest;
+        $most_expensive = $this->most_expensive;
+        return view('livewire.frontend.products.category-product',compact('products','more_viewed','newest','more_sold','cheapest','most_expensive'));
     }
 }
