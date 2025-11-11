@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
     use SoftDeletes;
+
     protected $fillable = [
         'name',
         'e_name',
@@ -20,37 +21,39 @@ class Category extends Model
 
     public function parentCategory()
     {
-        return $this->belongsTo(self::class,'parent_id','id')->withDefault(['name'=>'دسته پدر']);
+        return $this->belongsTo(self::class, 'parent_id', 'id')->withDefault(['name' => 'دسته پدر']);
     }
 
     public function childCategory()
     {
-        return $this->hasMany(self::class,'parent_id','id');
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
     public function products()
     {
         return $this->hasMany(Product::class);
     }
+
     public static function createCategory($request)
     {
         Category::query()->create([
-            'name'=>$request->input('name'),
-            'e_name'=>$request->input('e_name'),
-            'slug'=>str()->slug($request->e_name),
-            'image'=>ImageManager::saveImage('categories',$request->image),
-            'parent_id'=>$request->input('parent_id'),
+            'name' => $request->input('name'),
+            'e_name' => $request->input('e_name'),
+            'slug' => str()->slug($request->e_name),
+            'image' => ImageManager::saveImage('categories', $request->image),
+            'parent_id' => $request->input('parent_id'),
 
         ]);
     }
-    public static function updateCategory($request,$category)
+
+    public static function updateCategory($request, $category)
     {
         $category->update([
-            'name'=>$request->input('name'),
-            'e_name'=>$request->input('e_name'),
-            'slug'=>str()->slug($request->e_name),
-            'image'=>$request->image ? ImageManager::saveImage('categories',$request->image) : $category->image,
-            'parent_id'=>$request->input('parent_id'),
+            'name' => $request->input('name'),
+            'e_name' => $request->input('e_name'),
+            'slug' => str()->slug($request->e_name),
+            'image' => $request->image ? ImageManager::saveImage('categories', $request->image) : $category->image,
+            'parent_id' => $request->input('parent_id'),
 
         ]);
     }
@@ -58,93 +61,98 @@ class Category extends Model
     public static function getCategories()
     {
         $array = [];
-        $categories = self::query()->with('childCategory')->where('parent_id',0)->get();
-        foreach ($categories as $category1){
+        $categories = self::query()->with('childCategory')->where('parent_id', 0)->get();
+        foreach ($categories as $category1) {
             $array[$category1->id] = $category1->name;
-            foreach ($category1->childCategory as $category2){
-                $array[$category2->id] = ' - '. $category2->name;
-                foreach ($category2->childCategory as $category3){
-                    $array[$category3->id] = ' - - ' .$category3->name;
+            foreach ($category1->childCategory as $category2) {
+                $array[$category2->id] = ' - ' . $category2->name;
+                foreach ($category2->childCategory as $category3) {
+                    $array[$category3->id] = ' - - ' . $category3->name;
                 }
             }
         }
         return $array;
     }
+
     public static function getProductCategoryCount($id)
     {
         $sum = 0;
-        $categories = self::query()->with('childCategory')->where('parent_id',$id)->get();
-        foreach ($categories as $category1){
-            foreach ($category1->childCategory as $category2){
-               $sum += $category2->products()->count();
+        $categories = self::query()->with('childCategory')->where('parent_id', $id)->get();
+        foreach ($categories as $category1) {
+            foreach ($category1->childCategory as $category2) {
+                $sum += $category2->products()->count();
             }
         }
         return $sum;
     }
+
     protected static function boot()
     {
         parent::boot();
-        self::deleting(function ($category){
-            foreach ($category->childCategory()->withTrashed()->get() as $cat){
-                if ($category->isForceDeleting()){
+        self::deleting(function ($category) {
+            foreach ($category->childCategory()->withTrashed()->get() as $cat) {
+                if ($category->isForceDeleting()) {
                     $cat->forcedelete();
-                }else{
+                } else {
                     $cat->delete();
                 }
             }
         });
-        self::restoring(function ($category){
-            foreach ($category->childCategory()->withTrashed()->get() as $cat){
+        self::restoring(function ($category) {
+            foreach ($category->childCategory()->withTrashed()->get() as $cat) {
                 $cat->restore();
             }
         });
     }
 
-    public static function getProductByCategory($main_slug,$sub_slug,$child_slug,$column,$orderBy)
+    public static function getProductByCategory($main_slug, $sub_slug, $child_slug, $column, $orderBy, $page)
     {
-        if ($main_slug != null && $sub_slug == null && $child_slug == null){
-            return Category::getProductListByMainCategory($main_slug,$column,$orderBy);
-        }elseif ($main_slug == null && $sub_slug != null && $child_slug == null){
-            return Category::getProductListBySubCategory($sub_slug,$column,$orderBy);
-        }elseif ($main_slug == null && $sub_slug != null && $child_slug != null){
-            return Category::getProductListByChildCategory($child_slug,$column,$orderBy);
+        if ($main_slug != null && $sub_slug == null && $child_slug == null) {
+            return Category::getProductListByMainCategory($main_slug, $column, $orderBy, $page);
+        } elseif ($main_slug == null && $sub_slug != null && $child_slug == null) {
+            return Category::getProductListBySubCategory($sub_slug, $column, $orderBy, $page);
+        } elseif ($main_slug == null && $sub_slug != null && $child_slug != null) {
+            return Category::getProductListByChildCategory($child_slug, $column, $orderBy, $page);
         }
     }
-    public static function getProductListByMainCategory($slug,$column,$orderBy)
+
+    public static function getProductListByMainCategory($slug, $column, $orderBy, $page)
     {
         $categoryList = [];
-        $category = Category::query()->where('slug',$slug)->first();
-        if (sizeof($category->childCategory) > 0){
-            foreach ($category->childCategory as $category1){
-                if (sizeof($category1->childCategory) > 0){
-                    foreach ($category1->childCategory()->get() as $category2){
-                        array_push($categoryList,$category2->id);
+        $category = Category::query()->where('slug', $slug)->first();
+        if (sizeof($category->childCategory) > 0) {
+            foreach ($category->childCategory as $category1) {
+                if (sizeof($category1->childCategory) > 0) {
+                    foreach ($category1->childCategory()->get() as $category2) {
+                        array_push($categoryList, $category2->id);
                     }
                 }
             }
         }
 
-        return  Product::query()->whereIn('category_id',$categoryList)
-            ->orderBy($column,$orderBy)->paginate(2);
+        return Product::query()->whereIn('category_id', $categoryList)
+            ->orderBy($column, $orderBy)->paginate(2, ['*'], 'page', $page);
     }
-    public static function getProductListBySubCategory($slug,$column,$orderBy)
+
+    public static function getProductListBySubCategory($slug, $column, $orderBy, $page)
     {
         $categoryList = [];
-        $category = Category::query()->where('slug',$slug)->first();
-        if (sizeof($category->childCategory) > 0){
-            foreach ($category->childCategory as $category1){
-                array_push($categoryList,$category1->id);
+        $category = Category::query()->where('slug', $slug)->first();
+        if (sizeof($category->childCategory) > 0) {
+            foreach ($category->childCategory as $category1) {
+                array_push($categoryList, $category1->id);
             }
         }
 
-        return  Product::query()->whereIn('category_id',$categoryList)
-            ->orderBy($column,$orderBy)->paginate(2);
+        return Product::query()->whereIn('category_id', $categoryList)
+            ->orderBy($column, $orderBy)->paginate(2, ['*'], 'page', $page);
     }
-    public static function getProductListByChildCategory($slug,$column,$orderBy)
+
+    public static function getProductListByChildCategory($slug, $column, $orderBy, $page)
     {
 
-        $category = Category::query()->where('slug',$slug)->first();
-        return  Product::query()->where('category_id',$category->id)
-            ->orderBy($column,$orderBy)->paginate(2);
+        $category = Category::query()->where('slug', $slug)->first();
+        return Product::query()->where('category_id', $category->id)
+            ->orderBy($column, $orderBy)->paginate(2, ['*'], 'page', $page);
     }
 }

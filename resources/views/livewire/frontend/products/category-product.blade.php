@@ -68,7 +68,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        @if(count($products) >0) {{$products->links('vendor.pagination.products-pagination')}} @endif
+                        @if(count($products) >0) {{$products->links('vendor.pagination.category-product-pagination.all-products')}} @endif
 
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        @if(count($more_viewed) >0) {{$more_viewed->links('vendor.pagination.products-pagination')}} @endif
+                        @if(count($more_viewed) >0) {{$more_viewed->links('vendor.pagination.category-product-pagination.more-viewed-products')}} @endif
                     </div>
                 </div>
             </div>
@@ -181,7 +181,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        @if(count($newest) >0) {{$newest->links('vendor.pagination.products-pagination')}} @endif
+                        @if(count($newest) >0) {{$newest->links('vendor.pagination.category-product-pagination.newest-products')}} @endif
                     </div>
                 </div>
             </div>
@@ -237,7 +237,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        @if(count($more_sold) >0) {{$more_sold->links('vendor.pagination.products-pagination')}} @endif
+                        @if(count($more_sold) >0) {{$more_sold->links('vendor.pagination.category-product-pagination.more-sold-products')}} @endif
                     </div>
                 </div>
             </div>
@@ -293,7 +293,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        @if(count($cheapest) >0) {{$cheapest->links('vendor.pagination.products-pagination')}} @endif
+                        @if(count($cheapest) >0) {{$cheapest->links('vendor.pagination.category-product-pagination.cheapest-products')}} @endif
                     </div>
                 </div>
             </div>
@@ -349,7 +349,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        @if(count($most_expensive) >0) {{$most_expensive->links('vendor.pagination.products-pagination')}} @endif
+                        @if(count($most_expensive) >0) {{$most_expensive->links('vendor.pagination.category-product-pagination.most-expensive-products')}} @endif
                     </div>
                 </div>
             </div>
