@@ -15,7 +15,7 @@ class CategoryProduct extends Component
     public $main_slug;
     public $sub_slug;
     public $child_slug;
-    public $page;
+    public $page=1;
     private $products;
     private $more_viewed;
     private $newest;
