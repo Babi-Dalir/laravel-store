@@ -24,10 +24,62 @@
                         <div class="card-body">
                             @foreach($brands as $brand)
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input"
-                                           id="customCheck10">
+                                    <input type="checkbox" class="custom-control-input" wire:click="filterBrand({{$brand->id}})"
+                                           id="customCheck{{$brand->id}}">
                                     <label class="custom-control-label"
-                                           for="customCheck10">{{$brand->name}}</label>
+                                           for="customCheck{{$brand->id}}">{{$brand->name}}</label>
+                                </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-block text-right collapsed" type="button"
+                                    data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                گارانتی
+                                <i class="mdi mdi-chevron-down"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+                            @foreach($guaranties as $guaranty)
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" wire:click="filterGuaranty({{$guaranty->id}})"
+                                           id="customCheck{{$guaranty->id}}">
+                                    <label class="custom-control-label"
+                                           for="customCheck{{$guaranty->id}}">{{$guaranty->name}}</label>
+                                </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-block text-right collapsed" type="button"
+                                    data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                رنگ
+                                <i class="mdi mdi-chevron-down"></i>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+                            @foreach($colors as $color)
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" wire:click="filterColor({{$color->id}})"
+                                           id="customCheck{{$color->id}}">
+                                    <label class="custom-control-label"
+                                           for="customCheck{{$color->id}}">{{$color->name}}</label>
                                 </div>
                             @endforeach
 
