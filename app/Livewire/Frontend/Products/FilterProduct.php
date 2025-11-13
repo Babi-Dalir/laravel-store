@@ -17,6 +17,8 @@ class FilterProduct extends Component
     public $guaranties;
     public $colors;
     public $filter_brand_list=[];
+    public $filter_guaranty_list=[];
+    public $filter_color_list=[];
     public function mount()
     {
         $products = Category::getProductByCategory($this->main_slug, $this->sub_slug, $this->child_slug, 'id', 'DESC', null);
@@ -56,14 +58,29 @@ class FilterProduct extends Component
                 unset($this->filter_brand_list[$key]);
             }
         }
+        $this->dispatch('filterProducts',$this->filter_brand_list,$this->filter_guaranty_list,$this->filter_color_list);
     }
     public function filterGuaranty($guaranty_id)
     {
-
+        if (!in_array($guaranty_id,$this->filter_guaranty_list)){
+            array_push($this->filter_guaranty_list,$guaranty_id);
+        }else{
+            if (($key=array_search($guaranty_id,$this->filter_guaranty_list)) !== false){
+                unset($this->filter_guaranty_list[$key]);
+            }
+        }
+        $this->dispatch('filterProducts',$this->filter_brand_list,$this->filter_guaranty_list,$this->filter_color_list);
     }
     public function filterColor($color_id)
     {
-
+        if (!in_array($color_id,$this->filter_color_list)){
+            array_push($this->filter_color_list,$color_id);
+        }else{
+            if (($key=array_search($color_id,$this->filter_color_list)) !== false){
+                unset($this->filter_color_list[$key]);
+            }
+        }
+        $this->dispatch('filterProducts',$this->filter_brand_list,$this->filter_guaranty_list,$this->filter_color_list);
     }
     public function render()
     {

@@ -25,9 +25,9 @@
                             @foreach($brands as $brand)
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" wire:click="filterBrand({{$brand->id}})"
-                                           id="customCheck{{$brand->id}}">
+                                           id="customCheck{{$brand->id + 100}}">
                                     <label class="custom-control-label"
-                                           for="customCheck{{$brand->id}}">{{$brand->name}}</label>
+                                           for="customCheck{{$brand->id + 100}}">{{$brand->name}}</label>
                                 </div>
                             @endforeach
 
@@ -51,9 +51,9 @@
                             @foreach($guaranties as $guaranty)
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" wire:click="filterGuaranty({{$guaranty->id}})"
-                                           id="customCheck{{$guaranty->id}}">
+                                           id="customCheck{{$guaranty->id + 100}}">
                                     <label class="custom-control-label"
-                                           for="customCheck{{$guaranty->id}}">{{$guaranty->name}}</label>
+                                           for="customCheck{{$guaranty->id + 100}}">{{$guaranty->name}}</label>
                                 </div>
                             @endforeach
 
@@ -77,9 +77,9 @@
                             @foreach($colors as $color)
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" wire:click="filterColor({{$color->id}})"
-                                           id="customCheck{{$color->id}}">
+                                           id="customCheck{{$color->id + 1000}}">
                                     <label class="custom-control-label"
-                                           for="customCheck{{$color->id}}">{{$color->name}}</label>
+                                           for="customCheck{{$color->id + 1000}}">{{$color->name}}</label>
                                 </div>
                             @endforeach
 

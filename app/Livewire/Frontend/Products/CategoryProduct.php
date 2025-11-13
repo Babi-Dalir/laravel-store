@@ -22,6 +22,9 @@ class CategoryProduct extends Component
     private $more_sold;
     private $cheapest;
     private $most_expensive;
+    protected $listeners=[
+        'filterProducts'
+    ];
 
     public function mount()
     {
@@ -118,6 +121,22 @@ class CategoryProduct extends Component
             default:
                 $this->allProducts();
         }
+    }
+
+    public function filterProducts($brands,$guaranties,$colors)
+    {
+        if ($this->main_slug) {
+            $this->products = Category::getProductListByMainCategory($this->main_slug, 'id', 'DESC', $this->page,$brands,$guaranties,$colors);
+        } elseif ($this->sub_slug) {
+            $this->products = Category::getProductListBySubCategory($this->sub_slug, 'id', 'DESC', $this->page,$brands,$guaranties,$colors);
+        } elseif ($this->child_slug) {
+            $this->products = Category::getProductListByChildCategory($this->child_slug, 'id', 'DESC', $this->page,$brands,$guaranties,$colors);
+        }
+        $this->more_viewed = [];
+        $this->newest = [];
+        $this->more_sold = [];
+        $this->cheapest = [];
+        $this->most_expensive = [];
     }
 
     public function render()

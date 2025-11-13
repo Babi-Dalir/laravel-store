@@ -116,7 +116,7 @@ class Category extends Model
         }
     }
 
-    public static function getProductListByMainCategory($slug, $column, $orderBy, $page)
+    public static function getProductListByMainCategory($slug, $column, $orderBy, $page=null,$brands=null,$guaranties=null,$colors=null)
     {
         $categoryList = [];
         $category = Category::query()->where('slug', $slug)->first();
@@ -132,6 +132,19 @@ class Category extends Model
 
         if ($page){
             return Product::query()->whereIn('category_id', $categoryList)
+                ->when($brands,function ($q) use ($brands){
+                    $q->whereIn('brand_id',$brands);
+                })
+                ->when($guaranties,function ($q) use ($guaranties){
+                    $q->whereHas('productPrices',function ($q2) use ($guaranties){
+                        $q2->whereIn('guaranty_id',$guaranties);
+                    });
+                })
+                ->when($colors,function ($q) use ($colors){
+                    $q->whereHas('colors',function ($q2) use ($colors){
+                        $q2->whereIn('color_id',$colors);
+                    });
+                })
                 ->orderBy($column, $orderBy)->paginate(2, ['*'], 'page', $page);
         }else{
             return Product::query()->whereIn('category_id', $categoryList)
@@ -139,7 +152,7 @@ class Category extends Model
         }
     }
 
-    public static function getProductListBySubCategory($slug, $column, $orderBy, $page)
+    public static function getProductListBySubCategory($slug, $column, $orderBy, $page=null,$brands=null,$guaranties=null,$colors=null)
     {
         $categoryList = [];
         $category = Category::query()->where('slug', $slug)->first();
@@ -150,6 +163,19 @@ class Category extends Model
         }
         if ($page){
             return Product::query()->whereIn('category_id', $categoryList)
+                ->when($brands,function ($q) use ($brands){
+                    $q->whereIn('brand_id',$brands);
+                })
+                ->when($guaranties,function ($q) use ($guaranties){
+                    $q->whereHas('productPrices',function ($q2) use ($guaranties){
+                        $q2->whereIn('guaranty_id',$guaranties);
+                    });
+                })
+                ->when($colors,function ($q) use ($colors){
+                    $q->whereHas('colors',function ($q2) use ($colors){
+                        $q2->whereIn('color_id',$colors);
+                    });
+                })
                 ->orderBy($column, $orderBy)->paginate(2, ['*'], 'page', $page);
         }else{
             return Product::query()->whereIn('category_id', $categoryList)
@@ -157,12 +183,25 @@ class Category extends Model
         }
     }
 
-    public static function getProductListByChildCategory($slug, $column, $orderBy, $page)
+    public static function getProductListByChildCategory($slug, $column, $orderBy, $page=null,$brands=null,$guaranties=null,$colors=null)
     {
 
         $category = Category::query()->where('slug', $slug)->first();
         if ($page){
             return Product::query()->where('category_id', $category->id)
+                ->when($brands,function ($q) use ($brands){
+                    $q->whereIn('brand_id',$brands);
+                })
+                ->when($guaranties,function ($q) use ($guaranties){
+                    $q->whereHas('productPrices',function ($q2) use ($guaranties){
+                        $q2->whereIn('guaranty_id',$guaranties);
+                    });
+                })
+                ->when($colors,function ($q) use ($colors){
+                    $q->whereHas('colors',function ($q2) use ($colors){
+                        $q2->whereIn('color_id',$colors);
+                    });
+                })
                 ->orderBy($column, $orderBy)->paginate(2, ['*'], 'page', $page);
         }else{
             return Product::query()->where('category_id', $category->id)
