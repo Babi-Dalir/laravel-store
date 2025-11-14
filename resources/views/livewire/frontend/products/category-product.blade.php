@@ -48,10 +48,10 @@
                                 <div class="product-card-body">
                                     <div class="add-to-compare">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
-                                                   id="customCheck100">
+                                            <input type="checkbox" class="custom-control-input" wire:click="compareProducts({{$product->id}})"
+                                                   id="customCheck{{$product->id}}" wire:ignore.self>
                                             <label class="custom-control-label"
-                                                   for="customCheck100">مقایسه</label>
+                                                   for="customCheck{{$product->id}}">مقایسه</label>
                                         </div>
                                     </div>
                                     <h5 class="product-title">
