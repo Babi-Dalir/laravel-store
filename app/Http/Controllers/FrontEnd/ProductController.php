@@ -30,4 +30,9 @@ class ProductController extends Controller
         $main_slug=null;
         return view('frontend.category_product_list', compact('main_slug','sub_slug','child_slug'));
     }
+
+    public function compareProducts($product_id_1,$product_id_2)
+    {
+        return view('frontend.compare_products', compact('product_id_1', 'product_id_2'));
+    }
 }

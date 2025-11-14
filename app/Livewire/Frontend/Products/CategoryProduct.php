@@ -21,6 +21,7 @@ class CategoryProduct extends Component
     private $newest;
     private $more_sold;
     private $cheapest;
+    public $compare_product_list=[];
     private $most_expensive;
     protected $listeners=[
         'filterProducts'
@@ -137,6 +138,21 @@ class CategoryProduct extends Component
         $this->more_sold = [];
         $this->cheapest = [];
         $this->most_expensive = [];
+    }
+
+    public function compareProducts($product_id)
+    {
+        if (!in_array($product_id,$this->compare_product_list)){
+            array_push($this->compare_product_list,$product_id);
+        }else{
+            if (($key=array_search($product_id,$this->compare_product_list)) !== false){
+                unset($this->compare_product_list[$key]);
+            }
+        }
+        if (count($this->compare_product_list) == 2){
+            return redirect()->route('compare.products',[$this->compare_product_list[0],$this->compare_product_list[1]]);
+        }
+        $this->allProducts();
     }
 
     public function render()

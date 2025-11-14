@@ -25,9 +25,9 @@
                             @foreach($brands as $brand)
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" wire:click="filterBrand({{$brand->id}})"
-                                           id="customCheck{{$brand->id + 100}}">
+                                           id="customCheck{{$brand->id}}">
                                     <label class="custom-control-label"
-                                           for="customCheck{{$brand->id + 100}}">{{$brand->name}}</label>
+                                           for="customCheck{{$brand->id}}">{{$brand->name}}</label>
                                 </div>
                             @endforeach
 

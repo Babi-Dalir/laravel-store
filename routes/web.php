@@ -18,6 +18,8 @@ Route::get('/payment/callback',[PaymentController::class,'callback'])->name('pay
 Route::get('/main_category_product_list/{main_slug}',[ProductController::class,'mainCategoryProductList'])->name('main.category.product.list');
 Route::get('/search_category_product_list/{sub_slug}/{child_slug?}',[ProductController::class,'searchCategoryProductList'])->name('search.category.product.list');
 
+Route::get('/compare_products/{product_id_1}/{product_id_2}',[ProductController::class,'compareProducts'])->name('compare.products');
+
 
 Route::middleware('auth')->group(function (){
 
