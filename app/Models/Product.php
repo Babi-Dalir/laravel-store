@@ -78,6 +78,10 @@ class Product extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 
     public function approvedComments()
     {
