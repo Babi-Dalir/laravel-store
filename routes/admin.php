@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\GiftCartController;
 use App\Http\Controllers\Admin\GuarantyController;
 use App\Http\Controllers\Admin\PanelController;
@@ -96,3 +97,6 @@ Route::resource('discounts', DiscountController::class);
 
 //GiftCart Route
 Route::resource('gift_carts', GiftCartController::class);
+
+//Ckeditor Route
+Route::post('upload_image_ckeditor', [GalleryController::class, 'ckeditorImage'])->name('ckeditor.upload');

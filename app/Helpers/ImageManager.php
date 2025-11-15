@@ -32,4 +32,12 @@ class ImageManager
         unlink($path_small);
         unlink($path_big);
     }
+    public static function ckeditorImage($table,$image)
+    {
+            $name = $image->hashName();
+            $manager = new IM(Driver::class);
+            $bigImage = $manager->read($image->getRealPath());
+            Storage::disk('public')->put($table.'/big/'.$name,(string)$bigImage->toPng());
+            return url("images/$table/big/".$name);
+    }
 }

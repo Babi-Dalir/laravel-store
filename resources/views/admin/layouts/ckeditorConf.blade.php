@@ -1,3 +1,4 @@
+<script>
 
     $(document).ready(function () {
 
@@ -147,45 +148,5 @@
                 console.error(error.stack);
             });
 
-        ClassicEditor
-            .create(document.querySelector('#editor'), {
-                extraPlugins: [SimpleUploadAdapterPlugin],
-                toolbar: {
-                    items: [
-                        'heading',
-                        '|',
-                        'bold',
-                        'italic',
-                        'link',
-                        '|',
-                        'fontSize',
-                        'fontColor',
-                        '|',
-                        'imageUpload',
-                        'blockQuote',
-                        'insertTable',
-                        'undo',
-                        'redo',
-                        'codeBlock'
-                    ]
-                },
-                language: {
-                    ui: 'fa',
-                    content: 'fa'
-                },
-                table: {
-                    contentToolbar: [
-                        'tableColumn',
-                        'tableRow',
-                        'mergeTableCells'
-                    ]
-                },
-
-            })
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-            });
-
     });
-
-
+</script>
