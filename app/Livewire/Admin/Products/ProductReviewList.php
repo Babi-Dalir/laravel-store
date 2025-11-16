@@ -13,6 +13,7 @@ class ProductReviewList extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search;
+    public $product_id;
     #[On('destroy_review')]
     public function destroyReview($id)
     {
@@ -26,8 +27,8 @@ class ProductReviewList extends Component
     public function render()
     {
         $reviews = Review::query()
+            ->where('product_id',$this->product_id)
             ->where('name','like','%'.$this->search.'%')
-            ->orWhere('e_name','like','%'.$this->search.'%')
             ->paginate(10);
         return view('livewire.admin.products.product-review-list',compact('reviews'));
     }

@@ -19,21 +19,21 @@ class Review extends Model
     {
         return $this->belongsTo(Product::class);
     }
-    public static function createReview($request)
+    public static function createReview($request,$product_id)
     {
         Review::query()->create([
             'name'=>$request->input('name'),
-            'product_id'=>$request->input('product_id'),
+            'product_id'=>$product_id,
             'description'=>$request->input('description'),
 
         ]);
     }
-    public static function updateReview($request,$id)
+    public static function updateReview($request,$id,$product_id)
     {
         $review = Review::query()->find($id);
         $review->update([
             'name'=>$request->input('name'),
-            'product_id'=>$request->input('product_id'),
+            'product_id'=>$product_id,
             'description'=>$request->input('description'),
         ]);
     }

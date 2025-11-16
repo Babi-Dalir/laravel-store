@@ -21,6 +21,7 @@
             <th class="text-center align-middle text-primary">ویژگی های محصول</th>
             <th class="text-center align-middle text-primary">تنوع قیمت</th>
             <th class="text-center align-middle text-primary">گالری</th>
+            <th class="text-center align-middle text-primary">نقد وبررسی</th>
             <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
@@ -51,6 +52,11 @@
                 <td class="text-center align-middle">
                     <a class="btn btn-outline-success" href="{{route('add.product.gallery',$product->id)}}">
                         گالری
+                    </a>
+                </td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-warning" href="{{route('product.reviews',$product->id)}}">
+                        نقد وبررسی
                     </a>
                 </td>
                 <td class="text-center align-middle">

@@ -1,8 +1,13 @@
 <div class="table overflow-auto" tabindex="8">
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">عنوان جستجو</label>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
             <input type="text" @keyup.enter="$wire.searchData" class="form-control text-left" dir="rtl" wire:model="search">
+        </div>
+        <div class="col-sm-2">
+            <a href="{{route('create.product.reviews',$product_id)}}" class="btn btn-outline-info">
+                <i class="ti-plus">ایجاد نقد و بررسی</i>
+            </a>
         </div>
     </div>
     <table class="table table-striped table-hover">
@@ -21,9 +26,9 @@
             <tr>
                 <td class="text-center align-middle">{{$reviews->firstItem()+$index}}</td>
                 <td class="text-center align-middle">{{$review->product->name}}</td>
-                <td class="text-center align-middle">{{$review->description}}</td>
+                <td class="text-center align-middle">{!! $review->description !!}</td>
                 <td class="text-center align-middle">
-                    <a class="btn btn-outline-info" href="{{route('reviews.edit',$review->id)}}">
+                    <a class="btn btn-outline-info" href="{{route('edit.product.reviews',[$review->id,$product_id])}}">
                         ویرایش
                     </a>
                 </td>

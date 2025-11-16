@@ -11,7 +11,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <livewire:admin.products.product-review-list/>
+                <livewire:admin.products.product-review-list :product_id="$product_id"/>
             </div>
         </div>
     </main>
