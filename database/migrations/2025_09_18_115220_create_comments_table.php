@@ -14,6 +14,14 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('name');
+            $table->string('advantage');
+            $table->string('disadvantage');
+            $table->boolean('is_buyer');
+            $table->boolean('suggestion');
+            $table->integer('like')->default(0);
+            $table->integer('dislike')->default(0);
             $table->text('body');
             $table->integer('commentable_id');
             $table->string('commentable_type');

@@ -219,7 +219,7 @@
                                                 شما به عنوان مالک محصول ثبت خواهد شد.
                                             </p>
                                             <div class="dt-sl mt-2">
-                                                <a href="#" class="btn-primary-cm btn-with-icon">
+                                                <a href="{{route('product.comment',$product->id)}}" class="btn-primary-cm btn-with-icon">
                                                     <i class="mdi mdi-comment-text-outline"></i>
                                                     افزودن نظر جدید
                                                 </a>

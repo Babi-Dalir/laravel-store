@@ -8,6 +8,14 @@ class Comment extends Model
 {
     protected $fillable = [
         'user_id',
+        'product_id',
+        'name',
+        'advantage',
+        'disadvantage',
+        'is_buyer',
+        'suggestion',
+        'like',
+        'dislike',
         'body',
         'commentable_id',
         'commentable_type',
