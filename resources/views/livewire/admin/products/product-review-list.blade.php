@@ -26,7 +26,7 @@
             <tr>
                 <td class="text-center align-middle">{{$reviews->firstItem()+$index}}</td>
                 <td class="text-center align-middle">{{$review->product->name}}</td>
-                <td class="text-center align-middle">{!! $review->description !!}</td>
+                <td class="text-center align-middle">{{$review->name}}</td>
                 <td class="text-center align-middle">
                     <a class="btn btn-outline-info" href="{{route('edit.product.reviews',[$review->id,$product_id])}}">
                         ویرایش

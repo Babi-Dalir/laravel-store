@@ -83,7 +83,7 @@
                                 @foreach($product->propertyGroups as $propertyGroup)
                                     <li>
                                         <span>{{$propertyGroup->name}}: </span>
-                                        <span> {{$propertyGroup->properties->pluck('name')->implode(',')}} </span>
+                                        <span> {{$propertyGroup->properties->where('product_id',$product->id)->pluck('name')->implode(',')}} </span>
                                     </li>
                                 @endforeach
 
