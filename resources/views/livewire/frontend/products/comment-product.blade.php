@@ -174,6 +174,14 @@
                                 ثبت نظر
                             </button>
                         </div>
+                        <div>
+                            @if(session()->has('message'))
+                                <div class="alert alert-success">
+                                    <div>{{session('message')}}</div>
+                                </div>
+                            @endif
+
+                        </div>
                     </div>
                 </form>
             </div>

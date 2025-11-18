@@ -32,6 +32,8 @@ class CommentProduct extends Component
         $comment->body= $this->body;
         $comment->status = CommentStatus::Draft->value;
         $this->product->comments()->save($comment);
+        session()->flash('message','نظر شما ثبت شد و پس از تایید مدیر به نمایش گذاشته میشود');
+        $this->reset('name','advantage','disadvantage','suggestion','body','advantageList','disadvantageList');
     }
 
     public function addAdvantage()
