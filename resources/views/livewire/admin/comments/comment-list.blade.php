@@ -11,6 +11,7 @@
             <th class="text-center align-middle text-primary">ردیف</th>
             <th class="text-center align-middle text-primary">نام کاربر</th>
             <th class="text-center align-middle text-primary">متن نظر</th>
+            <th class="text-center align-middle text-primary">نام محصول</th>
             <th class="text-center align-middle text-primary">تایید یا عدم تایید</th>
             <th class="text-center align-middle text-primary"> وضعیت</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
@@ -22,6 +23,7 @@
                 <td class="text-center align-middle">{{$comments->firstItem()+$index}}</td>
                 <td class="text-center align-middle">{{$comment->user->name}}</td>
                 <td class="text-center align-middle">{{$comment->body}}</td>
+                <td class="text-center align-middle">{{$comment->product->name}}</td>
                 <td class="text-center align-middle">
                     @if($comment->status == \App\Enums\CommentStatus::Draft->value || $comment->status == \App\Enums\CommentStatus::Rejected->value)
                         <a class="btn btn-outline-success" wire:click="submitComment({{$comment->id}})">
