@@ -5,6 +5,7 @@ namespace App\Livewire\Frontend\Shops;
 use App\Models\Address;
 use App\Models\City;
 use App\Models\Province;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class EditAddressModal extends Component
@@ -19,9 +20,6 @@ class EditAddressModal extends Component
     public $cities;
     public $address_id;
 
-    protected $listeners = [
-        'editAddress'
-    ];
     protected $rules = [
         'name' => 'required',
         'mobile' => 'required|digits:11',
@@ -79,6 +77,7 @@ class EditAddressModal extends Component
 
     }
 
+    #[On('editAddress')]
     public function editAddress($address_id)
     {
         $address = Address::query()->find($address_id);

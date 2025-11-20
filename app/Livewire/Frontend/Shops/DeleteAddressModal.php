@@ -3,15 +3,14 @@
 namespace App\Livewire\Frontend\Shops;
 
 use App\Models\Address;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class DeleteAddressModal extends Component
 {
     public $address_id;
-    protected $listeners=[
-        'openModalDeleteAddress'
-    ];
 
+    #[On('openModalDeleteAddress')]
     public function openModalDeleteAddress($address_id)
     {
         $this->address_id = $address_id;

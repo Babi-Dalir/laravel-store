@@ -9,6 +9,7 @@ use App\Models\UserCart;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\Session;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Shopping extends Component
@@ -24,13 +25,16 @@ class Shopping extends Component
     public $carts;
     public $total_price;
     public $discount_price;
-    protected $listeners = [
-        'refreshAddressList' => '$refresh'
-    ];
+
     protected $rules = [
         'send_type' => 'required',
         'receive_time' => 'required|sometimes'
     ];
+    #[On('refreshAddressList')]
+    public function refreshAddressList()
+    {
+        $this->dispatch('$refresh');
+    }
 
     public function mount()
     {

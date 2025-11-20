@@ -271,7 +271,7 @@
                                                                 <div class="message-light message-light--opinion-positive">
                                                                     خرید این محصول را توصیه می‌کنم
                                                                 </div>
-                                                            @elseif($comment->suggestion==0)
+                                                            @elseif($comment->suggestion==2)
                                                                 <div class="message-light message-light--opinion-negative">
                                                                     خرید این محصول را توصیه نمیشود
                                                                 </div>

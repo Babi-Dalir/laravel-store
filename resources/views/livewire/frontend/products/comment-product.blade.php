@@ -96,13 +96,13 @@
                                             می کنم</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" value="0" name="customRadio" wire:model="suggestion"
+                                        <input type="radio" id="customRadio2" value="2" name="customRadio" wire:model="suggestion"
                                                class="custom-control-input">
                                         <label class="custom-control-label"
                                                for="customRadio2">خیر،پیشنهاد نمی کنم</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio3" value="{{null}}" name="customRadio" wire:model="suggestion"
+                                        <input type="radio" id="customRadio3" value="0" name="customRadio" wire:model="suggestion"
                                                class="custom-control-input">
                                         <label class="custom-control-label" for="customRadio3">نظری
                                             ندارم</label>

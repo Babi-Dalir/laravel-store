@@ -3,6 +3,7 @@
 namespace App\Livewire\Frontend\Products;
 
 use App\Models\Category;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -23,9 +24,6 @@ class CategoryProduct extends Component
     private $cheapest;
     public $compare_product_list=[];
     private $most_expensive;
-    protected $listeners=[
-        'filterProducts'
-    ];
 
     public function mount()
     {
@@ -124,6 +122,7 @@ class CategoryProduct extends Component
         }
     }
 
+    #[On('filterProducts')]
     public function filterProducts($brands,$guaranties,$colors)
     {
         if ($this->main_slug) {
