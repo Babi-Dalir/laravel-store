@@ -4,11 +4,13 @@
 @endpush
 <div class="comments-product-attributes px-3 dt-sl">
     <div class="row">
-        <div class="col-sm-6 col-12 mb-3">
-            <div class="comments-product-attributes-title">کیفیت ساخت</div>
-            <input id="input-id" name="input-name" type="number" class="rating" data-rtl="true">
+        @foreach($stars as $star)
+            <div class="col-sm-6 col-12 mb-3">
+                <div class="comments-product-attributes-title">{{$star->name}}</div>
+                <input id="input-{{$star->id}}" onchange="getStar({{$star->id}})" name="input-name" type="number" class="rating" data-rtl="true">
+            </div>
+        @endforeach
 
-        </div>
     </div>
 </div>
 @push('scripts')
@@ -33,5 +35,9 @@
                 showClear:false,
             }
         );
+        function getStar(id){
+            let starValue = $(`#input-${id}`).rating().val();
+            Livewire.dispatch('getScore',{starValue,id})
+        }
     </script>
 @endpush

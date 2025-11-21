@@ -16,7 +16,7 @@
                     <h1>{{$product->name}}</h1>
                     <h3>{{$product->e_name}}</h3>
                 </div>
-               <livewire:frontend.products.star-product/>
+               <livewire:frontend.products.star-product :product="$product"/>
             </div>
         </div>
     </div>

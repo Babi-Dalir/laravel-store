@@ -5,6 +5,7 @@ namespace App\Livewire\Frontend\Products;
 use App\Enums\CommentStatus;
 use App\Models\Comment;
 use App\Models\Order;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class CommentProduct extends Component
@@ -17,6 +18,7 @@ class CommentProduct extends Component
     public $body;
     public $advantageList=[];
     public $disadvantageList=[];
+    public $scoreList=[];
 
     public function submitComment()
     {
@@ -50,6 +52,11 @@ class CommentProduct extends Component
             array_push($this->disadvantageList,$this->disadvantage);
             $this->reset('disadvantage');
         }
+    }
+    #[On('sendScore')]
+    public function sendScore($scoreList)
+    {
+        $this->scoreList = $scoreList;
     }
     public function render()
     {
