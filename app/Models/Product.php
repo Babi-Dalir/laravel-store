@@ -82,6 +82,10 @@ class Product extends Model
     {
         return $this->hasMany(Review::class);
     }
+    public function productStars()
+    {
+        return $this->hasMany(ProductStar::class);
+    }
 
     public function approvedComments()
     {

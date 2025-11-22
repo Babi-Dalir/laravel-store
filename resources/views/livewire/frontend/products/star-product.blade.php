@@ -5,7 +5,7 @@
 <div class="comments-product-attributes px-3 dt-sl">
     <div class="row">
         @foreach($stars as $star)
-            <div class="col-sm-6 col-12 mb-3">
+            <div class="col-sm-6 col-12 mb-3" wire:ignore>
                 <div class="comments-product-attributes-title">{{$star->name}}</div>
                 <input id="input-{{$star->id}}" onchange="getStar({{$star->id}})" name="input-name" type="number" class="rating" data-rtl="true">
             </div>
