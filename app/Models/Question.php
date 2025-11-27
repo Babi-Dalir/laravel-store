@@ -14,4 +14,23 @@ class Question extends Model
         'status'
 
     ];
+    public function parentQuestion()
+    {
+        return $this->belongsTo(self::class, 'parent_id', 'id')
+            ->withDefault(['question' => 'سوال']);
+    }
+
+    public function childQuestion()
+    {
+        return $this->hasMany(self::class, 'parent_id', 'id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

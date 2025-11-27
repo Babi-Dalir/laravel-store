@@ -6,133 +6,51 @@
     </div>
     <ol class="comment-list">
         <!-- #comment-## -->
-        <li>
-            <div class="comment-body">
-                <div class="comment-author">
-                    <span class="icon-comment">?</span>
-                    <cite class="fn">حسن</cite>
-                    <span class="says">گفت:</span>
-                    <div class="commentmetadata">
-                        <a href="#">
-                            اسفند ۲۰, ۱۳۹۶ در ۹:۴۱ ب.ظ
-                        </a>
-                    </div>
-                </div>
-
-
-                <p>لورم ایپسوم متن ساختگی</p>
-
-                <div class="reply"><a class="comment-reply-link" href="#">پاسخ</a></div>
-            </div>
-        </li>
-        <!-- #comment-## -->
-        <li>
-            <div class="comment-body">
-                <div class="comment-author">
-                    <span class="icon-comment">?</span>
-                    <cite class="fn">رضا</cite>
-                    <span class="says">گفت:</span>
-                    <div class="commentmetadata">
-                        <a href="#">
-                            اسفند ۲۰, ۱۳۹۶ در ۹:۴۲ ب.ظ
-                        </a>
-                    </div>
-                </div>
-                <p>
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                    صنعت چاپ و با استفاده از طراحان گرافیک است.
-                </p>
-
-                <div class="reply"><a class="comment-reply-link" href="#">پاسخ</a></div>
-            </div>
-            <ol class="children">
-                <li>
-                    <div class="comment-body">
-                        <div class="comment-author">
-                                                            <span
-                                                                class="icon-comment mdi mdi-lightbulb-on-outline"></span>
-                            <cite class="fn">بهرامی راد</cite> <span
-                                class="says">گفت:</span>
-                            <div class="commentmetadata">
-                                <a href="#">
-                                    اسفند ۲۰, ۱۳۹۶ در ۹:۴۷ ب.ظ
-                                </a>
-                            </div>
+        @foreach($questions as $question)
+            <li>
+                <div class="comment-body">
+                    <div class="comment-author">
+                        <span class="icon-comment">?</span>
+                        <cite class="fn">{{$question->user->name}}</cite>
+                        <span class="says">گفت:</span>
+                        <div class="commentmetadata">
+                            <a href="#">
+                                {{\Hekmatinasser\Verta\Verta::instance($question->created_at)->format('%d%B، %Y')}}
+                            </a>
                         </div>
-                        <p>لورم ایپسوم متن ساختگی با تولید سادگی
-                            نامفهوم از صنعت چاپ و با استفاده از
-                            طراحان گرافیک است.
-                            چاپگرها و متون بلکه روزنامه و مجله در
-                            ستون و سطرآنچنان که لازم است و برای
-                            شرایط فعلی تکنولوژی
-                            مورد نیاز و کاربردهای متنوع با هدف بهبود
-                            ابزارهای کاربردی می باشد.</p>
-
-                        <div class="reply"><a class="comment-reply-link"
-                                              href="#">پاسخ</a></div>
                     </div>
+                    <p>{{$question->question}}</p>
+
+                    <div class="reply"><a class="comment-reply-link" href="#" wire:click.prevent="addReply({{$question->id}})">پاسخ</a></div>
+                </div>
+                @foreach($question->childQuestion as $reply)
                     <ol class="children">
                         <li>
                             <div class="comment-body">
                                 <div class="comment-author">
-                                    <span class="icon-comment">?</span>
-                                    <cite class="fn">محمد</cite>
-                                    <span class="says">گفت:</span>
+                                                            <span
+                                                                class="icon-comment mdi mdi-lightbulb-on-outline"></span>
+                                    <cite class="fn">{{$reply->user->name}}</cite> <span
+                                        class="says">گفت:</span>
                                     <div class="commentmetadata">
                                         <a href="#">
-                                            خرداد ۳۰, ۱۳۹۷ در ۸:۵۳ ق.ظ
+                                            {{\Hekmatinasser\Verta\Verta::instance($reply->created_at)->format('%d%B، %Y')}}
                                         </a>
                                     </div>
                                 </div>
-                                <p>عالیه</p>
+                                <p>{{$reply->question}}</p>
 
                                 <div class="reply"><a class="comment-reply-link"
                                                       href="#">پاسخ</a></div>
                             </div>
-                            <ol class="children">
-                                <li>
-                                    <div class="comment-body">
-                                        <div class="comment-author">
-                                                                            <span
-                                                                                class="icon-comment mdi mdi-lightbulb-on-outline"></span>
-                                            <cite class="fn">اشکان</cite>
-                                            <span class="says">گفت:</span>
-                                            <div class="commentmetadata">
-                                                <a href="#">
-                                                    خرداد ۳۰, ۱۳۹۷ در ۸:۵۳ ق.ظ
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <p>لورم ایپسوم متن ساختگی با
-                                            تولید سادگی نامفهوم از
-                                            صنعت چاپ و با استفاده از
-                                            طراحان
-                                            گرافیک است. چاپگرها و
-                                            متون بلکه روزنامه و مجله
-                                            در ستون و سطرآنچنان که
-                                            لازم است و
-                                            برای شرایط فعلی تکنولوژی
-                                            مورد نیاز و کاربردهای
-                                            متنوع با هدف بهبود
-                                            ابزارهای
-                                            کاربردی می باشد.</p>
-
-                                        <div class="reply"><a class="comment-reply-link"
-                                                              href="#">پاسخ</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!-- #comment-## -->
-                            </ol>
-                            <!-- .children -->
                         </li>
                         <!-- #comment-## -->
                     </ol>
-                    <!-- .children -->
-                </li>
-                <!-- #comment-## -->
-            </ol>
-            <!-- .children -->
-        </li>
+                @endforeach
+
+                <!-- .children -->
+            </li>
+        @endforeach
+
     </ol>
 </div>

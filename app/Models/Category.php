@@ -21,7 +21,9 @@ class Category extends Model
 
     public function parentCategory()
     {
-        return $this->belongsTo(self::class, 'parent_id', 'id')->withDefault(['name' => 'دسته پدر']);
+        return $this->belongsTo(self::class, 'parent_id', 'id')
+            ->withTrashed()
+            ->withDefault(['name' => 'دسته پدر']);
     }
 
     public function childCategory()
