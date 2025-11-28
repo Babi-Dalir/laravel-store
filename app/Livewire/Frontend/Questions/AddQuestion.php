@@ -42,6 +42,7 @@ class AddQuestion extends Component
                 'question'=>$this->question,
                 'parent_id'=>$this->question_id,
             ]);
+            $this->reset(['question','question_id','is_reply']);
             session()->flash('message','پاسخ شما ثبت شد و پس از تایید مدیر به نمایش گذاشته میشود');
 
         }else{

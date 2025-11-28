@@ -5,7 +5,6 @@
         <p class="count-comment">123 پرسش</p>
     </div>
     <ol class="comment-list">
-        <!-- #comment-## -->
         @foreach($questions as $question)
             <li>
                 <div class="comment-body">
@@ -21,7 +20,8 @@
                     </div>
                     <p>{{$question->question}}</p>
 
-                    <div class="reply"><a class="comment-reply-link" href="#" wire:click.prevent="addReply({{$question->id}})">پاسخ</a></div>
+                    <div class="reply"><a class="comment-reply-link" href="#"
+                                          wire:click.prevent="addReply({{$question->id}})">پاسخ</a></div>
                 </div>
                 @foreach($question->childQuestion as $reply)
                     <ol class="children">
@@ -40,17 +40,11 @@
                                 </div>
                                 <p>{{$reply->question}}</p>
 
-                                <div class="reply"><a class="comment-reply-link"
-                                                      href="#">پاسخ</a></div>
                             </div>
                         </li>
-                        <!-- #comment-## -->
                     </ol>
                 @endforeach
-
-                <!-- .children -->
             </li>
         @endforeach
-
     </ol>
 </div>

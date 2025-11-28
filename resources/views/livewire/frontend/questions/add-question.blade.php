@@ -7,7 +7,7 @@
             <button wire:click.prevent="createQuestion" type="submit" class="btn btn-dark float-right ml-3">ثبت پرسش</button>
         @endif
     </form>
-    <div>
+    <div class="row">
         @if(session()->has('message'))
             <div class="alert alert-success">
                 <div>{{session('message')}}</div>

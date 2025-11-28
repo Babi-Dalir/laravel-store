@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\PropertyGroupController;
 use App\Http\Controllers\Admin\ProvinceController;
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SliderController;
@@ -84,7 +85,6 @@ Route::resource('sliders', SliderController::class);
 Route::resource('banners', BannerController::class);
 
 //Comment Route
-
 Route::get('users_comments', [CommentController::class,'userComments'])->name('users.comments');
 
 //Province Route
@@ -112,4 +112,7 @@ Route::post('store_reviews/{product_id}', [ReviewController::class,'store'])->na
 Route::get('edit_reviews/{id}/{product_id}', [ReviewController::class,'edit'])->name('edit.product.reviews');
 
 Route::put('update_reviews/{id}/{product_id}', [ReviewController::class,'update'])->name('update.product.reviews');
+
+//Comment Route
+Route::get('users_questions', [QuestionController::class,'userQuestions'])->name('users.questions');
 

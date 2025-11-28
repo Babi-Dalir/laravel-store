@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\QuestionStatus;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
@@ -22,7 +23,7 @@ class Question extends Model
 
     public function childQuestion()
     {
-        return $this->hasMany(self::class, 'parent_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id')->where('status',QuestionStatus::Approved->value);
     }
 
     public function product()

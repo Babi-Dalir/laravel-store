@@ -19,6 +19,7 @@ class QuestionList extends Component
         $questions = Question::query()
             ->where('product_id',$this->product->id)
             ->where('status',QuestionStatus::Approved->value)
+            ->where('parent_id',null)
             ->get();
         return view('livewire.frontend.questions.question-list',compact('questions'));
     }
