@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\GiftCartController;
 use App\Http\Controllers\Admin\GuarantyController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PanelController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductPriceController;
@@ -113,6 +114,10 @@ Route::get('edit_reviews/{id}/{product_id}', [ReviewController::class,'edit'])->
 
 Route::put('update_reviews/{id}/{product_id}', [ReviewController::class,'update'])->name('update.product.reviews');
 
-//Comment Route
+//Questions Route
 Route::get('users_questions', [QuestionController::class,'userQuestions'])->name('users.questions');
+
+//Order Route
+Route::get('order_list', [OrderController::class,'orders'])->name('admin.orders.list');
+Route::get('order_detail_list/{order}', [OrderController::class,'orderDetails'])->name('admin.order.details.list');
 

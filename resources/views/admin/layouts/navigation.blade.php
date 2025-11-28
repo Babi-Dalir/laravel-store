@@ -11,6 +11,11 @@
                     <i class="icon ti-folder"></i>
                 </a>
             </li>
+            <li data-toggle="tooltip" title="سفارشات">
+                <a href="#orders" title=" سفارشات">
+                    <i class="icon ti-shopping-cart"></i>
+                </a>
+            </li>
         </ul>
         <ul>
             <li data-toggle="tooltip" title="ویرایش پروفایل">
@@ -149,5 +154,13 @@
             </li>
         </ul>
 {{--        @endhasanyrole--}}
+        <ul id="orders">
+            <li>
+                <a href="#">سفارشات</a>
+                <ul>
+                    <li><a href="{{route('admin.orders.list')}}">لیست سفارشات</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>
