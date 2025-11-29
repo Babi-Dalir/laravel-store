@@ -17,6 +17,6 @@ class OrderController extends Controller
     public function orderDetails(Order $order)
     {
         $title = "جزئیات سفارش";
-        return view('admin.orders.order_list', compact('title','order'));
+        return view('admin.orders.order_detail_list', compact('title','order'));
     }
 }
