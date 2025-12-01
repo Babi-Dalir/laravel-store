@@ -24,6 +24,10 @@ class ProfileController extends Controller
     {
         return view('frontend.profile.profile_favorites');
     }
+    public function profileComments()
+    {
+        return view('frontend.profile.profile_comments');
+    }
     public function profileAddresses()
     {
         return view('frontend.profile.profile_addresses');

@@ -40,6 +40,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Address::class);
     }
+    public function userProfile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

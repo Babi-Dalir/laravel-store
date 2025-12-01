@@ -7,8 +7,8 @@
                         <img src="./assets/img/theme/avatar.png" alt="">
                     </div>
                     <div class="profile-header-content mr-3 mt-2">
-                        <span class="d-block profile-username">جلال بهرامی راد</span>
-                        <span class="d-block profile-phone">09xxxxxxxxx</span>
+                        <span class="d-block profile-username">{{auth()->user()->name}}</span>
+                        <span class="d-block profile-phone">{{auth()->user()->mobile}}</span>
                     </div>
                 </div>
                 <div class="profile-point mt-3 mb-2 dt-sl">
@@ -24,7 +24,7 @@
                             </a>
                         </div>
                         <div class="col-6 text-center">
-                            <a href="#">
+                            <a href="{{route('logout')}}">
                                 <i class="mdi mdi-logout-variant"></i>
                                 <span class="d-block">خروج از حساب</span>
                             </a>
@@ -46,31 +46,31 @@
                 <div class="profile-menu">
                     <ul>
                         <li>
-                            <a href="#" class="active">
+                            <a href="{{route('profile')}}" class="active">
                                 <i class="mdi mdi-account-circle-outline"></i>
                                 پروفایل
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{route('profile.orders')}}">
                                 <i class="mdi mdi-basket"></i>
                                 همه سفارش ها
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{route('profile.favorites')}}">
                                 <i class="mdi mdi-heart-outline"></i>
                                 لیست علاقمندی ها
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{route('profile.comments')}}">
                                 <i class="mdi mdi-glasses"></i>
                                 نقد و نظرات
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{route('profile.addresses')}}">
                                 <i class="mdi mdi-sign-direction"></i>
                                 آدرس ها
                             </a>
