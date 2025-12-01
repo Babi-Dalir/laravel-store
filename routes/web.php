@@ -3,6 +3,7 @@
 use App\Http\Controllers\FrontEnd\HomeController;
 use App\Http\Controllers\FrontEnd\PaymentController;
 use App\Http\Controllers\FrontEnd\ProductController;
+use App\Http\Controllers\FrontEnd\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
@@ -32,6 +33,13 @@ Route::middleware('auth')->group(function (){
     Route::get('/payment',[PaymentController::class,'payment'])->name('payment');
 
     Route::get('/product_comment/{product_id}',[ProductController::class,'productComment'])->name('product.comment');
+
+    //Profile
+    Route::get('/profile',[ProfileController::class,'profile'])->name('profile');
+    Route::get('/profile_orders',[ProfileController::class,'profileOrders'])->name('profile.orders');
+    Route::get('/profile_order_details',[ProfileController::class,'profileOrdersDetails'])->name('profile.order.details');
+    Route::get('/profile_favorites',[ProfileController::class,'profileFavorites'])->name('profile.favorites');
+    Route::get('/profile_addresses',[ProfileController::class,'profileAddresses'])->name('profile.addresses');
 });
 
 
