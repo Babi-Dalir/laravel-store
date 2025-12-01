@@ -26,13 +26,8 @@ class User extends Authenticatable
         'mobile',
         'mobile_verified_at',
         'email',
-        'phone',
         'image',
         'is_admin',
-        'whatsapp',
-        'telegram',
-        'instagram',
-        'eita',
         'status',
         'password',
     ];

@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function (){
 
     //Profile
     Route::get('/profile',[ProfileController::class,'profile'])->name('profile');
+    Route::post('/profile_update',[ProfileController::class,'profileUpdate'])->name('profile.update');
     Route::get('/profile_orders',[ProfileController::class,'profileOrders'])->name('profile.orders');
     Route::get('/profile_order_details',[ProfileController::class,'profileOrdersDetails'])->name('profile.order.details');
     Route::get('/profile_favorites',[ProfileController::class,'profileFavorites'])->name('profile.favorites');

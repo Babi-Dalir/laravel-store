@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('bank_card_number')->nullable();
             $table->string('bank_shaba_number')->nullable();
             $table->string('national_code')->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->string('telegram')->nullable();
             $table->string('instagram')->nullable();
             $table->string('whatsapp')->nullable();

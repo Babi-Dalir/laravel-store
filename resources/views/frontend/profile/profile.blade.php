@@ -10,6 +10,14 @@
                 <!-- Start Content -->
                 <div class="col-xl-9 col-lg-8 col-md-8 col-sm-12">
                     <div class="row">
+                        <div class="row">
+                            @if(\Illuminate\Support\Facades\Session::has('message'))
+                                <div class="alert alert-info">
+                                    <div>{{session('message')}}</div>
+                                </div>
+                            @endif
+
+                        </div>
                         <div class="col-12">
                             <div class="px-3 px-res-0">
                                 <div
@@ -17,25 +25,26 @@
                                     <h2>ویرایش اطلاعات شخصی</h2>
                                 </div>
                                 <div class="form-ui additional-info dt-sl dt-sn pt-4">
-                                    <form action="">
+                                    <form action="{{route('profile.update')}}" method="POST" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <div class="form-row-title">
                                                     <h3>نام</h3>
                                                 </div>
                                                 <div class="form-row">
-                                                    <input type="text" class="input-ui pr-2"
-                                                           placeholder="نام خود را وارد نمایید" value="جلال">
+                                                    <input type="text" class="input-ui pr-2" name="name"
+                                                           placeholder="نام خود را وارد نمایید" value="{{$user->name}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <div class="form-row-title">
-                                                    <h3>نام و نام خانوادگی</h3>
+                                                    <h3>نام کاربری</h3>
                                                 </div>
                                                 <div class="form-row">
-                                                    <input type="text" class="input-ui pr-2"
-                                                           placeholder="نام خانوادگی خود را وارد نمایید"
-                                                           value="بهرامی راد">
+                                                    <input type="text" class="input-ui pr-2" name="user_name"
+                                                           placeholder="نام کاربری خود را وارد نمایید"
+                                                           value="{{$user->user_name}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -43,8 +52,8 @@
                                                     <h3>کد ملی</h3>
                                                 </div>
                                                 <div class="form-row">
-                                                    <input type="text" class="input-ui pl-2 text-left dir-ltr"
-                                                           placeholder="-">
+                                                    <input type="text" class="input-ui pl-2 text-left dir-ltr" name="national_code"
+                                                           value="{{$user->userProfile ? $user->userProfile->national_code : ""}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -52,9 +61,9 @@
                                                     <h3>شماره موبایل</h3>
                                                 </div>
                                                 <div class="form-row">
-                                                    <input type="text" class="input-ui pl-2 text-left dir-ltr"
+                                                    <input type="text" class="input-ui pl-2 text-left dir-ltr" name="mobile"
                                                            placeholder="شماره موبایل خود را وارد نمایید"
-                                                           value="09xxxxxxxxx">
+                                                           value="{{$user->mobile}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -62,9 +71,9 @@
                                                     <h3>آدرس ایمیل</h3>
                                                 </div>
                                                 <div class="form-row">
-                                                    <input type="email" class="input-ui pl-2 text-left dir-ltr"
+                                                    <input type="email" class="input-ui pl-2 text-left dir-ltr" name="email"
                                                            placeholder="آدرس ایمیل خود را وارد نمایید"
-                                                           value="info@gmail.com">
+                                                           value="{{$user->email}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -74,7 +83,7 @@
                                                 <div class="form-row mt-2">
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" class="custom-file-input"
+                                                            <input type="file" class="custom-file-input" name="image"
                                                                    id="inputGroupFile04"
                                                                    aria-describedby="inputGroupFileAddon04">
                                                             <label class="custom-file-label"
@@ -90,27 +99,15 @@
                                                         <h3>شماره کارت</h3>
                                                     </div>
                                                     <div class="form-row">
-                                                        <input type="text" class="input-ui pl-2 text-left dir-ltr"
-                                                               placeholder="-">
-                                                        <button class="btn btn-success float-left mt-3">بررسی
-                                                            اطلاعات</button>
+                                                        <input type="text" class="input-ui pl-2 text-left dir-ltr" name="bank_card_number"
+                                                               value="{{$user->userProfile ? $user->userProfile->bank_card_number : ""}}">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-12 mb-3">
                                                 <div class="form-row mt-2">
                                                     <div class="custom-control custom-checkbox float-right mt-2">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                               id="customCheck3">
-                                                        <label class="custom-control-label text-justify"
-                                                               for="customCheck3">
-                                                            تبعه خارجی فاقد کد ملی هستم
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="form-row mt-2">
-                                                    <div class="custom-control custom-checkbox float-right mt-2">
-                                                        <input type="checkbox" class="custom-control-input"
+                                                        <input type="checkbox" class="custom-control-input" name="newsletter"
                                                                id="customCheck4">
                                                         <label class="custom-control-label text-justify"
                                                                for="customCheck4">
@@ -122,11 +119,10 @@
                                         </div>
                                         <div class="dt-sl">
                                             <div class="form-row mt-3 justify-content-end">
-                                                <button class="btn-primary-cm btn-with-icon ml-2">
+                                                <button type="submit" class="btn-primary-cm btn-with-icon ml-2">
                                                     <i class="mdi mdi-account-circle-outline"></i>
                                                     ثبت اطلاعات کاربری
                                                 </button>
-                                                <button class="btn-primary-cm bg-secondary">انصراف</button>
                                             </div>
                                         </div>
                                     </form>

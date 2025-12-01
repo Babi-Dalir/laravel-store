@@ -12,6 +12,7 @@ class UserProfile extends Model
         'bank_card_number',
         'bank_shaba_number',
         'national_code',
+        'phone',
         'telegram',
         'instagram',
         'whatsapp',
