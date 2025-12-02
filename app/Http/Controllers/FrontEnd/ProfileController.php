@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd;
 
 use App\Helpers\ImageManager;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -24,12 +25,27 @@ class ProfileController extends Controller
             'email' => $user->email == null ? $request->input('email') : $user->email,
             'image'=>ImageManager::saveImage('users',$request->image),
         ]);
+        if ($user->userProfile){
+            $user->userProfile()->update([
+                'national_code' => $request->input('national_code'),
+                'bank_card_number' => $request->input('bank_card_number'),
+                'newsletter' => $request->input('newsletter')==='on'
+            ]);
+        }else{
+            $user->userProfile()->create([
+                'national_code' => $request->input('national_code'),
+                'bank_card_number' => $request->input('bank_card_number'),
+                'newsletter' => $request->input('newsletter')==='on'
+            ]);
+        }
         return redirect()->back()->with('message', "اطلاعات شما با موفقیت ویرایش شد");
     }
 
     public function profileOrders()
     {
-        return view('frontend.profile.profile_orders');
+        $user = auth()->user();
+        $orders = Order::query()->where('user_id',$user->id)->paginate(10);
+        return view('frontend.profile.profile_orders',compact('orders'));
     }
     public function profileOrdersDetails()
     {

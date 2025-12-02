@@ -4,7 +4,7 @@
             <div class="profile-sidebar-header dt-sl">
                 <div class="d-flex align-items-center">
                     <div class="profile-avatar">
-                        <img src="./assets/img/theme/avatar.png" alt="">
+                        <img src="{{url('frontend/img/theme/avatar.png')}}" alt="">
                     </div>
                     <div class="profile-header-content mr-3 mt-2">
                         <span class="d-block profile-username">{{auth()->user()->name}}</span>
@@ -46,31 +46,31 @@
                 <div class="profile-menu">
                     <ul>
                         <li>
-                            <a href="{{route('profile')}}" class="active">
+                            <a href="{{route('profile')}}" @if(\Illuminate\Support\Facades\Route::current()->getName() == 'profile') class="active" @endif>
                                 <i class="mdi mdi-account-circle-outline"></i>
                                 پروفایل
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('profile.orders')}}">
+                            <a href="{{route('profile.orders')}}" @if(\Illuminate\Support\Facades\Route::current()->getName() == 'profile.orders') class="active" @endif>
                                 <i class="mdi mdi-basket"></i>
                                 همه سفارش ها
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('profile.favorites')}}">
+                            <a href="{{route('profile.favorites')}}" @if(\Illuminate\Support\Facades\Route::current()->getName() == 'profile.favorites') class="active" @endif>
                                 <i class="mdi mdi-heart-outline"></i>
                                 لیست علاقمندی ها
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('profile.comments')}}">
+                            <a href="{{route('profile.comments')}}" @if(\Illuminate\Support\Facades\Route::current()->getName() == 'profile.comments') class="active" @endif>
                                 <i class="mdi mdi-glasses"></i>
                                 نقد و نظرات
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('profile.addresses')}}">
+                            <a href="{{route('profile.addresses')}}" @if(\Illuminate\Support\Facades\Route::current()->getName() == 'profile.addresses') class="active" @endif>
                                 <i class="mdi mdi-sign-direction"></i>
                                 آدرس ها
                             </a>
