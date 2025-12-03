@@ -54,7 +54,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="details-link">
-                                                    <a href="#">
+                                                    <a href="{{route('profile.order.details',$order->id)}}">
                                                         <i class="mdi mdi-chevron-left"></i>
                                                     </a>
                                                 </td>

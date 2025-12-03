@@ -5,6 +5,7 @@ namespace App\Http\Controllers\FrontEnd;
 use App\Helpers\ImageManager;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -47,9 +48,11 @@ class ProfileController extends Controller
         $orders = Order::query()->where('user_id',$user->id)->paginate(10);
         return view('frontend.profile.profile_orders',compact('orders'));
     }
-    public function profileOrdersDetails()
+    public function profileOrdersDetails($order_id)
     {
-        return view('frontend.profile.profile_order_details');
+        $order = Order::query()->find($order_id);
+        $order_details = OrderDetail::query()->where('order_id',$order_id)->paginate(10);
+        return view('frontend.profile.profile_order_details',compact('order','order_details'));
     }
     public function profileFavorites()
     {
