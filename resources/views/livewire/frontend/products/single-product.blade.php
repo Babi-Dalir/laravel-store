@@ -4,7 +4,15 @@
         <div class="col-lg-4 col-md-6 ps-relative">
             <!-- Product Options-->
             <ul class="gallery-options">
-                <li>
+                <div>
+                    @if(session()->has('message'))
+                        <div class="text-danger">
+                            <div>{{session('message')}}</div>
+                        </div>
+                    @endif
+
+                </div>
+                <li wire:click="AddFavorite({{$product->id}})">
                     <button class="add-favorites"><i class="mdi mdi-heart"></i></button>
                     <span class="tooltip-option">افزودن به علاقمندی</span>
                 </li>
