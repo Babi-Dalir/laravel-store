@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontEnd;
 
 use App\Helpers\ImageManager;
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
@@ -60,7 +61,9 @@ class ProfileController extends Controller
     }
     public function profileComments()
     {
-        return view('frontend.profile.profile_comments');
+        $user = auth()->user();
+        $comments = Comment::query()->where('user_id',$user->id)->get();
+        return view('frontend.profile.profile_comments',compact('comments'));
     }
     public function profileAddresses()
     {
