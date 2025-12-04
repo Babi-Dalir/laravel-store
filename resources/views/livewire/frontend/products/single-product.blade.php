@@ -12,8 +12,19 @@
                     @endif
 
                 </div>
+                @php
+                    if (auth()->user()){
+                        $favorite = \App\Models\Favorite::query()
+                    ->where('user_id',auth()->user()->id)
+                    ->where('product_id',$product->id)
+                    ->exists();
+                    }else{
+                        $favorite = null;
+                    }
+                @endphp
                 <li wire:click="AddFavorite({{$product->id}})">
-                    <button class="add-favorites"><i class="mdi mdi-heart"></i></button>
+                    <button class="add-favorites"><i class="mdi mdi-heart @if($favorite) text-danger @endif"></i>
+                    </button>
                     <span class="tooltip-option">افزودن به علاقمندی</span>
                 </li>
             </ul>
@@ -77,7 +88,8 @@
                                                         <span class="ui-variant-shape"
                                                               style="background-color: {{$color->code}}"></span>
                                                 <input type="radio" value="1" name="color"
-                                                       class="variant-selector" @if($product->productPrices()->where('price',$product->price)->first()->color_id == $color->id) checked @endif>
+                                                       class="variant-selector"
+                                                       @if($product->productPrices()->where('price',$product->price)->first()->color_id == $color->id) checked @endif>
                                                 <span class="ui-variant--check">{{$color->name}}</span>
                                             </label>
                                         </li>
@@ -294,15 +306,19 @@
                                         @endif
                                     </div>
                                     <div class="product-seller-price-real" wire:ignore.self>
-                                        <div class="product-seller-price-raw">{{number_format($product_price->price)}}</div>
+                                        <div
+                                            class="product-seller-price-raw">{{number_format($product_price->price)}}</div>
                                         تومان
                                     </div>
                                     <div
-                                        class="product-additional-item product-additional-item--no-icon" wire:ignore.self>
-                                        <span>{{number_format($product_price->main_price - $product_price->price)}}</span>&nbsp; تومان تخفیف سازمانی کسر گردیده است.
+                                        class="product-additional-item product-additional-item--no-icon"
+                                        wire:ignore.self>
+                                        <span>{{number_format($product_price->main_price - $product_price->price)}}</span>&nbsp;
+                                        تومان تخفیف سازمانی کسر گردیده است.
                                     </div>
                                 </div>
-                                <div class="product-seller-row product-seller-row--add-to-cart" wire:click="addToCart({{$product_price->color_id}},{{$product_price->guaranty_id}})">
+                                <div class="product-seller-row product-seller-row--add-to-cart"
+                                     wire:click="addToCart({{$product_price->color_id}},{{$product_price->guaranty_id}})">
                                     <a href="#" class="btn-add-to-cart btn-add-to-cart--full-width" wire:ignore>
                                         <span class="btn-add-to-cart-txt">افزودن به سبد خرید</span>
                                     </a>

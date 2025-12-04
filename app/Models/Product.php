@@ -86,6 +86,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductStar::class);
     }
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
 
     public function approvedComments()
     {
