@@ -71,7 +71,7 @@ class AddAddressModal extends Component
         ]);
         $this->dispatch('closeAddressModal');
         $this->dispatch('refreshAddressList');
-
+        $this->dispatch('refreshAddressProfile');
     }
 
     public function render()

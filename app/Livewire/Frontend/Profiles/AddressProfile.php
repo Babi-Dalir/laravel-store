@@ -3,10 +3,16 @@
 namespace App\Livewire\Frontend\Profiles;
 
 use App\Models\Address;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class AddressProfile extends Component
 {
+    #[On('refreshAddressProfile')]
+    public function refreshAddressProfile()
+    {
+        $this->dispatch('$refresh');
+    }
     public function render()
     {
         $user = auth()->user();

@@ -73,8 +73,7 @@ class EditAddressModal extends Component
         ]);
         $this->dispatch('closeEditAddressModal');
         $this->dispatch('refreshAddressList');
-
-
+        $this->dispatch('refreshAddressProfile');
     }
 
     #[On('editAddress')]

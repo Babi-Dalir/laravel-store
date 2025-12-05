@@ -28,9 +28,9 @@
                             </li>
                         </ul>
                         <div class="card-horizontal-address-actions">
-                            <button class="btn-note" data-toggle="modal"
+                            <button class="btn-note" data-toggle="modal"  wire:click="$dispatch('editAddress',{address_id : {{$address->id}} })"
                                     data-target="#modal-location-edit">ویرایش</button>
-                            <button class="btn-note" data-toggle="modal"
+                            <button class="btn-note" data-toggle="modal"  wire:click="$dispatch('openModalDeleteAddress',{address_id : {{$address->id}} })"
                                     data-target="#remove-location">حذف</button>
                         </div>
                     </div>
@@ -39,4 +39,15 @@
         @endforeach
 
     </div>
+    <!-- Start Modal location new -->
+    <livewire:frontend.shops.add-address-modal/>
+    <!-- End Modal location new -->
+
+    <!-- Start Modal location edit -->
+    <livewire:frontend.shops.edit-address-modal/>
+    <!-- End Modal location edit -->
+
+    <!-- Start Modal remove-location -->
+    <livewire:frontend.shops.delete-address-modal/>
+    <!-- End Modal remove-location -->
 </div>
