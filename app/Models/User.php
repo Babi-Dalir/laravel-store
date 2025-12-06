@@ -43,6 +43,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Favorite::class);
     }
+    public function seller()
+    {
+        return $this->hasOne(Seller::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

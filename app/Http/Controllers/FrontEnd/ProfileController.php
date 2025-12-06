@@ -69,4 +69,10 @@ class ProfileController extends Controller
     {
         return view('frontend.profile.profile_addresses');
     }
+
+    public function profileSeller()
+    {
+        $user = auth()->user();
+        return view('frontend.profile.profile_seller',compact('user'));
+    }
 }
