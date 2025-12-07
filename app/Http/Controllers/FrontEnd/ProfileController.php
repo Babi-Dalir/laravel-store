@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontEnd;
 
+use App\Helpers\FileManager;
 use App\Helpers\ImageManager;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
@@ -33,14 +34,15 @@ class ProfileController extends Controller
                 'bank_card_number' => $request->input('bank_card_number'),
                 'newsletter' => $request->input('newsletter')==='on'
             ]);
+            return redirect()->back()->with('message', "اطلاعات شما با موفقیت ویرایش شد");
         }else{
             $user->userProfile()->create([
                 'national_code' => $request->input('national_code'),
                 'bank_card_number' => $request->input('bank_card_number'),
                 'newsletter' => $request->input('newsletter')==='on'
             ]);
+            return redirect()->back()->with('message', "اطلاعات شما با موفقیت ثبت شد");
         }
-        return redirect()->back()->with('message', "اطلاعات شما با موفقیت ویرایش شد");
     }
 
     public function profileOrders()
@@ -74,5 +76,26 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         return view('frontend.profile.profile_seller',compact('user'));
+    }
+
+    public function profileStoreSeller(Request $request)
+    {
+        $user = auth()->user();
+        $contract = FileManager::saveContract($request->contract,$request->input('company_name'));
+        if ($user->seller){
+            $user->seller()->update([
+                'company_name' => $request->input('company_name'),
+                'company_economy_code' => $request->input('company_economy_code'),
+                'contract' => $contract
+            ]);
+            return redirect()->back()->with('message', "اطلاعات شرکت شما با موفقیت ویرایش شد");
+        }else{
+            $user->seller()->create([
+                'company_name' => $request->input('company_name'),
+                'company_economy_code' => $request->input('company_economy_code'),
+                'contract' => $contract
+            ]);
+            return redirect()->back()->with('message', "اطلاعات شرکت شما با موفقیت ثبت شد");
+        }
     }
 }

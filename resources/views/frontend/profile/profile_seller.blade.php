@@ -34,7 +34,7 @@
                                                 </div>
                                                 <div class="form-row">
                                                     <input type="text" class="input-ui pr-2" name="company_name"
-                                                           placeholder="نام شرکت خود را وارد نمایید" value="{{$user->seller->company_name}}">
+                                                           placeholder="نام شرکت خود را وارد نمایید" value="{{$user->seller->company_name ?? ""}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
@@ -44,12 +44,23 @@
                                                 <div class="form-row">
                                                     <input type="text" class="input-ui pr-2" name="company_economy_code"
                                                            placeholder=" شماره اقتصادی شرکت خود را وارد نمایید"
-                                                           value="{{$user->seller->company_economy_code}}">
+                                                           value="{{$user->seller->company_economy_code ?? ""}}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <div class="form-row-title">
-                                                    <h3>وضعیت</h3>
+                                                    <h3>
+                                                        وضعیت :
+                                                        @if($user->seller)
+                                                            @if($user->seller->status == \App\Enums\CompanyStatus::Request->value)
+                                                                <label class="badge badge-info">درخواست اولیه</label>
+                                                            @elseif($user->seller->status == \App\Enums\CompanyStatus::Active->value)
+                                                                <label class="badge badge-success">پذیرفته شده</label>
+                                                            @else
+                                                                <label class="badge badge-danger">رد شده</label>
+                                                            @endif
+                                                        @endif
+                                                    </h3>
                                                 </div>
 
                                             </div>

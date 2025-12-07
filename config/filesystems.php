@@ -43,6 +43,12 @@ return [
             'visibility' => 'public',
             'report' => false,
         ],
+        'files' => [
+            'driver' => 'local',
+            'root' => public_path('files'),
+            'visibility' => 'public',
+            'report' => false,
+        ],
 
         'private' => [
             'driver' => 'local',
