@@ -60,6 +60,12 @@
                     <li><a href="{{route('cities.index')}}">لیست شهر ها</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#">فروشندگان</a>
+                <ul>
+                    <li><a href="{{route('seller.list')}}">لیست فروشندگان</a></li>
+                </ul>
+            </li>
         </ul>
 {{--        @hasanyrole('نویسنده')--}}
         <ul id="store">

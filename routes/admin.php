@@ -34,6 +34,8 @@ Route::resource('users', UserController::class);
 Route::get('create_user_role/{id}',[UserController::class,'createUserRole'])->name('create.user.role');
 Route::post('store_user_role/{id}',[UserController::class,'storeUserRole'])->name('store.user.role');
 
+Route::get('seller_list',[UserController::class,'sellerList'])->name('seller.list');
+
 //roles Route
 Route::resource('roles', RoleController::class);
 
