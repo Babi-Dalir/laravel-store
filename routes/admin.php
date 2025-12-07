@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\GiftCartController;
 use App\Http\Controllers\Admin\GuarantyController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PanelController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductPriceController;
 use App\Http\Controllers\Admin\PropertyGroupController;
@@ -38,6 +39,9 @@ Route::get('seller_list',[UserController::class,'sellerList'])->name('seller.lis
 
 //roles Route
 Route::resource('roles', RoleController::class);
+
+//permissions Route
+Route::resource('permissions', PermissionController::class);
 
 //categories Route
 Route::resource('categories', CategoryController::class);

@@ -47,6 +47,13 @@
                 </ul>
             </li>
             <li>
+                <a href="#">مجوز ها</a>
+                <ul>
+                    <li><a href="{{route('permissions.create')}}">ایجاد مجوز</a></li>
+                    <li><a href="{{route('permissions.index')}}">لیست مجوز ها</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="#">استان ها</a>
                 <ul>
                     <li><a href="{{route('provinces.create')}}">ایجاد استان</a></li>
