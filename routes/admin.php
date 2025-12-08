@@ -39,6 +39,8 @@ Route::get('seller_list',[UserController::class,'sellerList'])->name('seller.lis
 
 //roles Route
 Route::resource('roles', RoleController::class);
+Route::get('create_role_permission/{id}',[RoleController::class,'createRolePermission'])->name('create.role.permission');
+Route::post('store_role_permission/{id}',[RoleController::class,'storeRolePermission'])->name('store.role.permission');
 
 //permissions Route
 Route::resource('permissions', PermissionController::class);

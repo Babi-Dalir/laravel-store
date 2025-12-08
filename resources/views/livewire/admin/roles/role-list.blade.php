@@ -11,6 +11,7 @@
         <tr>
             <th class="text-center align-middle text-primary">ردیف</th>
             <th class="text-center align-middle text-primary">عنوان نقش</th>
+            <th class="text-center align-middle text-primary">مجوزها</th>
             <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
@@ -21,6 +22,11 @@
             <tr>
                 <td class="text-center align-middle">{{$roles->firstItem()+$index}}</td>
                 <td class="text-center align-middle">{{$role->name}}</td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-dark" href="{{route('create.role.permission',$role->id)}}">
+                        مجوزها
+                    </a>
+                </td>
                 <td class="text-center align-middle">
                     <a class="btn btn-outline-info" href="{{route('roles.edit',$role->id)}}">
                         ویرایش
