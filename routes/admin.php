@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\DepotController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\GiftCartController;
@@ -28,19 +29,19 @@ use Illuminate\Support\Facades\Route;
 
 
 //Main Route
-Route::get('/',[PanelController::class, 'index'])->name('panel');
+Route::get('/', [PanelController::class, 'index'])->name('panel');
 
 //Users Route
 Route::resource('users', UserController::class);
-Route::get('create_user_role/{id}',[UserController::class,'createUserRole'])->name('create.user.role');
-Route::post('store_user_role/{id}',[UserController::class,'storeUserRole'])->name('store.user.role');
+Route::get('create_user_role/{id}', [UserController::class, 'createUserRole'])->name('create.user.role');
+Route::post('store_user_role/{id}', [UserController::class, 'storeUserRole'])->name('store.user.role');
 
-Route::get('seller_list',[UserController::class,'sellerList'])->name('seller.list');
+Route::get('seller_list', [UserController::class, 'sellerList'])->name('seller.list');
 
 //roles Route
 Route::resource('roles', RoleController::class);
-Route::get('create_role_permission/{id}',[RoleController::class,'createRolePermission'])->name('create.role.permission');
-Route::post('store_role_permission/{id}',[RoleController::class,'storeRolePermission'])->name('store.role.permission');
+Route::get('create_role_permission/{id}', [RoleController::class, 'createRolePermission'])->name('create.role.permission');
+Route::post('store_role_permission/{id}', [RoleController::class, 'storeRolePermission'])->name('store.role.permission');
 
 //permissions Route
 Route::resource('permissions', PermissionController::class);
@@ -66,26 +67,26 @@ Route::get('products_trashed', [ProductController::class, "trashed"])->name('pro
 Route::resource('guaranties', GuarantyController::class);
 
 //ProductPrice Route
-Route::get('product_prices/{id}', [ProductPriceController::class,'index'])->name('product.prices');
+Route::get('product_prices/{id}', [ProductPriceController::class, 'index'])->name('product.prices');
 
-Route::get('create_product_prices/{product_id}', [ProductPriceController::class,'create'])->name('create.product.prices');
+Route::get('create_product_prices/{product_id}', [ProductPriceController::class, 'create'])->name('create.product.prices');
 
-Route::post('store_product_prices/{product_id}', [ProductPriceController::class,'store'])->name('store.product.prices');
+Route::post('store_product_prices/{product_id}', [ProductPriceController::class, 'store'])->name('store.product.prices');
 
-Route::get('edit_product_prices/{id}/{product_id}', [ProductPriceController::class,'edit'])->name('edit.product.prices');
+Route::get('edit_product_prices/{id}/{product_id}', [ProductPriceController::class, 'edit'])->name('edit.product.prices');
 
-Route::put('update_product_prices/{id}/{product_id}', [ProductPriceController::class,'update'])->name('update.product.prices');
+Route::put('update_product_prices/{id}/{product_id}', [ProductPriceController::class, 'update'])->name('update.product.prices');
 
 // Gallery Route
-Route::get('add_product_galleries/{id}', [ProductController::class,'addGallery'])->name('add.product.gallery');
+Route::get('add_product_galleries/{id}', [ProductController::class, 'addGallery'])->name('add.product.gallery');
 
-Route::post('store_product_galleries/{id}', [ProductController::class,'storeGallery'])->name('store.product.gallery');
+Route::post('store_product_galleries/{id}', [ProductController::class, 'storeGallery'])->name('store.product.gallery');
 
 //PropertyGroup Route
 Route::resource('property_groups', PropertyGroupController::class);
 
 //Property Route
-Route::get('create_product_properties/{product}', [ProductController::class,'createProductProperty'])->name('create.product.properties');
+Route::get('create_product_properties/{product}', [ProductController::class, 'createProductProperty'])->name('create.product.properties');
 
 //Slider Route
 Route::resource('sliders', SliderController::class);
@@ -94,7 +95,7 @@ Route::resource('sliders', SliderController::class);
 Route::resource('banners', BannerController::class);
 
 //Comment Route
-Route::get('users_comments', [CommentController::class,'userComments'])->name('users.comments');
+Route::get('users_comments', [CommentController::class, 'userComments'])->name('users.comments');
 
 //Province Route
 Route::resource('provinces', ProvinceController::class);
@@ -112,20 +113,26 @@ Route::resource('gift_carts', GiftCartController::class);
 Route::post('upload_image_ckeditor', [GalleryController::class, 'ckeditorImage'])->name('ckeditor.upload');
 
 //Review Route
-Route::get('reviews/{id}', [ReviewController::class,'index'])->name('product.reviews');
+Route::get('reviews/{id}', [ReviewController::class, 'index'])->name('product.reviews');
 
-Route::get('create_reviews/{product_id}', [ReviewController::class,'create'])->name('create.product.reviews');
+Route::get('create_reviews/{product_id}', [ReviewController::class, 'create'])->name('create.product.reviews');
 
-Route::post('store_reviews/{product_id}', [ReviewController::class,'store'])->name('store.product.reviews');
+Route::post('store_reviews/{product_id}', [ReviewController::class, 'store'])->name('store.product.reviews');
 
-Route::get('edit_reviews/{id}/{product_id}', [ReviewController::class,'edit'])->name('edit.product.reviews');
+Route::get('edit_reviews/{id}/{product_id}', [ReviewController::class, 'edit'])->name('edit.product.reviews');
 
-Route::put('update_reviews/{id}/{product_id}', [ReviewController::class,'update'])->name('update.product.reviews');
+Route::put('update_reviews/{id}/{product_id}', [ReviewController::class, 'update'])->name('update.product.reviews');
 
 //Questions Route
-Route::get('users_questions', [QuestionController::class,'userQuestions'])->name('users.questions');
+Route::get('users_questions', [QuestionController::class, 'userQuestions'])->name('users.questions');
 
 //Order Route
-Route::get('order_list', [OrderController::class,'orders'])->name('admin.orders.list');
-Route::get('order_detail_list/{order}', [OrderController::class,'orderDetails'])->name('admin.order.details.list');
+//Route::group(['middleware' => ['can:لیست سفارشات']], function () {
+Route::get('order_list', [OrderController::class, 'orders'])->name('admin.orders.list');
+//});
+
+Route::get('order_detail_list/{order}', [OrderController::class, 'orderDetails'])->name('admin.order.details.list');
+
+//Depot Route
+Route::resource('depots', DepotController::class);
 

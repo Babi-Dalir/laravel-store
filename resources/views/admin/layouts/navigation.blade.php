@@ -74,7 +74,7 @@
                 </ul>
             </li>
         </ul>
-{{--        @hasanyrole('نویسنده')--}}
+        {{--        @hasanyrole('نویسنده')--}}
         <ul id="store">
             <li>
                 <a href="#">دسته بندی ها</a>
@@ -166,7 +166,7 @@
                 </ul>
             </li>
         </ul>
-{{--        @endhasanyrole--}}
+        {{--        @endhasanyrole--}}
         <ul id="orders">
             <li>
                 <a href="#">سفارشات</a>
