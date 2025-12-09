@@ -16,15 +16,15 @@
                     <i class="icon ti-shopping-cart"></i>
                 </a>
             </li>
-        </ul>
-        <ul>
-            <li data-toggle="tooltip" title="ویرایش پروفایل">
-                <a href="#" class="go-to-page">
-                    <i class="icon ti-settings"></i>
+            <li data-toggle="tooltip" title="انبار">
+                <a href="#depots" title=" انبار">
+                    <i class="icon ti-truck"></i>
                 </a>
             </li>
+        </ul>
+        <ul>
             <li data-toggle="tooltip" title="خروج">
-                <a href="login.html" class="go-to-page">
+                <a href="{{route('logout')}}" class="go-to-page">
                     <i class="icon ti-power-off"></i>
                 </a>
             </li>
@@ -172,6 +172,15 @@
                 <a href="#">سفارشات</a>
                 <ul>
                     <li><a href="{{route('admin.orders.list')}}">لیست سفارشات</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul id="depots">
+            <li>
+                <a href="#">انبار</a>
+                <ul>
+                    <li><a href="{{route('depots.create')}}">ایجاد انبار</a></li>
+                    <li><a href="{{route('depots.index')}}">لیست انبار</a></li>
                 </ul>
             </li>
         </ul>
