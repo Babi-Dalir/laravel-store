@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Depots;
 
+use App\Models\DepotProduct;
 use App\Models\Product;
 use App\Models\ProductPrice;
 use Livewire\Attributes\On;
@@ -11,10 +12,11 @@ use Livewire\WithPagination;
 class ProductList extends Component
 {
     use WithPagination;
+
     public $depot_id;
 
     protected $paginationTheme = 'bootstrap';
-    public $search;
+    public $search, $search_depot;
 
     public function searchData()
     {
@@ -23,8 +25,19 @@ class ProductList extends Component
 
     public function render()
     {
+        $depot_products = DepotProduct::query()
+            ->where('depot_id', $this->depot_id)
+            ->whereHas('productPrice', function ($q) {
+                $q->whereHas('product', function ($q) {
+                    $q->where('name', 'like', '%' . $this->search_depot . '%');
+                });
+            })
+            ->paginate(5);
         $product_prices = ProductPrice::query()
-            ->paginate(10);
-        return view('livewire.admin.depots.product-list', compact('product_prices'));
+            ->whereHas('product', function ($q) {
+                $q->where('name', 'like', '%' . $this->search . '%');
+            })
+            ->paginate(5);
+        return view('livewire.admin.depots.product-list', compact('product_prices','depot_products'));
     }
 }

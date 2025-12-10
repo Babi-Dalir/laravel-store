@@ -11,4 +11,13 @@ class DepotProduct extends Model
         'product_price_id',
         'count',
     ];
+
+    public function depot()
+    {
+        return $this->belongsTo(Depot::class);
+    }
+    public function productPrice()
+    {
+        return $this->belongsTo(ProductPrice::class);
+    }
 }
