@@ -18,6 +18,15 @@ class ProductList extends Component
     protected $paginationTheme = 'bootstrap';
     public $search, $search_depot;
 
+    public function addDepot($product_price_id,$product_price_count,$depot_id)
+    {
+        DepotProduct::query()->create([
+            'depot_id'=>$depot_id,
+            'product_price_id'=>$product_price_id,
+            'count'=>$product_price_count,
+        ]);
+        session()->flash('message','محصول با موفقیت به انبار اضافه شد');
+    }
     public function searchData()
     {
         $this->resetPage();
@@ -33,7 +42,8 @@ class ProductList extends Component
                 });
             })
             ->paginate(5);
-        $product_prices = ProductPrice::query()
+        $exist_depot_product = DepotProduct::query()->select('product_price_id')->get()->toArray();
+        $product_prices = ProductPrice::query()->whereNotIn('id',$exist_depot_product)
             ->whereHas('product', function ($q) {
                 $q->where('name', 'like', '%' . $this->search . '%');
             })

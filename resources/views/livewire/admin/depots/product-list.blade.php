@@ -6,6 +6,13 @@
                 <input type="text" @keyup.enter="$wire.searchData" class="form-control text-left" dir="rtl" wire:model="search_depot">
             </div>
         </div>
+        <div class="row">
+            @if(session()->has('message'))
+                <div class="alert alert-success">
+                    <div>{{session('message')}}</div>
+                </div>
+            @endif
+        </div>
         <table class="table table-striped table-hover">
             <thead class="thead-light">
             <tr>
@@ -67,7 +74,7 @@
                     <td class="text-center align-middle">{{$product_price->guaranty->name}}</td>
                     <td class="text-center align-middle">{{$product_price->count}}</td>
                     <td class="text-center align-middle">{{$product_price->color->name}}</td>
-                    <td class="text-center align-middle">
+                    <td class="text-center align-middle" wire:click="addDepot({{$product_price->id}},{{$product_price->count}},{{$depot_id}})">
                         <a class="btn btn-outline-info">
                             افزودن به انبار
                         </a>
