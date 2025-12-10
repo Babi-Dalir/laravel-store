@@ -11,6 +11,7 @@
             <th class="text-center align-middle text-primary">ردیف</th>
             <th class="text-center align-middle text-primary">نام انبار</th>
             <th class="text-center align-middle text-primary"> وضعیت</th>
+            <th class="text-center align-middle text-primary">لیست محصولات</th>
             <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
@@ -28,6 +29,11 @@
                         <span class="cursor-pointer badge badge-warning">غیر فعال</span>
                     @endif
 
+                </td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-dark" href="{{route('add.product.in.depot',$depot->id)}}">
+                        لیست محصولات
+                    </a>
                 </td>
                 <td class="text-center align-middle">
                     <a class="btn btn-outline-info" href="{{route('depots.edit',$depot->id)}}">

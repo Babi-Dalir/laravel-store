@@ -135,4 +135,5 @@ Route::get('order_detail_list/{order}', [OrderController::class, 'orderDetails']
 
 //Depot Route
 Route::resource('depots', DepotController::class);
+Route::get('add_product_in_depot/{depot_id}', [DepotController::class, 'addProductInDepot'])->name('add.product.in.depot');
 

@@ -71,4 +71,10 @@ class DepotController extends Controller
     {
         //
     }
+
+    public function addProductInDepot($depot_id)
+    {
+        $title = "افزودن محصول";
+        return view('admin.depots.add_product',compact('title','depot_id'));
+    }
 }
