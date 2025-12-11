@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Admin\Depots;
 
+use App\Enums\DepotType;
+use App\Models\DepotControl;
 use App\Models\DepotProduct;
 use App\Models\Product;
 use App\Models\ProductPrice;
@@ -25,7 +27,28 @@ class ProductList extends Component
             'product_price_id'=>$product_price_id,
             'count'=>$product_price_count,
         ]);
-        session()->flash('message','محصول با موفقیت به انبار اضافه شد');
+        DepotControl::query()->create([
+            'user_id'=>auth()->user()->id,
+            'depot_id'=>$depot_id,
+            'product_price_id'=>$product_price_id,
+            'count'=>$product_price_count,
+            'event_type'=>DepotType::AddDepot->value,
+        ]);
+        session()->flash('messageAdd','محصول با موفقیت به انبار اضافه شد');
+    }
+
+    public function deleteDepot($depot_product_id)
+    {
+        $depot_product = DepotProduct::query()->find($depot_product_id);
+        DepotControl::query()->create([
+            'user_id'=>auth()->user()->id,
+            'depot_id'=>$depot_product->depot_id,
+            'product_price_id'=>$depot_product->product_price_id,
+            'count'=>$depot_product->count,
+            'event_type'=>DepotType::DeleteDepot->value,
+        ]);
+        $depot_product->delete();
+        session()->flash('messageDelete','محصول با موفقیت از انبار حذف شد');
     }
     public function searchData()
     {

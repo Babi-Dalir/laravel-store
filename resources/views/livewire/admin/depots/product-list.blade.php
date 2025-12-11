@@ -7,9 +7,16 @@
             </div>
         </div>
         <div class="row">
-            @if(session()->has('message'))
+            @if(session()->has('messageAdd'))
                 <div class="alert alert-success">
-                    <div>{{session('message')}}</div>
+                    <div>{{session('messageAdd')}}</div>
+                </div>
+            @endif
+        </div>
+        <div class="row">
+            @if(session()->has('messageDelete'))
+                <div class="alert alert-danger">
+                    <div>{{session('messageDelete')}}</div>
                 </div>
             @endif
         </div>
@@ -34,7 +41,7 @@
                     <td class="text-center align-middle">{{$depot_product->count}}</td>
                     <td class="text-center align-middle">{{$depot_product->productPrice->color->name}}</td>
                     <td class="text-center align-middle">
-                        <a class="btn btn-outline-danger">
+                        <a class="btn btn-outline-danger" wire:click="deleteDepot({{$depot_product->id}})">
                             حذف از انبار
                         </a>
                     </td>
