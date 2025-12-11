@@ -29,6 +29,7 @@
                 <th class="text-center align-middle text-primary">تعداد</th>
                 <th class="text-center align-middle text-primary">رنگ ها</th>
                 <th class="text-center align-middle text-primary">حذف از انبار</th>
+                <th class="text-center align-middle text-primary">ورود یا خروج</th>
                 <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
             </tr>
             </thead>
@@ -43,6 +44,11 @@
                     <td class="text-center align-middle">
                         <a class="btn btn-outline-danger" wire:click="deleteDepot({{$depot_product->id}})">
                             حذف از انبار
+                        </a>
+                    </td>
+                    <td class="text-center align-middle" wire:click="$dispatch('addOrOutDepot',{'product_price_id':{{$depot_product->productPrice->id}},'depot_id':{{$depot_id}}})">
+                        <a class="btn btn-outline-success" data-toggle="modal" data-target="#ModalCenter">
+                            ورود <=> خروج => محصول
                         </a>
                     </td>
                     <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($depot_product->created_at)->format('%d%B، %Y')}}</td>
@@ -95,6 +101,8 @@
             {{$product_prices->appends(Request::except('page'))->links()}}
         </div>
     </div>
-</div>
 
+    <livewire:admin.depots.add-or-out-depot-modal/>
+
+</div>
 
