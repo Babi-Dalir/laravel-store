@@ -19,6 +19,11 @@ class ProductList extends Component
 
     protected $paginationTheme = 'bootstrap';
     public $search, $search_depot;
+    #[On('refreshDepotList')]
+    public function refreshDepotList()
+    {
+        $this->dispatch('$refresh');
+    }
 
     public function addDepot($product_price_id,$product_price_count,$depot_id)
     {
