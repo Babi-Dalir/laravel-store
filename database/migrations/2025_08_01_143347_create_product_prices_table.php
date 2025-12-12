@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('discount')->default(0);
             $table->integer('count')->default(0);
             $table->integer('max_sell')->nullable();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('color_id')->constrained('colors');
             $table->foreignId('guaranty_id')->constrained('guaranties');

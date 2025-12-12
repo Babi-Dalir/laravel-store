@@ -29,6 +29,7 @@ class Product extends Model
         'status',
         'category_id',
         'brand_id',
+        'user_id',
 
     ];
 
@@ -94,6 +95,10 @@ class Product extends Model
     public function approvedComments()
     {
         return $this->morphMany(Comment::class, 'commentable')->where('status',CommentStatus::Approved->value);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
     public static function createProduct($request)
     {

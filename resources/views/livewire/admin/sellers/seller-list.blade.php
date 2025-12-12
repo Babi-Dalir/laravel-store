@@ -11,6 +11,7 @@
             <th class="text-center align-middle text-primary">ردیف</th>
             <th class="text-center align-middle text-primary">نام شرکت</th>
             <th class="text-center align-middle text-primary">شماره اقتصادی</th>
+            <th class="text-center align-middle text-primary">نقش های کاربر</th>
             <th class="text-center align-middle text-primary"> وضعیت</th>
             <th class="text-center align-middle text-primary">قرارداد</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
@@ -22,6 +23,11 @@
                 <td class="text-center align-middle">{{$sellers->firstItem()+$index}}</td>
                 <td class="text-center align-middle">{{$seller->company_name}}</td>
                 <td class="text-center align-middle">{{$seller->company_economy_code}}</td>
+                <td class="text-center align-middle">
+                    <a class="btn btn-outline-info" href="{{route('create.user.role',$seller->user->id)}}">
+                        نقش های کاربر
+                    </a>
+                </td>
                 <td class="text-center align-middle" wire:click="changeStatus({{$seller->id}})">
                     @if($seller->status === \App\Enums\CompanyStatus::Active->value)
                         <span class="cursor-pointer badge badge-success">پذیرفته شده</span>

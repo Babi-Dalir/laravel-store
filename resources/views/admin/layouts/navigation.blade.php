@@ -1,26 +1,41 @@
 <div class="navigation">
     <div class="navigation-icon-menu">
         <ul>
+            @hasanyrole('مدیر کاربران|مدیر کل')
             <li data-toggle="tooltip" title="کاربران">
                 <a href="#users" title=" کاربران">
                     <i class="icon ti-user"></i>
                 </a>
             </li>
+            @endhasanyrole
+            @hasanyrole('مدیر فروش|مدیر کل')
             <li data-toggle="tooltip" title="فروشگاه">
                 <a href="#store" title=" فروشگاه">
                     <i class="icon ti-folder"></i>
                 </a>
             </li>
+            @endhasanyrole
+            @hasanyrole('مدیر سفارشات|مدیر کل')
             <li data-toggle="tooltip" title="سفارشات">
                 <a href="#orders" title=" سفارشات">
                     <i class="icon ti-shopping-cart"></i>
                 </a>
             </li>
+            @endhasanyrole
+            @hasanyrole('مدیر انبار|مدیر کل')
             <li data-toggle="tooltip" title="انبار">
                 <a href="#depots" title=" انبار">
                     <i class="icon ti-truck"></i>
                 </a>
             </li>
+            @endhasanyrole
+            @hasanyrole('فروشنده')
+            <li data-toggle="tooltip" title="پنل فروشنده">
+                <a href="#seller" title=" پنل فروشنده">
+                    <i class="icon ti-panel"></i>
+                </a>
+            </li>
+            @endhasanyrole
         </ul>
         <ul>
             <li data-toggle="tooltip" title="خروج">
@@ -31,6 +46,7 @@
         </ul>
     </div>
     <div class="navigation-menu-body">
+        @hasanyrole('مدیر کاربران|مدیر کل')
         <ul id="users">
             <li>
                 <a href="#">کاربران</a>
@@ -74,7 +90,8 @@
                 </ul>
             </li>
         </ul>
-        {{--        @hasanyrole('نویسنده')--}}
+        @endhasanyrole
+        @hasanyrole('مدیر فروش|مدیر کل')
         <ul id="store">
             <li>
                 <a href="#">دسته بندی ها</a>
@@ -166,7 +183,8 @@
                 </ul>
             </li>
         </ul>
-        {{--        @endhasanyrole--}}
+        @endhasanyrole
+        @hasanyrole('مدیر سفارشات|مدیر کل')
         <ul id="orders">
             <li>
                 <a href="#">سفارشات</a>
@@ -175,6 +193,8 @@
                 </ul>
             </li>
         </ul>
+        @endhasanyrole
+        @hasanyrole('مدیر انبار|مدیر کل')
         <ul id="depots">
             <li>
                 <a href="#">انبار</a>
@@ -184,5 +204,17 @@
                 </ul>
             </li>
         </ul>
+        @endhasanyrole
+        @hasanyrole('فروشنده')
+        <ul id="seller">
+            <li>
+                <a href="#">محصولات</a>
+                <ul>
+                    <li><a href="{{route('products.create')}}">ایجاد محصول</a></li>
+                    <li><a href="{{route('products.index')}}">لیست محصولات</a></li>
+                </ul>
+            </li>
+        </ul>
+        @endhasanyrole
     </div>
 </div>

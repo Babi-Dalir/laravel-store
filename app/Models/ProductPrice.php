@@ -14,6 +14,7 @@ class ProductPrice extends Model
         'discount',
         'count',
         'max_sell',
+        'user_id',
         'product_id',
         'color_id',
         'guaranty_id',
@@ -35,6 +36,10 @@ class ProductPrice extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public static function createProductPrice($request, $product_id)
