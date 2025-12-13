@@ -28,6 +28,7 @@ class ProductPriceRequest extends FormRequest
                 Rule::unique('product_prices','product_id')
                 ->where('guaranty_id',$this->input('guaranty_id'))
                 ->where('color_id',$this->input('color_id'))
+                ->where('user_id',auth()->user()->id)
             ]
         ];
     }

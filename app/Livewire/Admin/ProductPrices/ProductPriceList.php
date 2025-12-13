@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\ProductPrices;
 
+use App\Enums\ProductStatus;
 use App\Helpers\DateManager;
 use App\Models\Product;
 use App\Models\ProductPrice;
@@ -60,6 +61,31 @@ class ProductPriceList extends Component
             $product->colors()->sync($colors);
         }
     }
+    public function changeStatus($product_price_id)
+    {
+        $product_price = ProductPrice::query()->find($product_price_id);
+        if ($product_price->status == ProductStatus::Waiting->value){
+            $product_price->update([
+                'status'=>ProductStatus::Active->value
+            ]);
+        }elseif ($product_price->status == ProductStatus::Active->value){
+            $product_price->update([
+                'status'=>ProductStatus::InActive->value
+            ]);
+        }elseif ($product_price->status == ProductStatus::InActive->value){
+            $product_price->update([
+                'status'=>ProductStatus::StopProduction->value
+            ]);
+        }elseif ($product_price->status == ProductStatus::StopProduction->value){
+            $product_price->update([
+                'status'=>ProductStatus::Rejected->value
+            ]);
+        }elseif ($product_price->status == ProductStatus::Rejected->value){
+            $product_price->update([
+                'status'=>ProductStatus::Waiting->value
+            ]);
+        }
+    }
 
     public function searchData()
     {
@@ -69,8 +95,17 @@ class ProductPriceList extends Component
     public function render()
     {
         $product_id = $this->product_id;
-        $product_prices = ProductPrice::query()->where('product_id', $this->product_id)
-            ->paginate(10);
+
+        if (auth()->user()->is_admin){
+            $product_prices = ProductPrice::query()->where('product_id', $this->product_id)
+                ->paginate(10);
+        }else{
+            $product_prices = ProductPrice::query()
+                ->where('product_id', $this->product_id)
+                ->where('user_id', auth()->user()->id)
+                ->paginate(10);
+        }
+
         return view('livewire.admin.product-prices.product-price-list', compact('product_prices', 'product_id'));
     }
 }

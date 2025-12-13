@@ -22,6 +22,7 @@
             <th class="text-center align-middle text-primary">نهایت فروش</th>
             <th class="text-center align-middle text-primary">رنگ ها</th>
             <th class="text-center align-middle text-primary">فروش ویژه</th>
+            <th class="text-center align-middle text-primary">وضعیت</th>
             <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
@@ -43,6 +44,20 @@
                         <span class="cursor-pointer badge badge-light">فروش عادی</span>
                     @else
                         <span class="cursor-pointer badge badge-danger">فروش شگفت انگیز</span>
+                    @endif
+
+                </td>
+                <td class="text-center align-middle" @if(auth()->user()->is_admin) wire:click="changeStatus({{$product_price->id}})" @endif>
+                    @if($product_price->status === \App\Enums\ProductStatus::Active->value)
+                        <span class="cursor-pointer badge badge-success">تایید شده</span>
+                    @elseif($product_price->status === \App\Enums\ProductStatus::InActive->value)
+                        <span class="cursor-pointer badge badge-danger">رد شده</span>
+                    @elseif($product_price->status === \App\Enums\ProductStatus::Waiting->value)
+                        <span class="cursor-pointer badge badge-warning">در حال بررسی</span>
+                    @elseif($product_price->status === \App\Enums\ProductStatus::StopProduction->value)
+                        <span class="cursor-pointer badge badge-secondary">توقف تولید</span>
+                    @elseif($product_price->status === \App\Enums\ProductStatus::Rejected->value)
+                        <span class="cursor-pointer badge badge-danger">غیر مجاز</span>
                     @endif
 
                 </td>
