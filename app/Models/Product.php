@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use SoftDeletes;
+
     protected $fillable = [
         'name',
         'e_name',
@@ -37,6 +38,7 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
     public function brand()
     {
         return $this->belongsTo(Brand::class);
@@ -49,7 +51,7 @@ class Product extends Model
 
     public function tags()
     {
-        return $this->morphToMany(Tag::class,'taggable');
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     public function properties()
@@ -61,10 +63,12 @@ class Product extends Model
     {
         return $this->belongsToMany(PropertyGroup::class, 'product_property_group');
     }
+
     public function productPrices()
     {
         return $this->hasMany(ProductPrice::class);
     }
+
     public function galleries()
     {
         return $this->hasMany(Gallery::class);
@@ -79,14 +83,17 @@ class Product extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
     public function reviews()
     {
         return $this->hasMany(Review::class);
     }
+
     public function productStars()
     {
         return $this->hasMany(ProductStar::class);
     }
+
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
@@ -94,37 +101,41 @@ class Product extends Model
 
     public function approvedComments()
     {
-        return $this->morphMany(Comment::class, 'commentable')->where('status',CommentStatus::Approved->value);
+        return $this->morphMany(Comment::class, 'commentable')->where('status', CommentStatus::Approved->value);
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public static function createProduct($request)
     {
         $product = Product::query()->create([
-            'name'=>$request->input('name'),
-            'e_name'=>$request->input('e_name'),
-            'slug'=>str()->slug($request->e_name),
-            'description'=>$request->input('description'),
-            'category_id'=>$request->input('category_id'),
-            'brand_id'=>$request->input('brand_id'),
-            'image'=>ImageManager::saveImage('products',$request->image),
+            'user_id' => auth()->user()->id,
+            'name' => $request->input('name'),
+            'e_name' => $request->input('e_name'),
+            'slug' => str()->slug($request->e_name),
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'brand_id' => $request->input('brand_id'),
+            'image' => ImageManager::saveImage('products', $request->image),
         ]);
         $product->tags()->attach($request->tags);
     }
 
-    public static function updateProduct($request,$id)
+    public static function updateProduct($request, $id)
     {
         $product = Product::query()->find($id);
-            $product->update([
-            'name'=>$request->input('name'),
-            'e_name'=>$request->input('e_name'),
-            'slug'=>str()->slug($request->e_name),
-            'description'=>$request->input('description'),
-            'category_id'=>$request->input('category_id'),
-            'brand_id'=>$request->input('brand_id'),
-            'image'=>$request->image ? ImageManager::saveImage('products',$request->image) : $product->image,
+        $product->update([
+            'user_id' => auth()->user()->id,
+            'name' => $request->input('name'),
+            'e_name' => $request->input('e_name'),
+            'slug' => str()->slug($request->e_name),
+            'description' => $request->input('description'),
+            'category_id' => $request->input('category_id'),
+            'brand_id' => $request->input('brand_id'),
+            'image' => $request->image ? ImageManager::saveImage('products', $request->image) : $product->image,
         ]);
         $product->tags()->sync($request->tags);
     }

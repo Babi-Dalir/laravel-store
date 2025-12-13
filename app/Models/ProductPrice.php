@@ -50,6 +50,7 @@ class ProductPrice extends Model
         $price = ($request->input('main_price')) - (($request->input('main_price') * $request->input('discount')) / 100);
 
         ProductPrice::query()->create([
+            'user_id'=>auth()->user()->id,
             'main_price' => $request->input('main_price'),
             'discount' => $request->input('discount'),
             'price' => $price,
@@ -87,6 +88,7 @@ class ProductPrice extends Model
 
         $product_price = ProductPrice::query()->find($id);
         $product_price->update([
+            'user_id'=>auth()->user()->id,
             'main_price' => $request->input('main_price'),
             'discount' => $request->input('discount'),
             'price' => $price,
@@ -121,6 +123,7 @@ class ProductPrice extends Model
     public static function getUpdateProduct($product, float|int $price, $request): void
     {
         $product->update([
+            'user_id'=>auth()->user()->id,
             'price' => $price,
             'discount' => $request->input('discount'),
             'count' => $request->input('count'),

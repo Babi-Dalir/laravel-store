@@ -25,6 +25,7 @@
             <th class="text-center align-middle text-primary">ردیف</th>
             <th class="text-center align-middle text-primary">عکس</th>
             <th class="text-center align-middle text-primary">نام محصول</th>
+            <th class="text-center align-middle text-primary">نام شرکت</th>
             <th class="text-center align-middle text-primary">دسته بندی</th>
             <th class="text-center align-middle text-primary">برند</th>
             <th class="text-center align-middle text-primary">ویژگی های محصول</th>
@@ -32,6 +33,7 @@
             <th class="text-center align-middle text-primary">گالری</th>
             @if(auth()->user()->is_admin)
             <th class="text-center align-middle text-primary">نقد وبررسی</th>
+            <th class="text-center align-middle text-primary">وضعیت</th>
             @endif
             <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
@@ -48,6 +50,7 @@
                     </figure>
                 </td>
                 <td class="text-center align-middle">{{$product->name}}</td>
+                <td class="text-center align-middle">{{$product->user->seller?->company_name}}</td>
                 <td class="text-center align-middle">{{$product->category->name}}</td>
                 <td class="text-center align-middle">{{$product->brand->name}}</td>
                 <td class="text-center align-middle">
@@ -71,6 +74,20 @@
                         نقد وبررسی
                     </a>
                 </td>
+                    <td class="text-center align-middle" wire:click="changeStatus({{$product->id}})">
+                        @if($product->status === \App\Enums\ProductStatus::Active->value)
+                            <span class="cursor-pointer badge badge-success">تایید شده</span>
+                        @elseif($product->status === \App\Enums\ProductStatus::InActive->value)
+                            <span class="cursor-pointer badge badge-danger">رد شده</span>
+                        @elseif($product->status === \App\Enums\ProductStatus::Waiting->value)
+                            <span class="cursor-pointer badge badge-warning">در حال بررسی</span>
+                        @elseif($product->status === \App\Enums\ProductStatus::StopProduction->value)
+                            <span class="cursor-pointer badge badge-secondary">توقف تولید</span>
+                        @elseif($product->status === \App\Enums\ProductStatus::Rejected->value)
+                            <span class="cursor-pointer badge badge-danger">غیر مجاز</span>
+                        @endif
+
+                    </td>
                 @endif
                 <td class="text-center align-middle">
                     @if(auth()->user()->id == $product->user->id)
