@@ -4,11 +4,20 @@
         <div class="col-sm-8">
             <input type="text" @keyup.enter="$wire.searchData" class="form-control text-left" dir="rtl" wire:model="search">
         </div>
-        <div class="col-sm-2">
-            <a href="{{route('products.trashed')}}" class="btn btn-outline-warning">
-                <i class="ti-trash">لیست محصولات حذف شده</i>
-            </a>
-        </div>
+        @if(auth()->user()->is_admin)
+            <div class="col-sm-2">
+                <a href="{{route('products.trashed')}}" class="btn btn-outline-warning">
+                    <i class="ti-trash">لیست محصولات حذف شده</i>
+                </a>
+            </div>
+        @else
+            <div class="col-sm-2">
+                <a href="{{route('products.trashed')}}" class="btn btn-outline-secondary">
+                    <i class="ti-plus">ایجاد محصول</i>
+                </a>
+            </div>
+        @endif
+
     </div>
     <table class="table table-striped table-hover">
         <thead class="thead-light">
@@ -21,7 +30,9 @@
             <th class="text-center align-middle text-primary">ویژگی های محصول</th>
             <th class="text-center align-middle text-primary">تنوع قیمت</th>
             <th class="text-center align-middle text-primary">گالری</th>
+            @if(auth()->user()->is_admin)
             <th class="text-center align-middle text-primary">نقد وبررسی</th>
+            @endif
             <th class="text-center align-middle text-primary">ویرایش</th>
             <th class="text-center align-middle text-primary">حذف</th>
             <th class="text-center align-middle text-primary">تاریخ ایجاد</th>
@@ -54,20 +65,26 @@
                         گالری
                     </a>
                 </td>
+                @if(auth()->user()->is_admin)
                 <td class="text-center align-middle">
                     <a class="btn btn-outline-warning" href="{{route('product.reviews',$product->id)}}">
                         نقد وبررسی
                     </a>
                 </td>
+                @endif
                 <td class="text-center align-middle">
+                    @if(auth()->user()->id == $product->user->id)
                     <a class="btn btn-outline-info" href="{{route('products.edit',$product->id)}}">
                         ویرایش
                     </a>
+                    @endif
                 </td>
                 <td class="text-center align-middle">
+                    @if(auth()->user()->id == $product->user->id)
                     <a class="btn btn-outline-danger" wire:click="$dispatch('deleteProduct',{'id':{{$product->id}}})">
                         حذف
                     </a>
+                    @endif
                 </td>
                 <td class="text-center align-middle">{{\Hekmatinasser\Verta\Verta::instance($product->created_at)->format('%d%B، %Y')}}</td>
             </tr>
