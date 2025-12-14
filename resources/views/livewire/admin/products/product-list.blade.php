@@ -10,10 +10,15 @@
                     <i class="ti-trash">لیست محصولات حذف شده</i>
                 </a>
             </div>
+            <div class="col-sm-2">
+                <a href="{{route('products.create')}}" class="btn btn-outline-secondary">
+                    <i class="ti-plus">ایجاد محصول</i>
+                </a>
+            </div>
         @else
             <div class="col-sm-2">
-                <a href="{{route('products.trashed')}}" class="btn btn-outline-secondary">
-                    <i class="ti-plus">ایجاد محصول</i>
+                <a href="{{route('create.seller.product')}}" class="btn btn-outline-secondary">
+                    <i class="ti-plus">ایجاد محصول توسط فروشنده</i>
                 </a>
             </div>
         @endif
