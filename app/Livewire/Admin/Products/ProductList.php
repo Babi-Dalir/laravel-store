@@ -53,10 +53,17 @@ class ProductList extends Component
     }
     public function render()
     {
-        $products = Product::query()
-            ->where('name','like','%'.$this->search.'%')
-            ->orWhere('e_name','like','%'.$this->search.'%')
-            ->paginate(10);
+        if (auth()->user()->is_admin){
+            $products = Product::query()
+                ->where('name','like','%'.$this->search.'%')
+                ->paginate(10);
+        }else{
+            $products = Product::query()
+                ->where('status',ProductStatus::Active->value)
+                ->where('name','like','%'.$this->search.'%')
+                ->paginate(10);
+        }
+
         return view('livewire.admin.products.product-list',compact('products'));
     }
 }

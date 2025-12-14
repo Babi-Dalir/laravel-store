@@ -33,9 +33,9 @@
                         <img src="{{url('images/products/small/'.$product_price->product->image)}}" class="rounded-circle" alt="image">
                     </figure>
                 </td>
-                <td class="text-center align-middle">{{$product_price->main_price}}</td>
+                <td class="text-center align-middle">{{number_format($product_price->main_price)}} تومان </td>
                 <td class="text-center align-middle">{{$product_price->discount}}</td>
-                <td class="text-center align-middle">{{$product_price->price}}</td>
+                <td class="text-center align-middle">{{number_format($product_price->price)}}تومان </td>
                 <td class="text-center align-middle">{{$product_price->guaranty->name}}</td>
                 <td class="text-center align-middle">{{$product_price->count}}</td>
                 <td class="text-center align-middle">{{$product_price->max_sell}}</td>

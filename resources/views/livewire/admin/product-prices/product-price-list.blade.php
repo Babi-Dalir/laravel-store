@@ -32,9 +32,9 @@
         @foreach($product_prices as $index=>$product_price)
             <tr>
                 <td class="text-center align-middle">{{$product_prices->firstItem()+$index}}</td>
-                <td class="text-center align-middle">{{$product_price->main_price}}</td>
+                <td class="text-center align-middle">{{number_format($product_price->main_price)}}تومان </td>
                 <td class="text-center align-middle">{{$product_price->discount}}</td>
-                <td class="text-center align-middle">{{$product_price->price}}</td>
+                <td class="text-center align-middle">{{number_format($product_price->price)}}تومان </td>
                 <td class="text-center align-middle">{{$product_price->guaranty->name}}</td>
                 <td class="text-center align-middle">{{$product_price->count}}</td>
                 <td class="text-center align-middle">{{$product_price->max_sell}}</td>
