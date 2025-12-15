@@ -29,7 +29,7 @@
                 </a>
             </li>
             @endhasanyrole
-            @hasanyrole('فروشنده')
+            @hasanyrole('فروشنده|مدیر کل')
             <li data-toggle="tooltip" title="پنل فروشنده">
                 <a href="#seller" title=" پنل فروشنده">
                     <i class="icon ti-panel"></i>
@@ -205,7 +205,7 @@
             </li>
         </ul>
         @endhasanyrole
-        @hasanyrole('فروشنده')
+        @hasanyrole('فروشنده|مدیر کل')
         <ul id="seller">
             <li>
                 <a href="#">محصولات</a>

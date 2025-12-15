@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\CommissionController;
 use App\Http\Controllers\Admin\DepotController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\GalleryController;
@@ -137,3 +138,5 @@ Route::get('order_detail_list/{order}', [OrderController::class, 'orderDetails']
 Route::resource('depots', DepotController::class);
 Route::get('add_product_in_depot/{depot_id}', [DepotController::class, 'addProductInDepot'])->name('add.product.in.depot');
 
+//commissions Route
+Route::resource('commissions', CommissionController::class);
