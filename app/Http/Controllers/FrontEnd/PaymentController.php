@@ -14,6 +14,7 @@ use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\ProductPrice;
 use App\Models\UserCart;
+use App\Models\UserTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -97,7 +98,7 @@ class PaymentController extends Controller
             DB::beginTransaction();
             try {
                 Order::successPayment($order, $order_details,$order->discount_code,$order->gif_cart_code);
-
+                UserTransaction::soldProductBySeller($order_details);
                 $result = "success";
                 DB::commit();
 
