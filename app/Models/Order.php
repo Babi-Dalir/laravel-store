@@ -51,6 +51,10 @@ class Order extends Model
     {
         return $this->belongsTo(PaymentType::class);
     }
+    public function userTransactions()
+    {
+        return $this->hasMany(UserTransaction::class);
+    }
 
     public static function createOrder($user, $address, $total_price, $shop_data, $discount_code_price, $gif_cart_code_price)
     {

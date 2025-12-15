@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDetail extends Model
 {
     protected $fillable = [
+        'seller_id',
         'order_id',
         'product_id',
         'color_id',
@@ -41,6 +42,7 @@ class OrderDetail extends Model
     public static function createOrderDetail($order,$cart,$product_price)
     {
         return OrderDetail::query()->create([
+            'seller_id'=>$product_price->user_id,
             'order_id'=>$order->id,
             'product_id'=>$cart->product_id,
             'color_id'=>$cart->color_id,

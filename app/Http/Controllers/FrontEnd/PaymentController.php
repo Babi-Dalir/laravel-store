@@ -97,6 +97,7 @@ class PaymentController extends Controller
             DB::beginTransaction();
             try {
                 Order::successPayment($order, $order_details,$order->discount_code,$order->gif_cart_code);
+
                 $result = "success";
                 DB::commit();
 
