@@ -5,14 +5,14 @@
         <div class="card">
             <div class="card-body">
                 <div class="container">
-                    <h6 class="card-title">ویرایش گروه ویژگی</h6>
-                    <form method="POST" action="{{route('property_groups.update',$property_group->id)}}" enctype="multipart/form-data">
+                    <h6 class="card-title">ویرایش کمیسیون</h6>
+                    <form method="POST" action="{{route('commissions.update',$commission->id)}}" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <div class="form-group row">
-                            <label  class="col-sm-2 col-form-label">عنوان گروه ویژگی</label>
+                            <label  class="col-sm-2 col-form-label">درصد کمیسیون</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control text-left" dir="rtl" name="name" value="{{$property_group->name}}">
+                                <input type="text" class="form-control text-left" dir="rtl" name="commission_percent" value="{{$commission->commission_percent}}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -20,7 +20,7 @@
                             <div class="col-sm-10">
                                 <select name="category_id" class="form-select">
                                     @foreach($categories as $key => $value)
-                                        @if($property_group->category_id == $key)
+                                        @if($commission->category_id == $key)
                                             <option selected value="{{$key}}">{{$value}}</option>
                                         @else
                                             <option value="{{$key}}">{{$value}}</option>

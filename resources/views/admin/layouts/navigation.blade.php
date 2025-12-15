@@ -94,6 +94,13 @@
         @hasanyrole('مدیر فروش|مدیر کل')
         <ul id="store">
             <li>
+                <a href="#">کمیسیون ها</a>
+                <ul>
+                    <li><a href="{{route('categories.create')}}">ایجاد کمیسیون</a></li>
+                    <li><a href="{{route('categories.index')}}">لیست کمیسیون ها</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="#">دسته بندی ها</a>
                 <ul>
                     <li><a href="{{route('categories.create')}}">ایجاد دسته بندی</a></li>

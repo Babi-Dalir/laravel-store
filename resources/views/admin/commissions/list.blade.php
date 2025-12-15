@@ -11,7 +11,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <livewire:admin.property-groups.property-group-list/>
+                <livewire:admin.commissions.commission-list/>
             </div>
         </div>
     </main>
