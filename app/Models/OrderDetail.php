@@ -57,8 +57,8 @@ class OrderDetail extends Model
 
     public static function calculateMoneyForCommission($order_detail)
     {
-        if ($order_detail->product->category->commissions){
-            return $order_detail->price - ((($order_detail->product->category->commissions->commission_percent) * $order_detail->price) / 100);
+        if ($order_detail->product->category->commission){
+            return $order_detail->price - ((($order_detail->product->category->commission->commission_percent) * $order_detail->price) / 100);
         }else{
             return $order_detail->price;
         }

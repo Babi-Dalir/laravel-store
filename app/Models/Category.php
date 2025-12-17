@@ -35,9 +35,9 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
-    public function commissions()
+    public function commission()
     {
-        return $this->hasMany(Commission::class);
+        return $this->hasOne(Commission::class);
     }
 
     public static function createCategory($request)
