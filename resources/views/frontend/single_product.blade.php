@@ -7,9 +7,9 @@
             <div class="title-breadcrumb-special dt-sl mb-3">
                 <div class="breadcrumb dt-sl">
                     <nav>
-                        <a href="#">موبایل</a>
-                        <a href="#">سامسونگ</a>
-                        <a href="#">مدل Galaxy A50 SM-A505F/DS</a>
+                        <a href="#">{{$product->category->parentCategory->name}}</a>
+                        <a href="#">{{$product->category->name}}</a>
+                        <a href="#">{{$product->name , $product->e_name}}</a>
                     </nav>
                 </div>
             </div>

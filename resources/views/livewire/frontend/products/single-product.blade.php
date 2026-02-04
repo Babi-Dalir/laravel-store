@@ -123,147 +123,11 @@
                         </div>
                     </div>
                     <div class="col-lg-6" wire:ignore.self>
-                        <div class="product-guaranteed" wire:ignore>
-                            <i class="fas fa-badge-check"></i>
-                            <p>بیش از ۴۳۰ نفر از خریداران این محصول را پیشنهاد داده‌اند</p>
-                        </div>
+
                         <div class="product-summary" wire:ignore.self>
                             <nav id="stack-menu" wire:ignore.self>
                                 <ul wire:ignore.self>
-                                    <li wire:ignore>
-                                        <a href="#" wire:ignore>
-                                            <div class="product-seller-row-main" wire:ignore>
-                                                <img src="./assets/img/seller-logo.png" alt="" wire:ignore>
-                                                <div class="product-seller-first-line" wire:ignore>
-                                                    فروشنده:
-                                                    <span class="product-seller-name">بابی شاپ</span>
-                                                </div>
-                                                <div class="product-seller-second-line">
-                                                    عملکرد:
-                                                    <span class="font-weight-bold">۵</span>
-                                                    از ۵
-                                                    <span>
-                                                                        <span class="u-divider"></span>
-                                                                        <span class="font-weight-bold">۸۶.۶٪</span>
-                                                                        رضایت از کالا
-                                                                    </span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <ul class="product-seller-box--shadowed">
-                                            <div class="product-info-box-body-wrapper">
-                                                <div class="product-info-box-body">
-                                                    <div class="product-info-box-row font-weight-bold">
-                                                        <span class="seller-name">بابی شاپ</span>
-                                                    </div>
-                                                    <div class="product-info-box-row">
-                                                        عملکرد
-                                                        <span
-                                                            class="font-weight-bold u-text-big">۵</span>
-                                                        از ۵
-                                                        <div class="product-info-box-feedbacks">
-                                                            <div class="product-feedback">
-                                                                <div
-                                                                    class="product-feedback-percent product-feedback-percent--green">
-                                                                    ۱۰۰٪
-                                                                </div>
-                                                                تامین به موقع
-                                                            </div>
-                                                            <div class="product-feedback">
-                                                                <div
-                                                                    class="product-feedback-percent product-feedback-percent--green">
-                                                                    ۱۰۰٪
-                                                                </div>
-                                                                تعهد ارسال
-                                                            </div>
-                                                            <div class="product-feedback">
-                                                                <div
-                                                                    class="product-feedback-percent product-feedback-percent--green">
-                                                                    ۹۹.۹٪
-                                                                </div>
-                                                                بدون مرجوعی
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-info-box-row">
-                                                                        <span
-                                                                            class="font-weight-bold u-text-big">۸۶.۶٪</span>
-                                                        رضایت از کالا
-                                                        <span class="text-secondary">
-                                                                            (<span>۲۱</span> نفر)
-                                                                        </span>
-                                                        <div class="product-info-box-v-feedbacks">
-                                                            <div class="product-v-feedback">
-                                                                <div class="product-v-feedback-label">
-                                                                    کاملا راضی
-                                                                </div>
-                                                                <div class="product-v-feedback-bar">
-                                                                    <div style="width: 52.38%;"
-                                                                         class="product-v-feedback-bar product-v-feedback-bar--very-green">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-v-feedback-percent">
-                                                                    ۵۲٪
-                                                                </div>
-                                                            </div>
-                                                            <div class="product-v-feedback">
-                                                                <div class="product-v-feedback-label">
-                                                                    راضی
-                                                                </div>
-                                                                <div class="product-v-feedback-bar">
-                                                                    <div style="width: 33.33%;"
-                                                                         class="product-v-feedback-bar product-v-feedback-bar--green">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-v-feedback-percent">
-                                                                    ۳۳٪
-                                                                </div>
-                                                            </div>
-                                                            <div class="product-v-feedback">
-                                                                <div class="product-v-feedback-label">
-                                                                    نظری ندارم
-                                                                </div>
-                                                                <div class="product-v-feedback-bar">
-                                                                    <div style="width: 9.52%;"
-                                                                         class="product-v-feedback-bar product-v-feedback-bar--yellow">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-v-feedback-percent">
-                                                                    ۱۰٪
-                                                                </div>
-                                                            </div>
-                                                            <div class="product-v-feedback">
-                                                                <div class="product-v-feedback-label">
-                                                                    ناراضی
-                                                                </div>
-                                                                <div class="product-v-feedback-bar">
-                                                                    <div style="width: 4.76%;"
-                                                                         class="product-v-feedback-bar product-v-feedback-bar--orange">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-v-feedback-percent">
-                                                                    ۵٪
-                                                                </div>
-                                                            </div>
-                                                            <div class="product-v-feedback">
-                                                                <div class="product-v-feedback-label">
-                                                                    کاملا ناراضی
-                                                                </div>
-                                                                <div class="product-v-feedback-bar">
-                                                                    <div style="width: 0%;"
-                                                                         class="product-v-feedback-bar product-v-feedback-bar--red">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="product-v-feedback-percent">
-                                                                    ۰٪
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </ul>
-                                    </li>
+
                                     <li wire:ignore.self>
                                         <a>
                                             <i class="far fa-shield-check"></i>
@@ -275,23 +139,7 @@
                                             <i class="far fa-box-check product-delivery-warehouse"></i>
                                             موجود در انبار بابی شاپ
                                         </a>
-                                        <ul class="product-seller-box--shadowed">
-                                            <div class="product-info-box-body-wrapper">
-                                                <div class="product-info-box-body">
-                                                    <div class="shipment-info-box-row">
-                                                        <div class="font-weight-bold">
-                                                                            <span>
-                                                                                آماده ارسال
-                                                                            </span>
-                                                        </div>
-                                                        <div class="u-text-spaced">
-                                                            این کالا در انبار بابی شاپ موجود و آماده
-                                                            پردازش است.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </ul>
+
                                     </li>
                                 </ul>
                                 <div class="product-seller-row product-seller-row--price" wire:ignore.self>
@@ -314,7 +162,7 @@
                                         class="product-additional-item product-additional-item--no-icon"
                                         wire:ignore.self>
                                         <span>{{number_format($product_price->main_price - $product_price->price)}}</span>&nbsp;
-                                        تومان تخفیف سازمانی کسر گردیده است.
+                                        تومان تخفیف شما از خرید این محصول کسر گردیده است.
                                     </div>
                                 </div>
                                 <div class="product-seller-row product-seller-row--add-to-cart"
@@ -322,28 +170,7 @@
                                     <a href="#" class="btn-add-to-cart btn-add-to-cart--full-width" wire:ignore>
                                         <span class="btn-add-to-cart-txt">افزودن به سبد خرید</span>
                                     </a>
-                                    <div class="product-seller-digiclub" wire:ignore>
-                                        <img src="./assets/img/digiclub.png" alt="">
-                                        <div>
-                                            دریافت
-                                            <span>۱۵۰</span>
-                                            امتیاز دیجی‌کلاب با خرید این کالا
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="other-seller" wire:ignore.self>
-                                    <a href="#product-seller-all">
-                                        <div class="product-seller-row-main">
-                                                            <span class="font-weight-bold">
-                                                                <span id="more-suppliers-count">۳</span>
-                                                                فروشنده
-                                                            </span>
-                                            دیگر این کالا
-                                        </div>
-                                        <div class="product-seller-row-info">
-                                            مشاهده
-                                        </div>
-                                    </a>
+
                                 </div>
                             </nav>
                         </div>

@@ -19,3 +19,60 @@
 <!-- Main JS File -->
 <script src="{{url('frontend/js/main.js')}}"></script>
 @stack('scripts')
+
+
+
+
+
+{{-- ایجکس برای سرچ زدن محصول در هدر صفحاتی که سرچ دارند --}}
+<script>
+
+$(document).ready(function(){
+
+    $('#ajax-search').on('keyup', function(){
+        let query = $(this).val();
+
+        if(query.length < 2){
+            $('#search-result').hide();
+            return;
+        }
+
+        $.ajax({
+            url: "{{ route('ajax.search') }}",
+            type: "GET",
+            data: { query: query },
+            success: function(response){
+                let html = '';
+
+                if(response.categories.length > 0){
+                    html += '<li class="search-title">دسته‌بندی‌ها</li>';
+                    response.categories.forEach(function(cat){
+                        html += `<li><a href="/search_category_product_list/${cat.slug}">${cat.name}</a></li>`;
+                    });
+                }
+
+                if(response.products.length > 0){
+                    html += '<li class="search-title">محصولات</li>';
+                    response.products.forEach(function(prod){
+                        html += `<li><a href="/single_products/${prod.slug}">${prod.name}</a></li>`;
+                    });
+                }
+
+                if(response.categories.length == 0 && response.products.length == 0){
+                    html += `<li class="empty-result">نتیجه‌ای برای «${query}» پیدا نشد</li>`;
+                }
+
+                $('#search-result-list').html(html);
+                $('#search-result').show();
+            }
+        });
+    });
+
+    $('#close-search-result').on('click', function(){
+        $('#ajax-search').val('');
+        $('#search-result').hide();
+    });
+
+});
+</script>
+{{-- ایجکس برای سرچ زدن محصول در هدر صفحاتی که سرچ دارند --}}ّ

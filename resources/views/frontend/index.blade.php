@@ -74,6 +74,31 @@
                 </div>
             </div>
             <!-- End Main-Slider -->
+            <!-- Start Category-Section -->
+            <div class="row mt-3 mb-5">
+                <div class="col-12">
+                    <div class="category-section dt-sn dt-sl border">
+                        <div class="category-section-title dt-sl">
+                            <h3>دسته بندی ها</h3>
+                        </div>
+                        <div class="category-section-slider dt-sl">
+                            <div class="category-slider owl-carousel">
+                                @foreach($categories as $category)
+                                    <div class="item">
+                                        <a href="#" class="promotion-category">
+                                            <img src="{{url('images/categories/big/'.$category->image)}}" alt="">
+                                            <h4 class="promotion-category-name">{{$category->name}}</h4>
+                                            <h6 class="promotion-category-quantity">{{$category->getProductCategoryCount($category->id)}}</h6>
+                                        </a>
+                                    </div>
+
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Category-Section -->
             <!-- Start Product-Slider -->
             <div class="row">
                 <div class="col-xl-12 col-lg-12">
@@ -155,31 +180,6 @@
                 @endforeach
             </div>
             <!-- End Banner -->
-            <!-- Start Category-Section -->
-            <div class="row mt-3 mb-5">
-                <div class="col-12">
-                    <div class="category-section dt-sn dt-sl border">
-                        <div class="category-section-title dt-sl">
-                            <h3>بیش از ۱،۵۰۰،۰۰۰ کالا در دسته‌بندی‌های مختلف</h3>
-                        </div>
-                        <div class="category-section-slider dt-sl">
-                            <div class="category-slider owl-carousel">
-                                @foreach($categories as $category)
-                                    <div class="item">
-                                        <a href="#" class="promotion-category">
-                                            <img src="{{url('images/categories/big/'.$category->image)}}" alt="">
-                                            <h4 class="promotion-category-name">{{$category->name}}</h4>
-                                            <h6 class="promotion-category-quantity">{{$category->getProductCategoryCount($category->id)}}</h6>
-                                        </a>
-                                    </div>
-
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Category-Section -->
             <!-- Start Product-Slider -->
             <section class="slider-section dt-sl mb-5">
                 <div class="row mb-3">
