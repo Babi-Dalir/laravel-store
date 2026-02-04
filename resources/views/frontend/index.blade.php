@@ -10,10 +10,8 @@
                     <div class="sidebar-inner dt-sl">
                         <div class="sidebar-banner">
                             <a href="#" target="_top">
-                                <img
-                                    src="{{url('images/banners/big/'.$banners->where('type','side_banner')->first()->image)}}"
-                                    width="100%" height="329"
-                                    alt="">
+                                <img src="{{ url('images/banners/big/' . $banners->where('type', 'side_banner')->first()->image) }}"
+                                    width="100%" height="329" alt="">
                             </a>
                         </div>
                     </div>
@@ -22,18 +20,18 @@
                 <div class="col-xl-10 col-lg-9 col-12 order-1 order-lg-2">
                     <!-- Start main-slider -->
                     <section id="main-slider" class="main-slider carousel slide carousel-fade card hidden-sm"
-                             data-ride="carousel">
+                        data-ride="carousel">
                         <ol class="carousel-indicators">
-                            @foreach($sliders as $slider)
-                                <li data-target="#main-slider" data-slide-to="{{$slider->id}}"
-                                    @if($loop->first) class="active" @endif ></li>
+                            @foreach ($sliders as $slider)
+                                <li data-target="#main-slider" data-slide-to="{{ $slider->id }}"
+                                    @if ($loop->first) class="active" @endif></li>
                             @endforeach
                         </ol>
                         <div class="carousel-inner">
-                            @foreach($sliders as $slider)
-                                <div class="carousel-item @if($loop->first) active @endif">
+                            @foreach ($sliders as $slider)
+                                <div class="carousel-item @if ($loop->first) active @endif">
                                     <a class="main-slider-slide" href="#"
-                                       style="background-image: url({{url('images/sliders/big/'.$slider->image)}})">
+                                        style="background-image: url({{ url('images/sliders/big/' . $slider->image) }})">
                                     </a>
                                 </div>
                             @endforeach
@@ -45,20 +43,20 @@
                             <i class="mdi mdi-chevron-left"></i>
                         </a>
                     </section>
-                    <section id="main-slider-res"
-                             class="main-slider carousel slide carousel-fade card d-none show-sm" data-ride="carousel">
+                    <section id="main-slider-res" class="main-slider carousel slide carousel-fade card d-none show-sm"
+                        data-ride="carousel">
                         <ol class="carousel-indicators">
-                            @foreach($sliders as $slider)
-                                <li data-target="#main-slider-res" data-slide-to="{{$slider->id}}"
-                                    @if($loop->first) class="active" @endif ></li>
+                            @foreach ($sliders as $slider)
+                                <li data-target="#main-slider-res" data-slide-to="{{ $slider->id }}"
+                                    @if ($loop->first) class="active" @endif></li>
                             @endforeach
                         </ol>
                         <div class="carousel-inner">
-                            @foreach($sliders as $slider)
-                                <div class="carousel-item @if($loop->first) active @endif ">
+                            @foreach ($sliders as $slider)
+                                <div class="carousel-item @if ($loop->first) active @endif ">
                                     <a class="main-slider-slide" href="#">
-                                        <img src="{{url('images/sliders/big/'.$slider->image)}}" alt=""
-                                             class="img-fluid">
+                                        <img src="{{ url('images/sliders/big/' . $slider->image) }}" alt=""
+                                            class="img-fluid">
                                     </a>
                                 </div>
                             @endforeach
@@ -83,15 +81,16 @@
                         </div>
                         <div class="category-section-slider dt-sl">
                             <div class="category-slider owl-carousel">
-                                @foreach($categories as $category)
+                                @foreach ($categories as $category)
                                     <div class="item">
                                         <a href="#" class="promotion-category">
-                                            <img src="{{url('images/categories/big/'.$category->image)}}" alt="">
-                                            <h4 class="promotion-category-name">{{$category->name}}</h4>
-                                            <h6 class="promotion-category-quantity">{{$category->getProductCategoryCount($category->id)}}</h6>
+                                            <img src="{{ url('images/categories/big/' . $category->image) }}"
+                                                alt="">
+                                            <h4 class="promotion-category-name">{{ $category->name }}</h4>
+                                            <h6 class="promotion-category-quantity">
+                                                {{ $category->getProductCategoryCount($category->id) }}</h6>
                                         </a>
                                     </div>
-
                                 @endforeach
                             </div>
                         </div>
@@ -114,7 +113,7 @@
                             <!-- Start Product-Slider -->
                             <div class="col-12 px-res-0">
                                 <div class="product-carousel carousel-md owl-carousel owl-theme">
-                                    @foreach($most_sold as $product)
+                                    @foreach ($most_sold as $product)
                                         <div class="item">
                                             <div class="product-card">
                                                 <div class="product-head">
@@ -126,22 +125,25 @@
                                                         <i class="mdi mdi-star active"></i>
                                                     </div>
                                                     <div class="discount">
-                                                        @if($product->discount != 0)
-                                                            <span>{{$product->discount}}%</span>
+                                                        @if ($product->discount != 0)
+                                                            <span>{{ $product->discount }}%</span>
                                                         @endif
                                                     </div>
                                                 </div>
-                                                <a class="product-thumb" href="{{route('single.product',$product->slug)}}">
-                                                    <img src="{{url('images/products/big/'.$product->image)}}"
-                                                         alt="Product Thumbnail">
+                                                <a class="product-thumb"
+                                                    href="{{ route('single.product', $product->slug) }}">
+                                                    <img src="{{ url('images/products/big/' . $product->image) }}"
+                                                        alt="Product Thumbnail">
                                                 </a>
                                                 <div class="product-card-body">
                                                     <h5 class="product-title">
-                                                        <a href="{{route('single.product',$product->slug)}}">{{$product->name}}</a>
+                                                        <a
+                                                            href="{{ route('single.product', $product->slug) }}">{{ $product->name }}</a>
                                                     </h5>
-                                                    <a class="product-meta" href="#">{{$product->category->name}}</a>
-                                                    <span
-                                                        class="product-price">{{number_format($product->price)}} تومان</span>
+                                                    <a class="product-meta"
+                                                        href="#">{{ $product->category->name }}</a>
+                                                    <span class="product-price">{{ number_format($product->price) }}
+                                                        تومان</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -156,11 +158,11 @@
             <!-- End Product-Slider -->
             <!-- Start Banner -->
             <div class="row mt-3 mb-5">
-                @foreach($banners->where('type','medium_banner') as $medium_banner)
+                @foreach ($banners->where('type', 'medium_banner') as $medium_banner)
                     <div class="col-sm-6 col-12 mb-2">
                         <div class="widget-banner">
                             <a href="#">
-                                <img src="{{url('images/banners/big/'.$medium_banner->image)}}" alt="">
+                                <img src="{{ url('images/banners/big/' . $medium_banner->image) }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -169,11 +171,11 @@
             <!-- End Banner -->
             <!-- Start Banner -->
             <div class="row mt-3 mb-5">
-                @foreach($banners->where('type','small_banner') as $small_banner)
+                @foreach ($banners->where('type', 'small_banner') as $small_banner)
                     <div class="col-md-3 col-sm-6 col-6 mb-2">
                         <div class="widget-banner">
                             <a href="#">
-                                <img src="{{url('images/banners/big/'.$small_banner->image)}}" alt="">
+                                <img src="{{ url('images/banners/big/' . $small_banner->image) }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -193,7 +195,7 @@
                     <!-- Start Product-Slider -->
                     <div class="col-12">
                         <div class="product-carousel carousel-lg owl-carousel owl-theme">
-                            @foreach($spacial_products as $spacial_product)
+                            @foreach ($spacial_products as $spacial_product)
                                 <div class="item">
                                     <div class="product-card">
                                         <div class="product-head">
@@ -205,22 +207,25 @@
                                                 <i class="mdi mdi-star active"></i>
                                             </div>
                                             <div class="discount">
-                                                @if($spacial_product->discount != 0)
-                                                    <span>{{$spacial_product->discount}}%</span>
+                                                @if ($spacial_product->discount != 0)
+                                                    <span>{{ $spacial_product->discount }}%</span>
                                                 @endif
                                             </div>
                                         </div>
-                                        <a class="product-thumb" href="{{route('single.product',$spacial_product->product->slug)}}">
-                                            <img src="{{url('images/products/big/'.$spacial_product->product->image)}}"
-                                                 alt="Product Thumbnail">
+                                        <a class="product-thumb"
+                                            href="{{ route('single.product', $spacial_product->product->slug) }}">
+                                            <img src="{{ url('images/products/big/' . $spacial_product->product->image) }}"
+                                                alt="Product Thumbnail">
                                         </a>
                                         <div class="product-card-body">
                                             <h5 class="product-title">
-                                                <a href="{{route('single.product',$spacial_product->product->slug)}}">{{$spacial_product->product->name}}</a>
+                                                <a
+                                                    href="{{ route('single.product', $spacial_product->product->slug) }}">{{ $spacial_product->product->name }}</a>
                                             </h5>
-                                            <a class="product-meta" href="#">{{$spacial_product->product->category->name}}</a>
-                                            <span
-                                                class="product-price">{{number_format($spacial_product->price)}} تومان</span>
+                                            <a class="product-meta"
+                                                href="#">{{ $spacial_product->product->category->name }}</a>
+                                            <span class="product-price">{{ number_format($spacial_product->price) }}
+                                                تومان</span>
                                         </div>
                                     </div>
                                 </div>
@@ -237,8 +242,7 @@
                 <div class="col-12">
                     <div class="widget-banner">
                         <a href="#">
-                            <img
-                                src="{{url('images/banners/big/'.$banners->where('type','large_banner')->first()->image)}}"
+                            <img src="{{ url('images/banners/big/' . $banners->where('type', 'large_banner')->first()->image) }}"
                                 alt="">
                         </a>
                     </div>
@@ -258,7 +262,7 @@
                     <!-- Start Product-Slider -->
                     <div class="col-12">
                         <div class="product-carousel carousel-lg owl-carousel owl-theme">
-                            @foreach($newest_products as $newest_product)
+                            @foreach ($newest_products as $newest_product)
                                 <div class="item">
                                     <div class="product-card">
                                         <div class="product-head">
@@ -270,22 +274,25 @@
                                                 <i class="mdi mdi-star active"></i>
                                             </div>
                                             <div class="discount">
-                                                @if($newest_product->discount != 0)
-                                                    <span>{{$newest_product->discount}}%</span>
+                                                @if ($newest_product->discount != 0)
+                                                    <span>{{ $newest_product->discount }}%</span>
                                                 @endif
                                             </div>
                                         </div>
-                                        <a class="product-thumb" href="{{route('single.product',$newest_product->slug)}}">
-                                            <img src="{{url('images/products/big/'.$newest_product->image)}}"
-                                                 alt="Product Thumbnail">
+                                        <a class="product-thumb"
+                                            href="{{ route('single.product', $newest_product->slug) }}">
+                                            <img src="{{ url('images/products/big/' . $newest_product->image) }}"
+                                                alt="Product Thumbnail">
                                         </a>
                                         <div class="product-card-body">
                                             <h5 class="product-title">
-                                                <a href="{{route('single.product',$newest_product->slug)}}">{{$newest_product->name}}</a>
+                                                <a
+                                                    href="{{ route('single.product', $newest_product->slug) }}">{{ $newest_product->name }}</a>
                                             </h5>
-                                            <a class="product-meta" href="#">{{$newest_product->category->name}}</a>
-                                            <span
-                                                class="product-price">{{number_format($newest_product->price)}} تومان</span>
+                                            <a class="product-meta"
+                                                href="#">{{ $newest_product->category->name }}</a>
+                                            <span class="product-price">{{ number_format($newest_product->price) }}
+                                                تومان</span>
                                         </div>
                                     </div>
                                 </div>
@@ -306,292 +313,54 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row mb-3">
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-12 pt-4">
-                        <div class="row">
-                            <div class="col-12">
+                    {{-- هر ردیف شامل 3 محصول --}}
+                    @foreach ($instant_offers->chunk(3) as $products)
+                        @foreach ($products as $product)
+                            <div class="col-lg-4 col-md-6 col-sm-12 pt-4">
                                 <div class="card-horizontal-product border-bottom rounded-0">
                                     <div class="card-horizontal-product-thumb">
-                                        <a href="#">
-                                            <img src="{{url('frontend/img/products/017.jpg')}}" alt="">
+                                        <a href="{{ route('single.product', $product->slug) }}">
+                                            <img src="{{ url('images/products/big/' . $product->image) }}"
+                                                alt="{{ $product->name }}">
                                         </a>
                                     </div>
                                     <div class="card-horizontal-product-content">
                                         <div class="card-horizontal-product-title">
-                                            <a href="#">
-                                                <h3>کت مردانه مجلسی مدل k-m-5110</h3>
+                                            <a href="{{ route('single.product', $product->slug) }}">
+                                                <h3>{{ $product->name }}</h3>
                                             </a>
                                         </div>
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
+
+                                        {{-- قیمت --}}
                                         <div class="card-horizontal-product-price">
-                                            <span>199,000 تومان</span>
+                                            <span>{{ number_format($product->price) }} تومان</span>
                                         </div>
+
                                         <div class="card-horizontal-product-buttons">
-                                            <a href="#" class="btn btn-outline-info">جزئیات محصول</a>
+                                            <a href="{{ route('single.product', $product->slug) }}"
+                                                class="btn btn-outline-info">جزئیات محصول</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="card-horizontal-product border-bottom rounded-0">
-                                    <div class="card-horizontal-product-thumb">
-                                        <a href="#">
-                                            <img src="{{url('frontend/img/products/020.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="card-horizontal-product-content">
-                                        <div class="card-horizontal-product-title">
-                                            <a href="#">
-                                                <h3>کت مردانه مجلسی مدل k-m-5110</h3>
-                                            </a>
-                                        </div>
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                        <div class="card-horizontal-product-price">
-                                            <span>199,000 تومان</span>
-                                        </div>
-                                        <div class="card-horizontal-product-buttons">
-                                            <a href="#" class="btn btn-outline-info">جزئیات محصول</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="card-horizontal-product border-bottom rounded-0">
-                                    <div class="card-horizontal-product-thumb">
-                                        <a href="#">
-                                            <img src="{{url('frontend/img/products/014.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="card-horizontal-product-content">
-                                        <div class="card-horizontal-product-title">
-                                            <a href="#">
-                                                <h3>کت مردانه مجلسی مدل k-m-5110</h3>
-                                            </a>
-                                        </div>
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                        <div class="card-horizontal-product-price">
-                                            <span>199,000 تومان</span>
-                                        </div>
-                                        <div class="card-horizontal-product-buttons">
-                                            <a href="#" class="btn btn-outline-info">جزئیات محصول</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-12 pt-4">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card-horizontal-product border-bottom rounded-0">
-                                    <div class="card-horizontal-product-thumb">
-                                        <a href="#">
-                                            <img src="{{url('frontend/img/products/016.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="card-horizontal-product-content">
-                                        <div class="card-horizontal-product-title">
-                                            <a href="#">
-                                                <h3>کت مردانه مجلسی مدل k-m-5110</h3>
-                                            </a>
-                                        </div>
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                        <div class="card-horizontal-product-price">
-                                            <span>199,000 تومان</span>
-                                        </div>
-                                        <div class="card-horizontal-product-buttons">
-                                            <a href="#" class="btn btn-outline-info">جزئیات محصول</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="card-horizontal-product border-bottom rounded-0">
-                                    <div class="card-horizontal-product-thumb">
-                                        <a href="#">
-                                            <img src="{{url('frontend/img/products/018.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="card-horizontal-product-content">
-                                        <div class="card-horizontal-product-title">
-                                            <a href="#">
-                                                <h3>کت مردانه مجلسی مدل k-m-5110</h3>
-                                            </a>
-                                        </div>
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                        <div class="card-horizontal-product-price">
-                                            <span>199,000 تومان</span>
-                                        </div>
-                                        <div class="card-horizontal-product-buttons">
-                                            <a href="#" class="btn btn-outline-info">جزئیات محصول</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="card-horizontal-product border-bottom rounded-0">
-                                    <div class="card-horizontal-product-thumb">
-                                        <a href="#">
-                                            <img src="{{url('frontend/img/products/015.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="card-horizontal-product-content">
-                                        <div class="card-horizontal-product-title">
-                                            <a href="#">
-                                                <h3>کت مردانه مجلسی مدل k-m-5110</h3>
-                                            </a>
-                                        </div>
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                        <div class="card-horizontal-product-price">
-                                            <span>199,000 تومان</span>
-                                        </div>
-                                        <div class="card-horizontal-product-buttons">
-                                            <a href="#" class="btn btn-outline-info">جزئیات محصول</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-12 pt-4">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card-horizontal-product border-bottom rounded-0">
-                                    <div class="card-horizontal-product-thumb">
-                                        <a href="#">
-                                            <img src="{{url('frontend/img/products/017.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="card-horizontal-product-content">
-                                        <div class="card-horizontal-product-title">
-                                            <a href="#">
-                                                <h3>کت مردانه مجلسی مدل k-m-5110</h3>
-                                            </a>
-                                        </div>
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                        <div class="card-horizontal-product-price">
-                                            <span>199,000 تومان</span>
-                                        </div>
-                                        <div class="card-horizontal-product-buttons">
-                                            <a href="#" class="btn btn-outline-info">جزئیات محصول</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="card-horizontal-product border-bottom rounded-0">
-                                    <div class="card-horizontal-product-thumb">
-                                        <a href="#">
-                                            <img src="{{url('frontend/img/products/020.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="card-horizontal-product-content">
-                                        <div class="card-horizontal-product-title">
-                                            <a href="#">
-                                                <h3>کت مردانه مجلسی مدل k-m-5110</h3>
-                                            </a>
-                                        </div>
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                        <div class="card-horizontal-product-price">
-                                            <span>199,000 تومان</span>
-                                        </div>
-                                        <div class="card-horizontal-product-buttons">
-                                            <a href="#" class="btn btn-outline-info">جزئیات محصول</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="card-horizontal-product border-bottom rounded-0">
-                                    <div class="card-horizontal-product-thumb">
-                                        <a href="#">
-                                            <img src="{{url('frontend/img/products/014.jpg')}}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="card-horizontal-product-content">
-                                        <div class="card-horizontal-product-title">
-                                            <a href="#">
-                                                <h3>کت مردانه مجلسی مدل k-m-5110</h3>
-                                            </a>
-                                        </div>
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                        <div class="card-horizontal-product-price">
-                                            <span>199,000 تومان</span>
-                                        </div>
-                                        <div class="card-horizontal-product-buttons">
-                                            <a href="#" class="btn btn-outline-info">جزئیات محصول</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endforeach
                 </div>
             </section>
+
             <!-- End Feature-Product -->
             <!-- Start Brand-Slider -->
-            <section class="slider-section dt-sl mb-5">
+            {{-- <section class="slider-section dt-sl mb-5">
                 <div class="row">
                     <!-- Start Product-Slider -->
                     <div class="col-12">
                         <div class="brand-slider carousel-lg owl-carousel owl-theme">
-                            @foreach($brands as $brand)
+                            @foreach ($brands as $brand)
                                 <div class="item">
-                                    <img src="{{url('images/brands/big/'.$brand->image)}}" class="img-fluid" alt="">
+                                    <img src="{{ url('images/brands/big/' . $brand->image) }}" class="img-fluid"
+                                        alt="">
                                 </div>
                             @endforeach
 
@@ -600,7 +369,7 @@
                     <!-- End Product-Slider -->
 
                 </div>
-            </section>
+            </section> --}}
             <!-- End Brand-Slider -->
         </div>
     </main>

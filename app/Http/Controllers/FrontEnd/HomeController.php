@@ -30,8 +30,15 @@ class HomeController extends Controller
             ->where('spacial_expiration','>=',now())
             ->where('count','>',0)
             ->get();
+
+        // پیشنهاد لحظه ای
+
+         $instant_offers = Product::smartOffer()
+        ->limit(9)
+        ->get();
+
         return view('frontend.index',compact('sliders'
-            ,'most_sold','spacial_products','brands','newest_products'));
+            ,'most_sold','spacial_products','brands','newest_products','instant_offers'));
     }
 
     public function userCart()

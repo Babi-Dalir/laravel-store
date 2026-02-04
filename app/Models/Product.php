@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use App\Enums\CommentStatus;
+use App\Enums\ProductStatus;
 use App\Helpers\ImageManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -138,5 +139,23 @@ class Product extends Model
             'image' => $request->image ? ImageManager::saveImage('products', $request->image) : $product->image,
         ]);
         $product->tags()->sync($request->tags);
+    }
+
+    protected $appends = ['final_price'];
+
+    public function getFinalPriceAttribute()
+    {
+        return $this->price - ($this->price * $this->discount / 100);
+    }
+
+    // الگوریتم پیشنهاد لحظه‌ای
+    public function scopeSmartOffer($query)
+    {
+        return $query
+            ->where('status', ProductStatus::Active->value)
+            ->where('discount', '>', 0)
+            ->where('count', '>', 0)
+            ->orderByDesc('discount') // تخفیف بیشتر
+            ->orderBy('count');       // موجودی کمتر
     }
 }
