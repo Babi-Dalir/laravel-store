@@ -18,6 +18,9 @@
            <livewire:frontend.products.single-product :product="$product"/>
             <!-- sellers -->
             <div class="product-sellers shadow-around mb-5" id="product-seller-all">
+                <div class="category-section-title dt-sl">
+                        <h3> <mark>تنوع قیمت محصول {{ $product->name }}</mark></h3>
+                </div>
                 @foreach($product->productPrices()->where('price','!=',$product->price)->get() as $productPrice)
                     <div class="product-seller">
                         <div class="product-seller-col">
@@ -26,16 +29,10 @@
                                     <i class="fas fa-store-alt"></i>
                                 </div>
                                 <div class="detail">
-                                    <div class="name">بابی شاپ <span
+                                    <div class="name"> {{ $productPrice->product->name }} <span
                                             class="badge badge-light rounded-pill">برگزیده</span>
                                     </div>
-                                    <div class="rating">
-                                        <span class="value">۹۰.۲٪</span>
-                                        <span class="label">رضایت خریداران</span>
-                                        <span class="divider">|</span>
-                                        <span class="label">عملکرد</span>
-                                        <span class="value">عالی</span>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -234,193 +231,6 @@
                 <!-- End tabs -->
             </div>
             <!-- End Product -->
-            <!-- Start Product-Slider -->
-            <section class="slider-section dt-sl mb-5">
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <div class="section-title text-sm-title title-wide no-after-title-wide">
-                            <h2>خریداران این محصول، محصولات زیر را هم خریده‌اند</h2>
-                            <a href="#">مشاهده همه</a>
-                        </div>
-                    </div>
-
-                    <!-- Start Product-Slider -->
-                    <div class="col-12">
-                        <div class="product-carousel carousel-lg owl-carousel owl-theme">
-                            <div class="item">
-                                <div class="product-card mb-3">
-                                    <div class="product-head">
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                        </div>
-                                        <div class="discount">
-                                            <span>20%</span>
-                                        </div>
-                                    </div>
-                                    <a class="product-thumb" href="shop-single.html">
-                                        <img src="./assets/img/products/07.jpg" alt="Product Thumbnail">
-                                    </a>
-                                    <div class="product-card-body">
-                                        <h5 class="product-title">
-                                            <a href="shop-single.html">مانتو زنانه</a>
-                                        </h5>
-                                        <a class="product-meta" href="shop-categories.html">لباس زنانه</a>
-                                        <span class="product-price">157,000 تومان</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-card mb-3">
-                                    <div class="product-head">
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                        </div>
-                                    </div>
-                                    <a class="product-thumb" href="shop-single.html">
-                                        <img src="./assets/img/products/017.jpg" alt="Product Thumbnail">
-                                    </a>
-                                    <div class="product-card-body">
-                                        <h5 class="product-title">
-                                            <a href="shop-single.html">کت مردانه</a>
-                                        </h5>
-                                        <a class="product-meta" href="shop-categories.html">لباس مردانه</a>
-                                        <span class="product-price">199,000 تومان</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-card mb-3">
-                                    <div class="product-head">
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                    </div>
-                                    <a class="product-thumb" href="shop-single.html">
-                                        <img src="./assets/img/products/013.jpg" alt="Product Thumbnail">
-                                    </a>
-                                    <div class="product-card-body">
-                                        <h5 class="product-title">
-                                            <a href="shop-single.html">مانتو زنانه مدل هودی تیک تین</a>
-                                        </h5>
-                                        <a class="product-meta" href="shop-categories.html">لباس زنانه</a>
-                                        <span class="product-price">135,000 تومان</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-card mb-3">
-                                    <div class="product-head">
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                    </div>
-                                    <a class="product-thumb" href="shop-single.html">
-                                        <img src="./assets/img/products/09.jpg" alt="Product Thumbnail">
-                                    </a>
-                                    <div class="product-card-body">
-                                        <h5 class="product-title">
-                                            <a href="shop-single.html">مانتو زنانه</a>
-                                        </h5>
-                                        <a class="product-meta" href="shop-categories.html">لباس زنانه</a>
-                                        <span class="product-price">145,000 تومان</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-card mb-3">
-                                    <div class="product-head">
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                        </div>
-                                    </div>
-                                    <a class="product-thumb" href="shop-single.html">
-                                        <img src="./assets/img/products/010.jpg" alt="Product Thumbnail">
-                                    </a>
-                                    <div class="product-card-body">
-                                        <h5 class="product-title">
-                                            <a href="shop-single.html">مانتو زنانه</a>
-                                        </h5>
-                                        <a class="product-meta" href="shop-categories.html">لباس زنانه</a>
-                                        <span class="product-price">170,000 تومان</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-card mb-3">
-                                    <div class="product-head">
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                        <div class="discount">
-                                            <span>20%</span>
-                                        </div>
-                                    </div>
-                                    <a class="product-thumb" href="shop-single.html">
-                                        <img src="./assets/img/products/011.jpg" alt="Product Thumbnail">
-                                    </a>
-                                    <div class="product-card-body">
-                                        <h5 class="product-title">
-                                            <a href="shop-single.html">مانتو زنانه</a>
-                                        </h5>
-                                        <a class="product-meta" href="shop-categories.html">لباس زنانه</a>
-                                        <span class="product-price">185,000 تومان</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product-card mb-3">
-                                    <div class="product-head">
-                                        <div class="rating-stars">
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star active"></i>
-                                            <i class="mdi mdi-star"></i>
-                                        </div>
-                                    </div>
-                                    <a class="product-thumb" href="shop-single.html">
-                                        <img src="./assets/img/products/019.jpg" alt="Product Thumbnail">
-                                    </a>
-                                    <div class="product-card-body">
-                                        <h5 class="product-title">
-                                            <a href="shop-single.html">تیشرت مردانه</a>
-                                        </h5>
-                                        <a class="product-meta" href="shop-categories.html">لباس مردانه</a>
-                                        <span class="product-price">54,000 تومان</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Product-Slider -->
-
-                </div>
-            </section>
-            <!-- End Product-Slider -->
         </div>
     </main>
 @endsection

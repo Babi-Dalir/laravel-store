@@ -234,9 +234,9 @@
                 </div>
             </form>
             <div class="mt-5">
-                <a href="#" class="float-right border-bottom-dt"><i
+                <a href="{{ route('user.cart') }}" class="float-right border-bottom-dt"><i
                         class="mdi mdi-chevron-double-right"></i>بازگشت به سبد خرید</a>
-                <a href="#" class="float-left border-bottom-dt">تایید و ادامه ثبت سفارش<i
+                <a href="#" class="float-left border-bottom-dt"  wire:click.prevent="submitCountinueOrder">تایید و ادامه ثبت سفارش<i
                         class="mdi mdi-chevron-double-left"></i></a>
             </div>
         </section>
@@ -262,13 +262,7 @@
                             {{number_format($send_price)}}
                         @endif</span>
                 </li>
-                <li class="checkout-club-container">
-                                    <span>کلاب<span class="help-sn" data-toggle="tooltip" data-html="true"
-                                                    data-placement="bottom"
-                                                    title="<div class='help-container is-right'><div class='help-arrow'></div><p class='help-text'>با امتیازهای خود در باشگاه مشتریان دیجی کالا (دیجی کلاب) از بین جوایز متنوع انتخاب کنید.</p></div>">
-                                            <span class="mdi mdi-information-outline"></span>
-                                        </span></span><span><span>۱۵۰+</span><span> امتیاز</span></span>
-                </li>
+
             </ul>
             <div class="checkout-summary-devider">
                 <div></div>

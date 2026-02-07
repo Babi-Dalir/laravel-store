@@ -101,13 +101,6 @@
                                     <span>سود شما از خرید</span><span>{{number_format($discount_price)}}
                                                         تومان</span>
                                 </li>
-                                <li class="checkout-club-container">
-                                                    <span>کلاب<span class="help-sn" data-toggle="tooltip"
-                                                                    data-html="true" data-placement="bottom"
-                                                                    title="<div class='help-container is-right'><div class='help-arrow'></div><p class='help-text'>با امتیازهای خود در باشگاه مشتریان دیجی کالا (دیجی کلاب) از بین جوایز متنوع انتخاب کنید.</p></div>">
-                                                            <span class="mdi mdi-information-outline"></span>
-                                                        </span></span><span><span>۱۵۰+</span><span> امتیاز</span></span>
-                                </li>
                             </ul>
                             <div class="checkout-summary-devider">
                                 <div></div>
@@ -130,7 +123,7 @@
                                                         مراحل بعدی را تکمیل کنید.
                                                     </span><span class="help-sn" data-toggle="tooltip" data-html="true"
                                                                  data-placement="bottom"
-                                                                 title="<div class='help-container is-right'><div class='help-arrow'></div><p class='help-text'>محصولات موجود در سبد خرید شما تنها در صورت ثبت و پرداخت سفارش برای شما رزرو می‌شوند. در صورت عدم ثبت سفارش، دیجی‌کالا هیچگونه مسئولیتی در قبال تغییر قیمت یا موجودی این کالاها ندارد.</p></div>">
+                                                                 title="<div class='help-container is-right'><div class='help-arrow'></div><p class='help-text'>محصولات موجود در سبد خرید شما تنها در صورت ثبت و پرداخت سفارش برای شما رزرو می‌شوند. در صورت عدم ثبت سفارش، بابی شاپ هیچگونه مسئولیتی در قبال تغییر قیمت یا موجودی این کالاها ندارد.</p></div>">
                                                         <span class="mdi mdi-information-outline"></span>
                                                     </span>
                                 </div>

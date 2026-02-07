@@ -1,15 +1,13 @@
-<div class="modal fade" id="modal-location" role="dialog" wire:ignore.self
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg send-info modal-dialog-centered"
-         role="document">
+<div class="modal fade" id="modal-location" role="dialog" wire:ignore.self aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg send-info modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">
                     <i class="now-ui-icons location_pin"></i>
                     افزودن آدرس جدید
                 </h5>
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -26,9 +24,8 @@
                                             </h4>
                                         </div>
                                         <div class="form-row">
-                                            <input class="input-ui pr-2 text-right" wire:model="name"
-                                                   type="text"
-                                                   placeholder="نام خود را وارد نمایید">
+                                            <input class="input-ui pr-2 text-right" wire:model="name" type="text"
+                                                placeholder="نام خود را وارد نمایید">
                                             @error('name')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -41,12 +38,10 @@
                                             </h4>
                                         </div>
                                         <div class="form-row">
-                                            <input
-                                                class="input-ui pl-2 dir-ltr text-left" wire:model="mobile"
-                                                type="text"
-                                                placeholder="09xxxxxxxxx">
+                                            <input class="input-ui pl-2 dir-ltr text-left" wire:model="mobile"
+                                                type="text" placeholder="09xxxxxxxxx">
                                             @error('mobile')
-                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -58,19 +53,21 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group" style="width: 100% !important;">
-                                                <select class="form-control"  style="width: 100% !important;" wire:model="province" wire:change="changeProvince($event.target.value)">
+                                                <select class="form-control" style="width: 100% !important;"
+                                                    wire:model="province"
+                                                    wire:change="changeProvince($event.target.value)">
                                                     <option value="">
                                                         انتخاب استان
                                                     </option>
-                                                    @foreach($provinces as $key=>$value)
-                                                        <option value="{{$key}}">
-                                                            {{$value}}
+                                                    @foreach ($provinces as $key => $value)
+                                                        <option value="{{ $key }}">
+                                                            {{ $value }}
                                                         </option>
                                                     @endforeach
 
                                                 </select>
                                                 @error('province')
-                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                    <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -83,18 +80,19 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group" style="width: 100% !important;">
-                                                <select class="form-control"  style="width: 100% !important;" wire:model="city">
+                                                <select class="form-control" style="width: 100% !important;"
+                                                    wire:model="city">
                                                     <option value="">
                                                         انتخاب شهر
                                                     </option>
-                                                    @foreach($cities as $key=>$value)
-                                                        <option value="{{$key}}">
-                                                            {{$value}}
+                                                    @foreach ($cities as $key => $value)
+                                                        <option value="{{ $key }}">
+                                                            {{ $value }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                                 @error('city')
-                                                <div class="alert alert-danger">{{ $message }}</div>
+                                                    <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -106,11 +104,9 @@
                                             </h4>
                                         </div>
                                         <div class="form-row">
-                                  <textarea wire:model="address"
-                                             class="input-ui pr-2 text-right"
-                                              placeholder=" آدرس تحویل گیرنده را وارد نمایید"></textarea>
+                                            <textarea wire:model="address" class="input-ui pr-2 text-right" placeholder=" آدرس تحویل گیرنده را وارد نمایید"></textarea>
                                             @error('address')
-                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
@@ -122,21 +118,19 @@
                                         </div>
                                         <div class="form-row">
                                             <input wire:model="postal_code"
-                                                class="input-ui pl-2 dir-ltr text-left placeholder-right"
-                                                type="text"
+                                                class="input-ui pl-2 dir-ltr text-left placeholder-right" type="text"
                                                 placeholder=" کد پستی را بدون خط تیره بنویسید">
                                             @error('postal_code')
-                                            <div class="alert alert-danger">{{ $message }}</div>
+                                                <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="col-12 pr-4 pl-4">
-                                        <button type="submit"
-                                                class="btn btn-sm btn-primary btn-submit-form">ثبت
+                                        <button type="submit" class="btn btn-sm btn-primary btn-submit-form">ثبت
                                             و
                                             ارسال به این آدرس</button>
-                                        <button type="button"
-                                                class="btn-link-border float-left mt-2">انصراف
+                                        <button type="button" data-dismiss="modal" aria-label="Close"
+                                            class="btn-link-border float-left mt-2">انصراف
                                             و بازگشت</button>
                                     </div>
                                 </div>
@@ -150,7 +144,7 @@
 </div>
 @push('scripts')
     <script>
-        window.addEventListener('closeAddressModal',event=>{
+        window.addEventListener('closeAddressModal', event => {
             $("#modal-location").modal('toggle')
         })
     </script>
