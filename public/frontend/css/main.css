@@ -9286,3 +9286,28 @@ footer.mini-footer .copy-right-mini-footer {
     text-align: center;
     color: #999;
 }
+
+
+.product-seller-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+}
+
+.product-color {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 17px;
+    color: #555;
+}
+
+.product-color-circle {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+

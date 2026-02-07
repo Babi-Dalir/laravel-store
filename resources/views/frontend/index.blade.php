@@ -106,7 +106,6 @@
                             <div class="col-12">
                                 <div class="section-title text-sm-title title-wide no-after-title-wide">
                                     <h2>پر فروش ترینها</h2>
-                                    <a href="#">مشاهده همه</a>
                                 </div>
                             </div>
 
@@ -185,13 +184,22 @@
             <!-- Start Product-Slider -->
             <section class="slider-section dt-sl mb-5">
                 <div class="row mb-3">
+
+               {{-- فقط محصولاتی که تخفیف ویژه دارن و هنوز معتبر هستن --}}
+                @php
+                    $specialCount = \App\Models\Product::query()
+                        ->where('spacial_expiration', '>', now())
+                        ->where('discount', '>', 0)
+                        ->count();
+                @endphp
+
+                    @if ( $specialCount > 0)
                     <div class="col-12">
                         <div class="section-title text-sm-title title-wide no-after-title-wide">
                             <h2>فروش شگفت انگیز</h2>
-                            <a href="#">مشاهده همه</a>
                         </div>
                     </div>
-
+                    @endif
                     <!-- Start Product-Slider -->
                     <div class="col-12">
                         <div class="product-carousel carousel-lg owl-carousel owl-theme">
@@ -255,7 +263,6 @@
                     <div class="col-12">
                         <div class="section-title text-sm-title title-wide no-after-title-wide">
                             <h2>جدید ترینها</h2>
-                            <a href="#">مشاهده همه</a>
                         </div>
                     </div>
 

@@ -17,10 +17,17 @@
             <!-- Start Product -->
            <livewire:frontend.products.single-product :product="$product"/>
             <!-- sellers -->
-            <div class="product-sellers shadow-around mb-5" id="product-seller-all">
-                <div class="category-section-title dt-sl">
+
+            {{-- <div class="product-sellers shadow-around mb-5" id="product-seller-all">
+                @php
+                    $pro_count = $product->productPrices()->select('price')->distinct()->get()
+                @endphp
+                @if ($pro_count->count() > 1)
+                 <div class="category-section-title dt-sl">
                         <h3> <mark>تنوع قیمت محصول {{ $product->name }}</mark></h3>
                 </div>
+                @endif
+
                 @foreach($product->productPrices()->where('price','!=',$product->price)->get() as $productPrice)
                     <div class="product-seller">
                         <div class="product-seller-col">
@@ -29,18 +36,18 @@
                                     <i class="fas fa-store-alt"></i>
                                 </div>
                                 <div class="detail">
-                                    <div class="name"> {{ $productPrice->product->name }} <span
-                                            class="badge badge-light rounded-pill">برگزیده</span>
-                                    </div>
-
+                                    <div class="name"> {{ $productPrice->product->name }} </div>
                                 </div>
                             </div>
                         </div>
                         <div class="product-seller-col">
                             <div class="product-seller-conditions">
-                                <div class="product-seller-info">
-                                    <i class="fad fa-truck-container"></i>
-                                    <span>ارسال از بابی شاپ</span>
+                               <div class="product-seller-info">
+                                      <span class="product-color">
+                                        <span class="product-color-circle" style="background-color: {{ $productPrice->color->code }}"
+                                       ></span>
+                                       {{ $productPrice->color->name }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -55,13 +62,14 @@
                         <div class="product-seller-col">
                             <div class="product-seller-price-action">
                                 <div class="product-seller-price">{{number_format($productPrice->price)}}<span class="currency">تومان</span></div>
-                                <div class="product-seller-action"><a href="#" class="btn btn-outline-danger">افزودن به
+                                <div class="product-seller-action"><a href="" class="btn btn-outline-danger">افزودن به
                                         سبد</a></div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-            </div>
+            </div> --}}
+            
             <div class="dt-sn mb-5 px-0 dt-sl pt-0">
                 <!-- Start tabs -->
                 <section class="tabs-product-info mb-3 dt-sl">
